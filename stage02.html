@@ -1,0 +1,151 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 2 阶段：欠拟合、过拟合与泛化诊断 · 政府采购模型训练课</title><style>
+:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
+[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
+@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
+@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
+</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课六阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html" >阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html" class="active">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html" >阶段 03 · 如何正确评价一个模型</a><a href="stage04.html" >阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html" >阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html" >阶段 06 · 数据分布、采样与“数据即模型”</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#fit">什么是拟合</a><a href="#under">欠拟合</a><a href="#over">过拟合与捷径</a><a href="#bias">Bias / Variance / Noise</a><a href="#split">Train/Val/Test</a><a href="#leak">数据泄漏与正确切分</a><a href="#general">泛化维度</a><a href="#diagnosis">训练曲线与诊断</a><a href="#mental">专家心智模型</a><a href="#quiz">小测</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 02</div><h1>第一课 · 第 2 阶段：欠拟合、过拟合与泛化诊断</h1><p>Underfitting、Overfitting、Bias/Variance、Train/Validation/Test</p><div class="chips"><span class="chip">Underfitting</span><span class="chip">Overfitting</span><span class="chip">Bias/Variance</span><span class="chip">Train/Validation/Test</span></div></section><section class="section" id="fit" data-search><h2>一、从“拟合”开始：模型为什么会学浅、学歪、学死？</h2>
+<div class="quote">第二阶段的核心问题：Loss 一直下降，模型就一定越来越好吗？不一定。</div>
+<div class="formula">没学会（Underfitting） → 学到稳定规律（Good Fit） → 把训练题和噪声都记住（Overfitting）</div>
+<p>Fit（拟合）可以理解为：模型逐渐适应训练数据中的规律。机器学习真正追求的不是 Train Loss 最低，而是<b>真实未来数据上的错误尽可能低</b>。</p>
+</section><section class="section" id="under" data-search><h2>二、Underfitting：连训练数据都没学明白</h2>
+<p>例如：</p><div class="tablewrap"><table class="tbl"><thead><tr><th>数据集</th><th>准确率</th></tr></thead><tbody><tr><td>Train</td><td>61%</td></tr><tr><td>Validation</td><td>59%</td></tr></tbody></table></div>
+<p>训练集都做不好，说明模型连已有经验都没有充分利用。常见原因：</p>
+<ul><li><b>输入信息不足：</b>真实判断需要项目上下文，你却只给三个关键词特征。</li><li><b>模型容量不足：</b>真实关系复杂，模型表达能力太简单。</li><li><b>优化失败：</b>学习率、训练步数、梯度或实现有问题。</li><li><b>标签/数据质量差：</b>老师本身提供了大量噪声。</li></ul>
+<div class="card mental"><b>专家认知：</b>模型效果差 ≠ “训练不够”。先诊断 Data、Input、Label、Capacity、Optimization，再决定是否多跑 Epoch。</div>
+</section><section class="section" id="over" data-search><h2>三、Overfitting：训练题 100 分，新题却不会</h2>
+<p>例如：</p><div class="tablewrap"><table class="tbl"><thead><tr><th>数据集</th><th>准确率</th></tr></thead><tbody><tr><td>Train</td><td>99.7%</td></tr><tr><td>Validation</td><td>71%</td></tr></tbody></table></div>
+<p>这说明模型对训练数据极其熟悉，但对未知数据明显变差。它可能把：</p>
+<ul><li>固定模板措辞</li><li>特定代理机构名称</li><li>某些项目格式</li><li>偶然数字</li><li>标签噪声</li></ul>
+<p>都当成了规律。</p>
+<h3>Shortcut Learning：捷径学习</h3>
+<p>模型不会主动追求人类心中“最深刻的业务原理”，它只会寻找能让 Loss 快速下降的可用信号。</p>
+<div class="formula">我们希望它学：要求是否与真实履约需要合理相关、是否不必要限制竞争
+模型可能偷学：出现“本市” → 风险；出现“万元” → 风险</div>
+<div class="card warn"><b>政府采购特别容易出现捷径：</b><p>训练数据中某代理机构风险率高，模型可能学“机构名”；投诉案例里总出现“处理决定”，模型可能学未来答案提示，而不是真正审原始采购文件。</p></div>
+</section><section class="section" id="bias" data-search><h2>四、Bias、Variance 与 Noise：为什么“模型复杂度”必须和数据、任务匹配</h2>
+<h3>High Bias：方法本身就太弱</h3>
+<p>如果模型只能检查“是否出现注册资本”这一条规则，那么无论给多少评分标准、技术参数、合同条款，它都很难学会。典型表现：</p>
+<div class="formula">Train Error 高 + Validation Error 高 ≈ High Bias / Underfitting</div>
+<h3>High Variance：过度依赖那一批训练数据</h3>
+<p>一个很大的模型配很少的数据，可能把样本措辞、机构、项目模板全部记住：</p>
+<div class="formula">Train 很好 + Validation 明显差 ≈ High Variance / Overfitting</div>
+<h3>经典 Bias–Variance 直觉</h3>
+<div class="formula">Expected Error ≈ Bias² + Variance + Noise</div>
+<p>目标不是模型越复杂越好，而是：<b>复杂到足以表达真实规律，又没有复杂到把噪声当知识记住。</b></p>
+<h3>Noise：标签本身也可能不确定</h3>
+<p>政府采购边界案例中，专家 A、B、C 可能给出不同意见。这时不仅存在 Model Error，还要考虑 Label Error / Label Noise。成熟数据系统必须记录：</p>
+<pre>专家意见
+专家一致度
+适用地区/时间
+证据
+置信度
+是否争议案例</pre>
+</section><section class="section" id="split" data-search><h2>五、Validation 为什么重要？Early Stopping 是什么？</h2>
+<p>观察如下训练过程：</p>
+<div class="tablewrap"><table class="tbl"><thead><tr><th>Epoch</th><th>Train</th><th>Validation</th></tr></thead><tbody><tr><td>1</td><td>68%</td><td>66%</td></tr><tr><td>2</td><td>75%</td><td>72%</td></tr><tr><td>3</td><td>82%</td><td>78%</td></tr><tr><td>4</td><td>89%</td><td>81%</td></tr><tr><td>5</td><td>94%</td><td>80%</td></tr><tr><td>6</td><td>97%</td><td>76%</td></tr></tbody></table></div>
+<p>Epoch 1–4：Train 与 Validation 同时改善。Epoch 5 之后：Train 继续上升，但 Validation 开始下降。这是过拟合开始的经典信号。</p>
+<div class="card good"><b>Early Stopping：</b><p>当验证性能不再改善时停止训练。训练更久不等于模型更好，验证集更接近我们关心的“没见过的数据”。</p></div>
+<p>Test 还要再独立，因为如果你反复根据 Validation 选模型，Validation 已经间接参与了开发。Test 是最后的正式考试。</p>
+</section><section class="section" id="leak" data-search><h2>六、Data Leakage：政府采购数据为什么不能简单随机切分？</h2>
+<p>同一个采购项目可能包含采购公告、招标文件、更正公告、中标公告、质疑答复、投诉处理决定。若按“文档”随机拆分：</p>
+<pre>招标文件 → Train
+更正公告 → Validation
+投诉处理决定 → Test</pre>
+<p>模型可能通过同项目线索提前“知道答案”。这叫 Data Leakage。</p>
+<h3>更合理：Project-Level Split</h3>
+<pre>项目 A 的全部文件 → Train
+项目 B 的全部文件 → Train
+项目 C 的全部文件 → Validation
+项目 D 的全部文件 → Test</pre>
+<h3>如果真实使用是“过去训练，未来部署”：Time Split</h3>
+<pre>2022–2024 → Train
+2025 → Validation
+2026 → Test</pre>
+<div class="quote">测试集必须模拟真正的部署场景，而不是追求一个看起来“标准”的随机比例。</div>
+</section><section class="section" id="general" data-search><h2>七、泛化不是一个数字：要问“对什么变化还能泛化？”</h2>
+<div class="tablewrap"><table class="tbl"><thead><tr><th>泛化类型</th><th>要回答的问题</th></tr></thead><tbody>
+<tr><td>新项目</td><td>完全没见过的采购项目还能不能判断？</td></tr>
+<tr><td>新时间</td><td>新年度、新政策环境还能不能工作？</td></tr>
+<tr><td>新地区</td><td>从 A 省训练，B 省是否可靠？</td></tr>
+<tr><td>新品类</td><td>IT 强，到了医疗/工程是否掉点？</td></tr>
+<tr><td>新措辞</td><td>换一种表达还能识别同一业务本质吗？</td></tr>
+<tr><td>边界案例</td><td>明显案例会做，灰色复杂案例会不会？</td></tr>
+</tbody></table></div>
+<p>所以“Accuracy=87%”远远不够，要知道这 87% 是在哪个分布上得到的。</p>
+</section><section class="section" id="diagnosis" data-search><h2>八、Training Curve 与 ML Diagnosis：错误是诊断信号</h2>
+<div class="grid2"><div class="card"><b>欠拟合信号</b><p>Train 差，Validation 也差。</p><p>优先排查：输入信息、模型容量、数据质量、优化、训练是否充分。</p></div><div class="card"><b>过拟合信号</b><p>Train 极好，Validation 明显落后或开始变差。</p><p>优先考虑：更多多样化数据、Hard Examples、正则化、减少训练、Early Stopping、泄漏检查。</p></div></div>
+<p>专家不会只看“Accuracy 82%”，而会把错误拆成：</p>
+<pre>漏掉风险
+误报风险
+风险类型错
+法规依据错
+事实理解错
+上下文理解错
+边界问题错
+地区/时间规则错
+幻觉</pre>
+<p>不同错误对应不同修复手段。例如法律依据总是错，可能应该加强 RAG，而不是一味扩大 SFT 数据。</p>
+</section><section class="section" id="mental" data-search><h2>九、本阶段 5 个专家核心心智模型</h2>
+<ol class="stage-list"><li><b>学不好 ≠ 训练不够：</b>先诊断数据、输入、标签、模型容量与优化。</li><li><b>Train 好不代表模型好：</b>Validation/Test 才开始说明泛化。</li><li><b>测试必须模拟真实部署：</b>按项目、时间、地区、品类正确隔离。</li><li><b>防止模型走捷径：</b>用 Hard / Contrastive Examples 逼它学习更深层规律。</li><li><b>错误是信息：</b>不要只看总分，要知道哪类错误为什么发生。</li></ol>
+<div class="quote">机器学习训练的目标不是把训练集做对，而是利用训练集学会解决未来问题。</div>
+</section><section class="section" id="quiz" data-search><h2>十、本阶段小测与掌握标准</h2>
+<details><summary>Train 60%，Validation 58%，你首先想到什么？</summary><p>可能是欠拟合或训练/数据质量问题。重点不是立刻加 Epoch，而是诊断输入、标签、模型容量和优化。</p></details>
+<details><summary>Train 99.5%，Validation 73%，说明什么？</summary><p>明显泛化差距，优先怀疑过拟合、数据泄漏、捷径学习或 Train/Val 分布不匹配。</p></details>
+<details><summary>为什么同一项目所有文档要尽量放在同一侧？</summary><p>防止项目级信息泄漏，让测试真正模拟没见过的新项目。</p></details>
+<details><summary>为什么“模型判对了”仍要问“为什么判对”？</summary><p>因为它可能依靠错误的表面捷径而暂时猜对，遇到分布变化就会崩。</p></details>
+<label class="check"><input type="checkbox" class="learn-check" data-key="s2_complete"><span><b>阶段 2 掌握：</b>我能根据 Train/Validation 行为区分欠拟合与过拟合，并能解释 Bias、Variance、Leakage、Early Stopping 和项目级/时间级切分。</span></label></section>
+<section class="section" id="deep2" data-search><h2>十一、深化理解：模型“判对”也可能是错的方法</h2>
+<h3>1. Hard Examples：为什么边界案例比明显案例更值钱？</h3>
+<p>如果模型只看“明显违法”和“明显正常”，它很容易学到表面关键词。更专业的数据要故意加入：</p>
+<ul><li>看起来有限制，但存在合理履约必要性；</li><li>看起来正常，却暗含不合理条件；</li><li>措辞几乎相同，但答案不同；</li><li>答案相同，但成立理由完全不同。</li></ul>
+<p>例如“本市”这个词：</p>
+<pre>样本 1：必须在本市注册 → 可能高风险
+样本 2：项目履约地点位于本市 → 正常事实描述
+样本 3：2小时响应但不要求提前设机构 → 需结合需求
+样本 4：特殊场景确需驻场 → 可能有合理依据</pre>
+<p>这些对比能够立刻揭穿“本市=风险”的 Shortcut。</p>
+<h3>2. Decision Boundary：模型真正要画的是边界</h3>
+<div class="formula">明显风险  ● ● ●   |   ○ ○ ○  明显正常
+                  ↑
+             边界附近最难</div>
+<p>简单样本离边界远；真正决定泛化的是边界附近的 Hard Positive / Hard Negative。</p>
+<h3>3. 什么叫更稳定、更抽象的业务规律？</h3>
+<p>我们不希望模型记住“本市、注册资本、10年、品牌授权”几个词，而希望它进一步抽象为：</p>
+<div class="formula">某项要求是否具有业务必要性
++ 是否与采购标的/履约能力合理相关
++ 是否造成不适当的竞争限制
++ 是否有适用法规与事实支持</div>
+<p>同一抽象原则才能迁移到成立年限、注册资本、本地机构、业绩规模、认证、人员、技术参数等不同表面形式。这也是 Representation Learning 想达到的方向。</p>
+<h3>4. Error Taxonomy：18% 的错误必须拆开</h3>
+<p>如果模型 Accuracy=82%，专家接下来不是“再训练”，而是把另外 18% 分类：</p>
+<pre>FN：漏掉风险
+FP：误报正常
+类型判断错
+法规依据错
+事实理解错
+上下文理解错
+边界案例错
+地区规则错
+时间规则错
+编造依据/幻觉</pre>
+<p>若法规引用错多，方案可能是 RAG；若边界判断差，方案可能是 Hard Examples；若新品类差，是 Distribution Shift；若 Train/Val 差距大，是 Overfitting。不同病因不能吃同一种药。</p>
+<h3>5. “学生”比喻重新理解 Bias / Variance</h3>
+<div class="grid2"><div class="card"><b>High Bias 学生</b><p>几乎什么都不会，每套试卷都差。方法/能力本身不足。</p></div><div class="card"><b>High Variance 学生</b><p>把 1000 道原题背到满分，一换表达就不会。对训练集过度敏感。</p></div></div>
+<p>真正专家既掌握原则，又能根据新项目灵活应用。</p>
+</section>
+<div class="pager"><a href="stage01.html">← 上一阶段</a><a href="stage03.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 完整教材版。页面为独立 HTML，可直接离线打开；进度勾选保存在浏览器本地。</div></main></div><script>
+const root=document.documentElement;
+const keyTheme='proc_ml_theme';
+const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
+document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
+document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
+document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
+const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
+const checks=[...document.querySelectorAll('.learn-check')];
+checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
+function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
+update();
+const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
+</script></body></html>
