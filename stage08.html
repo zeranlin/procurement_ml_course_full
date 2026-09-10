@@ -1,55 +1,304 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 8 阶段：完整机器学习实验：Experiment 001 · 政府采购模型训练课</title><style>
-:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
-[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
-@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
-@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html" class="active">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#map">总地图</a><a href="#task">Experiment 001</a><a href="#xy">定义 X / Y</a><a href="#schema">数据 Schema</a><a href="#split">数据切分</a><a href="#baseline">Baseline</a><a href="#metrics">成功标准</a><a href="#errors">Error Analysis</a><a href="#mental">心智模型</a><a href="#mastery">掌握标准</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 08</div><h1>第一课 · 第 8 阶段：完整机器学习实验：Experiment 001</h1><p>把前七阶段的知识第一次连接成一个真正可以执行、评估、诊断和迭代的 ProcurementML 实验。</p><div class="chips"><span class="chip">Experiment Design</span><span class="chip">Baseline</span><span class="chip">Success Criteria</span><span class="chip">Error Analysis</span><span class="chip">Controlled Experiment</span></div></section><section class="section" id="map" data-search><h2>一、第 8 阶段总地图：第一次把前七阶段装成一台机器</h2><div class="quote">目标：完整设计第一个政府采购机器学习实验——ProcurementML Experiment 001。</div><div class="formula">Problem → Hypothesis → Dataset → Baseline → Train → Evaluate → Error Analysis → Next Experiment</div><p>前七阶段学的是零件：X/Y、Loss、Gradient、Batch、Precision/Recall、Distribution、OOD、Diagnosis。第八阶段第一次把这些零件连接成一个可执行实验。</p><div class="grid2"><div class="card mental"><b>科学问题</b><p>不是“训练看看效果怎么样”，而是“提出一个可以被证伪的假设”。</p></div><div class="card mental"><b>工程目标</b><p>让每次训练都回答一个清晰问题，并留下可复用证据。</p></div></div></section><section class="section" id="task" data-search><h2>二、定义 Experiment 001：先做一个足够小、足够清晰的任务</h2><p>第一版不要定义成“训练一个政府采购大模型”。范围太大，失败时无法定位。Experiment 001 只做：</p><div class="quote">判断政府采购文件中的供应商资格条件，是否存在潜在不合理限制风险。</div><p>它适合作为第一个实验，因为输入和标签相对清楚、业务价值明确、可获得专家标签、能计算 Precision / Recall / F1，并能向更复杂任务扩展。</p><div class="note"><b>原则：</b>One Experiment, One Main Question。一次实验尽量回答一个核心问题。</div></section><section class="section" id="xy" data-search><h2>三、定义 X 与 Y：实验能否被测量，取决于问题定义</h2><h3>1. X：模型究竟可以看到什么？</h3><div class="formula">Experiment 001-A: X = 单条资格条件文本</div><div class="formula">Experiment 001-B: X = [资格条件, 采购标的, 项目类型, 上下文]</div><p>这样可以把“加入上下文是否真正提升泛化”变成下一轮可验证假设，而不是凭直觉决定。</p><h3>2. Y：第一版故意保持简单</h3><div class="formula">Y = 1（潜在不合理限制风险） / 0（未发现明显风险）</div><p>未来可以升级为风险类型、严重程度、法律依据、理由与建议，但第一版先把“能否识别资格条件风险”测清楚。</p></section><section class="section" id="hypothesis" data-search><h2>四、假设驱动研发：把“大模型项目”拆成一串可验证的小实验</h2><div class="card mental"><b>核心心智模型 ①：模型研发不是一个“大项目”，而是一串可证伪的小实验。</b><p>每次实验只改变少数关键变量，并提前写清楚预期。</p></div><ol class="stage-list"><li><b>EXP001：</b>高质量专家标签能否让文本分类器明显超过关键词规则？</li><li><b>EXP002：</b>增加上下文能否降低漏报？</li><li><b>EXP003：</b>加入 Hard Negative 能否减少误报？</li><li><b>EXP004：</b>7B 与 14B 的增益是否值得额外成本？</li><li><b>EXP005：</b>RAG 是否显著提高法规依据准确率？</li></ol></section><section class="section" id="schema" data-search><h2>五、数据 Schema：今天多记录一个字段，未来就多一种诊断能力</h2><pre>{
-  &quot;sample_id&quot;: &quot;xxx&quot;,
-  &quot;project_id&quot;: &quot;xxx&quot;,
-  &quot;text&quot;: &quot;供应商注册资本不得低于5000万元&quot;,
-  &quot;label&quot;: 1,
-  &quot;risk_type&quot;: &quot;qualification_condition&quot;,
-  &quot;project_category&quot;: &quot;service&quot;,
-  &quot;industry&quot;: &quot;IT&quot;,
-  &quot;region&quot;: &quot;某省&quot;,
-  &quot;case_date&quot;: &quot;2026-01-15&quot;,
-  &quot;difficulty&quot;: &quot;normal&quot;,
-  &quot;source_type&quot;: &quot;tender_document&quot;,
-  &quot;expert_id&quot;: &quot;expert_x&quot;,
-  &quot;label_confidence&quot;: 0.95
-}</pre><div class="tablewrap"><table class="tbl"><thead><tr><th>字段</th><th>未来用途</th></tr></thead><tbody><tr><td>project_id</td><td>项目级切分，防止 Project Leakage</td></tr><tr><td>industry / category</td><td>Slice Evaluation 与跨领域泛化</td></tr><tr><td>case_date / region</td><td>Time Split、地区分布与 Concept Drift</td></tr><tr><td>difficulty</td><td>Hard Positive / Hard Negative 分析</td></tr><tr><td>expert_confidence</td><td>标签不确定性与专家分歧管理</td></tr></tbody></table></div><div class="quote">Data Schema = Future Evaluation Infrastructure</div></section><section class="section" id="composition" data-search><h2>六、样本组成：不要让爬虫替你决定模型的世界</h2><p>假设第一批有 10,000 条专家标注数据，可以主动设计分布，而不是只追求“正负各一半”。</p><div class="tablewrap"><table class="tbl"><thead><tr><th>样本类型</th><th>示例数量</th><th>作用</th></tr></thead><tbody><tr><td>明显风险</td><td>2,500</td><td>学习基础模式</td></tr><tr><td>普通风险</td><td>1,500</td><td>覆盖真实常见风险</td></tr><tr><td>普通正常</td><td>2,500</td><td>建立正常分布</td></tr><tr><td>Hard Negative</td><td>1,500</td><td>打掉关键词捷径和误报</td></tr><tr><td>Hard Positive</td><td>1,000</td><td>训练“看起来正常但有风险”的边界</td></tr><tr><td>边界案例</td><td>1,000</td><td>训练不确定性和上下文依赖</td></tr></tbody></table></div><p>具体比例不是标准答案。关键是知道每类样本为什么存在，以及它想修复什么错误。</p></section><section class="section" id="split" data-search><h2>七、数据切分：Test Set 不是“剩下的数据”，而是未来世界的模拟器</h2><div class="formula">Train 8000 / Validation 1000 / Test 1000</div><p>但不能按条款随机切。政府采购数据至少要按 <b>Project ID</b> 隔离：同一项目的招标文件、更正、质疑答复、投诉决定不能跨集合。</p><h3>进一步的真实部署模拟</h3><div class="grid2"><div class="card good"><b>时间外测试</b><p>用历史年份训练、更新年份验证/测试，模拟 Past → Future。</p></div><div class="card good"><b>Challenge Set</b><p>专门保留新行业、新地区、Hard Example、同义改写和特殊案例。</p></div></div><div class="card mental"><b>核心心智模型 ②：Test Set 的任务是模拟部署，不是为了凑出一个 80/10/10。</b><p>线上面对新项目就按项目隔离；面对未来年份就做时间隔离；准备全国部署就要做跨地区评估。</p></div></section><section class="section" id="baseline" data-search><h2>八、Baseline：先问最简单的方法能做到多少</h2><div class="tablewrap"><table class="tbl"><thead><tr><th>Baseline</th><th>方法</th><th>意义</th></tr></thead><tbody><tr><td>0</td><td>永远预测无风险</td><td>暴露类别不平衡；风险 Recall=0</td></tr><tr><td>1</td><td>关键词规则：注册资本、本地注册、成立年限等</td><td>建立最低可解释业务基线</td></tr><tr><td>2</td><td>TF-IDF + Logistic Regression</td><td>验证“简单文本模型”已经能做到多少</td></tr></tbody></table></div><p>如果一个 7B 模型 F1=0.82，而 TF-IDF 已经 0.81，就必须问：几十倍计算成本换来的增益值不值。</p><div class="card mental"><b>核心心智模型 ③：模型价值来自相对提升，不来自漂亮的绝对分数。</b><p>真正要看 Improvement over Baseline，同时衡量成本、延迟和复杂度。</p></div></section><section class="section" id="metrics" data-search><h2>九、指标与成功条件：在看到结果之前就写清楚“什么算成功”</h2><p>这是风险筛查，所以漏报通常比误报更危险。可以把 Recall 设为主指标，Precision/F1/F2 为辅。</p><div class="formula">示例成功条件：Recall ≥ 90%  且  Precision ≥ 80%  且  High-Risk Recall ≥ 95%</div><p>还要对 Hard Negative、行业、风险类型等 Slice 定义最低标准，而不只是总体分数。</p><div class="card mental"><b>核心心智模型 ④：Success Criteria 必须预先定义。</b><p>否则训练后很容易只挑最好看的 Accuracy 宣布成功，形成 Metric Gaming / Cherry Picking。</p></div></section><section class="section" id="train" data-search><h2>十、选择模型与训练：复杂度逐级增加，先验证任务再烧 GPU</h2><div class="formula">Rule Baseline → Logistic Regression → Small Transformer → 7B LLM → 14B LLM</div><p>每增加一层复杂度都问：“它是否带来了足够、稳定、可复现的增益？”</p><h3>一个简单训练量计算</h3><div class="formula">Train=8000, Batch=32 → 250 steps/epoch; 5 epochs → 最多 1250 optimizer steps</div><p>训练中至少记录 Train Loss、Validation Loss、Precision、Recall、F1/F2、Learning Rate、Step/Epoch 与 Best Checkpoint。</p><div class="tablewrap"><table class="tbl"><thead><tr><th>Epoch</th><th>Train Loss</th><th>Val Loss</th><th>Recall</th><th>Precision</th></tr></thead><tbody><tr><td>1</td><td>0.63</td><td>0.59</td><td>78%</td><td>76%</td></tr><tr><td>2</td><td>0.47</td><td>0.44</td><td>85%</td><td>79%</td></tr><tr><td>3</td><td>0.36</td><td>0.38</td><td>90%</td><td>82%</td></tr><tr><td>4</td><td>0.28</td><td>0.41</td><td>91%</td><td>78%</td></tr><tr><td>5</td><td>0.20</td><td>0.51</td><td>91%</td><td>71%</td></tr></tbody></table></div><p>这里 Epoch 3 附近更像最佳点：后面训练集继续变好，但验证集开始恶化。</p></section><section class="section" id="test" data-search><h2>十一、真正打开 Test：先锁定模型、阈值和超参数</h2><div class="formula">例：TP=270, FN=30, FP=60, TN=640</div><div class="formula">Recall = 270 / 300 = 90%</div><div class="formula">Precision = 270 / 330 ≈ 81.8%</div><p>达到预设成功条件并不代表实验结束。下一步才进入最值钱的工作：Error Analysis。</p></section><section class="section" id="errors" data-search><h2>十二、Error Analysis：把“30 个漏报”变成下一轮实验问题</h2><div class="tablewrap"><table class="tbl"><thead><tr><th>Root Cause</th><th>数量</th><th>下一步</th></tr></thead><tbody><tr><td>Hard Positive</td><td>9</td><td>扩充困难正样本</td></tr><tr><td>上下文缺失</td><td>8</td><td>Experiment 002 增加上下文</td></tr><tr><td>医疗领域知识</td><td>5</td><td>补数据/RAG/专项评测</td></tr><tr><td>Label 错误</td><td>3</td><td>专家复核并修正数据</td></tr><tr><td>新型风险</td><td>3</td><td>建立新类别或扩充边界</td></tr></tbody></table></div><p>如果最大问题是上下文缺失，就提出 Hypothesis 002：“加入采购标的与上下文能显著降低 FN”。然后只改变这一个主要变量验证。</p></section><section class="section" id="control" data-search><h2>十三、Controlled Experiment：一次主要改一个变量</h2><p>如果同时换模型、加数据、改 LR、改 Loss、加上下文、加 RAG，结果从 78% 到 85%，你只知道“某些东西有效”，不知道为什么。</p><div class="quote">Hypothesis → Experiment → Measurement → Conclusion → Next Hypothesis</div><div class="card mental"><b>核心心智模型 ⑤：真正的模型能力来自实验积累，而不是某一次幸运训练。</b><p>Experiment Log 也是研发资产；失败实验同样告诉你哪些假设不成立。</p></div></section><section class="section" id="card" data-search><h2>十四、Experiment Card：每次实验都应该有身份证</h2><div class="card"><b>EXP-0001 示例</b><p><b>Question：</b>能否仅根据资格条件文本识别潜在不合理限制？<br><b>Hypothesis：</b>专家标注文本分类器明显超过关键词规则。<br><b>Dataset：</b>10,000；Project-level split 8k/1k/1k。<br><b>Baseline：</b>关键词规则 + Logistic Regression。<br><b>Primary Metric：</b>Recall。<br><b>Success：</b>Recall≥90%，Precision≥80%。<br><b>Result / Error Analysis / Next Experiment：</b>训练后填写。</p></div><p>随着实验变多，需要记录 Model、DataVersion、CodeVersion、LearningRate、BatchSize、Epoch、Metrics、Checkpoint、Date、Notes。后续第 9 阶段会把这套体系工程化。</p></section><section class="section" id="loop" data-search><h2>十五、Experiment 001 的完整 ML Development Loop</h2><pre>业务问题
-  ↓
-定义 X / Y
-  ↓
-数据 Schema → 采集/清洗/专家标注
-  ↓
-Project-level Split
-  ↓
-Baseline
-  ↓
-Model V0 → Train → Validation
-  ↓
-锁定 Threshold / Hyperparameter
-  ↓
-Test
-  ↓
-Precision / Recall / F1 + Slice Evaluation
-  ↓
-Error Analysis → Root Cause Analysis
-  ↓
-Experiment 002 ↺</pre></section><section class="section" id="mental" data-search><h2>十六、第 8 阶段的 5 个专家核心心智模型</h2><div class="grid2"><div class="card mental"><b>① 小实验模型</b><p>把大目标拆成一串可验证、可证伪的小问题。</p></div><div class="card mental"><b>② 测试模拟未来</b><p>Test 的设计必须匹配真实部署场景。</p></div><div class="card mental"><b>③ Baseline 思维</b><p>不问模型多少分，先问相比最简单方法提升多少。</p></div><div class="card mental"><b>④ 预注册成功标准</b><p>在看到结果之前就定义什么叫成功。</p></div><div class="card mental"><b>⑤ 实验积累就是知识</b><p>每一次成功和失败都要成为可复现的研发资产。</p></div></div><div class="quote">不要“训练看看效果怎么样”，而要“提出一个假设，然后设计实验验证它”。</div></section><section class="section" id="mastery" data-search><h2>十七、掌握标准与小练习</h2><label class="check"><input class="learn-check" data-key="s08_1" type="checkbox"><span>我能为一个政府采购任务明确写出 X、Y、部署场景与 Success Criteria。</span></label><label class="check"><input class="learn-check" data-key="s08_2" type="checkbox"><span>我知道为什么 Test 应按 Project/Time/Domain 设计，而不是只随机切分。</span></label><label class="check"><input class="learn-check" data-key="s08_3" type="checkbox"><span>我会先建立 Rule / Logistic Regression 等 Baseline，再判断大模型增益。</span></label><label class="check"><input class="learn-check" data-key="s08_4" type="checkbox"><span>我能从 FN/FP 错误中提出下一轮可验证假设，而不是一次改十个东西。</span></label><label class="check"><input class="learn-check" data-key="s08_5" type="checkbox"><span>我理解 Experiment Log、Dataset Version、Code Version 都是模型研发资产。</span></label><details><summary>思维题：如果 7B F1=0.88，Logistic Regression F1=0.87，该怎么办？</summary><p>不要因为 7B“更高级”就自动选它。比较最重要 Slice、稳定性、推理成本、延迟、维护复杂度和未来扩展价值；必要时保留简单模型作为生产方案或强 Baseline。</p></details></section><div class="pager"><a href="stage07.html">← 上一阶段</a><a href="stage09.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
-const root=document.documentElement;
-const keyTheme='proc_ml_theme';
-const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
-document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
-document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
-document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
-const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
-const checks=[...document.querySelectorAll('.learn-check')];
-checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
-function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
-update();
-const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
-</script></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第8阶段：完整机器学习实验——ProcurementML Experiment 001</title><style>:root{--bg:#f7f8fb;--panel:#fff;--text:#1d2433;--muted:#697386;--line:#e5e9f0;--accent:#3559e0;--code:#f2f4f8;--quote:#eef3ff;--math:#fbfcff}html[data-theme="dark"]{--bg:#111318;--panel:#191c23;--text:#edf0f7;--muted:#aab2c0;--line:#2b303a;--accent:#8ea4ff;--code:#20242d;--quote:#1d2744;--math:#151923}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.82}.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh}aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 16px}aside h1{font-size:17px;margin:0 0 8px}aside p{font-size:12px;color:var(--muted);margin:0 0 14px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}button,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 9px;cursor:pointer;text-decoration:none;font-size:13px}.toc{display:flex;flex-direction:column;gap:3px}.toc a{display:flex;gap:9px;text-decoration:none;color:var(--muted);font-size:13px;padding:7px 8px;border-radius:7px}.toc a:hover{background:var(--code);color:var(--text)}.toc a span{min-width:27px;color:var(--accent);font-weight:700}main{max-width:1040px;width:100%;padding:44px 56px 90px}article{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:46px 54px;box-shadow:0 8px 28px rgba(0,0,0,.03)}h1{font-size:34px;line-height:1.3;margin-top:0}h2{font-size:24px;margin-top:52px;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:20px}h3{font-size:19px;margin-top:30px}p{margin:12px 0}blockquote{margin:20px 0;padding:14px 18px;background:var(--quote);border-left:4px solid var(--accent);border-radius:8px}pre{overflow:auto;background:var(--code);padding:16px 18px;border-radius:10px;border:1px solid var(--line);line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}th{background:var(--code)}hr{border:0;border-top:1px solid var(--line);margin:38px 0}p>math[display="block"]{display:block;width:max-content;max-width:100%;margin:22px auto;padding:13px 18px;background:var(--math);border:1px solid var(--line);border-radius:10px;overflow-x:auto;font-size:1.12em}math{font-family:"STIX Two Math","Cambria Math","Times New Roman",serif}.topnote{font-size:14px;color:var(--muted);margin-bottom:28px;padding:12px 14px;background:var(--code);border-radius:10px}.bottomnav{display:flex;justify-content:space-between;gap:12px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{display:block}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}article{padding:26px 20px}.toc{max-height:360px;overflow:auto}}@media print{aside{display:none}.layout{display:block}main{padding:0;max-width:none}article{border:0;box-shadow:none;padding:0}}</style></head><body><div class="layout"><aside><h1>第一课 · 第 8 阶段</h1><p>原文级 Markdown → MathML HTML · 66 个编号内容</p><div class="tools"><a class="navbtn" href="index.html">首页</a><button onclick="toggleTheme()">深/浅</button><button onclick="window.print()">打印</button></div><nav class="toc"><a href="#sec-1"><span>1</span>第八阶段目标：把前 7 个阶段装成一台机器</a><a href="#sec-2"><span>2</span>完整实验主线</a><a href="#sec-3"><span>3</span>Experiment 001 的任务边界</a><a href="#sec-4"><span>4</span>为什么先选资格条件风险</a><a href="#sec-5"><span>5</span>第一步：定义 X</a><a href="#sec-6"><span>6</span>Experiment 001-A</a><a href="#sec-7"><span>7</span>Experiment 001-B</a><a href="#sec-8"><span>8</span>上下文是可实验变量</a><a href="#sec-9"><span>9</span>第二步：定义 Y</a><a href="#sec-10"><span>10</span>为什么第一版不把 Y 做得太复杂</a><a href="#sec-11"><span>11</span>One Experiment, One Main Question</a><a href="#sec-12"><span>12</span>Hypothesis-driven Development</a><a href="#sec-13"><span>13</span>第三步：定义数据 Schema</a><a href="#sec-14"><span>14</span>project_id 的用途</a><a href="#sec-15"><span>15</span>industry / region 的用途</a><a href="#sec-16"><span>16</span>date 的用途</a><a href="#sec-17"><span>17</span>difficulty 的用途</a><a href="#sec-18"><span>18</span>Data Schema = Future Evaluation Infrastructure</a><a href="#sec-19"><span>19</span>第四步：设计样本组成</a><a href="#sec-20"><span>20</span>为什么不是简单 50/50</a><a href="#sec-21"><span>21</span>第五步：Train/Val/Test Split</a><a href="#sec-22"><span>22</span>项目级隔离</a><a href="#sec-23"><span>23</span>时间外测试</a><a href="#sec-24"><span>24</span>Challenge Set</a><a href="#sec-25"><span>25</span>Test 是未来场景模拟器</a><a href="#sec-26"><span>26</span>第六步：先建立 Baseline</a><a href="#sec-27"><span>27</span>Baseline 0：永远预测正常</a><a href="#sec-28"><span>28</span>Baseline 1：关键词规则</a><a href="#sec-29"><span>29</span>Baseline 2：TF-IDF + Logistic Regression</a><a href="#sec-30"><span>30</span>为什么 Baseline 极重要</a><a href="#sec-31"><span>31</span>Improvement over Baseline</a><a href="#sec-32"><span>32</span>第七步：定义 Primary Metric</a><a href="#sec-33"><span>33</span>Secondary Metrics</a><a href="#sec-34"><span>34</span>第八步：训练前写 Success Criteria</a><a href="#sec-35"><span>35</span>为什么必须训练前定义成功</a><a href="#sec-36"><span>36</span>Metric Gaming / Cherry Picking</a><a href="#sec-37"><span>37</span>心智模型④：预注册成功标准</a><a href="#sec-38"><span>38</span>第九步：选择第一个模型</a><a href="#sec-39"><span>39</span>复杂度阶梯</a><a href="#sec-40"><span>40</span>第十步：正式训练</a><a href="#sec-41"><span>41</span>训练监控表</a><a href="#sec-42"><span>42</span>曲线案例</a><a href="#sec-43"><span>43</span>第十一步：Test 只在模型冻结后打开</a><a href="#sec-44"><span>44</span>Confusion Matrix 例子</a><a href="#sec-45"><span>45</span>实验通过 ≠ 项目结束</a><a href="#sec-46"><span>46</span>把 FN 全拉出来</a><a href="#sec-47"><span>47</span>Root Cause 决定 Experiment 002</a><a href="#sec-48"><span>48</span>Controlled Experiment</a><a href="#sec-49"><span>49</span>实验日志是知识资产</a><a href="#sec-50"><span>50</span>Experiment Card</a><a href="#sec-51"><span>51</span>Experiment Tracking</a><a href="#sec-52"><span>52</span>Data Version</a><a href="#sec-53"><span>53</span>Reproducibility</a><a href="#sec-54"><span>54</span>Experiment 001 完整闭环</a><a href="#sec-55"><span>55</span>第八阶段五个心智模型</a><a href="#sec-56"><span>56</span>阶段掌握标准</a><a href="#sec-57"><span>57</span>Experiment 001 的完整实验卡</a><a href="#sec-58"><span>58</span>Baseline 0、1、2 为什么都值得做</a><a href="#sec-59"><span>59</span>数据 Schema 是未来评测基础设施</a><a href="#sec-60"><span>60</span>Challenge Set 与普通 Test 的作用不同</a><a href="#sec-61"><span>61</span>训练前先写 Success Criteria 可以防止 Metric Gaming</a><a href="#sec-62"><span>62</span>一个 Epoch 表格应该怎样读</a><a href="#sec-63"><span>63</span>Test 之后才真正开始 Error Analysis</a><a href="#sec-64"><span>64</span>Experiment 002 的控制实验示例</a><a href="#sec-65"><span>65</span>Experiment Log 也是模型资产</a><a href="#sec-66"><span>66</span>第八阶段五个核心心智模型</a></nav></aside><main><article><div class="topnote">唯一内容源：<strong>stage08.md</strong>。HTML 不压缩正文；所有 LaTeX 公式在构建时转换为浏览器原生 MathML。</div><h1
+id="第一课-第-8-阶段完整机器学习实验procurementml-experiment-001">第一课
+· 第 8 阶段：完整机器学习实验——ProcurementML Experiment 001</h1>
+<blockquote>
+<p><strong>原文级教材源文件</strong>：本 Markdown
+是该阶段唯一内容源。HTML
+由本文件直接生成，不再二次压缩、合并知识点或改写公式。</p>
+</blockquote>
+<p>这一阶段把前七个阶段真正装成一个实验：定义
+Problem、Hypothesis、X/Y、Dataset、Split、Baseline、Success
+Criteria、Training、Evaluation、Error Analysis 和 Next Experiment。</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mi>o</mi><mi>b</mi><mi>l</mi><mi>e</mi><mi>m</mi><mo>→</mo><mi>H</mi><mi>y</mi><mi>p</mi><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>s</mi><mi>i</mi><mi>s</mi><mo>→</mo><mi>D</mi><mi>a</mi><mi>t</mi><mi>a</mi><mi>s</mi><mi>e</mi><mi>t</mi><mo>→</mo><mi>B</mi><mi>a</mi><mi>s</mi><mi>e</mi><mi>l</mi><mi>i</mi><mi>n</mi><mi>e</mi><mo>→</mo><mi>T</mi><mi>r</mi><mi>a</mi><mi>i</mi><mi>n</mi><mo>→</mo><mi>E</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>u</mi><mi>a</mi><mi>t</mi><mi>e</mi><mo>→</mo><mi>E</mi><mi>r</mi><mi>r</mi><mi>o</mi><mi>r</mi><mi>A</mi><mi>n</mi><mi>a</mi><mi>l</mi><mi>y</mi><mi>s</mi><mi>i</mi><mi>s</mi></mrow><annotation encoding="application/x-tex">
+Problem \rightarrow Hypothesis \rightarrow Dataset \rightarrow Baseline \rightarrow Train \rightarrow Evaluate \rightarrow ErrorAnalysis
+</annotation></semantics></math></p>
+<p>目标是完整设计第一个政府采购机器学习实验
+<code>ProcurementML Experiment 001</code>。</p>
+<hr />
+<h2 id="sec-1">1. 第八阶段目标：把前 7
+个阶段装成一台机器</h2>
+<p>这一阶段不再堆新概念，而是完整设计第一个可执行实验 ProcurementML
+Experiment 001。</p>
+<hr />
+<h2 id="sec-2">2. 完整实验主线</h2>
+<p>科学实验式研发应该从问题和假设出发，而不是先开 GPU。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Problem → Hypothesis → Dataset → Baseline → Train → Evaluate → Error
+Analysis → Next Experiment</p>
+</blockquote>
+<hr />
+<h2 id="sec-3">3. Experiment 001 的任务边界</h2>
+<p>先做“供应商资格条件是否存在潜在不合理限制风险”的二分类任务，不做大而全。</p>
+<hr />
+<h2 id="sec-4">4. 为什么先选资格条件风险</h2>
+<p>输入较清晰、标签相对可定义、业务价值明确、可计算
+Precision/Recall，也便于后续扩展。</p>
+<hr />
+<h2 id="sec-5">5. 第一步：定义 X</h2>
+<p>最小 X 是一条资格条件文本。</p>
+<hr />
+<h2 id="sec-6">6. Experiment 001-A</h2>
+<p>X=单条资格条件，用于验证仅凭条款文本能做到什么。</p>
+<hr />
+<h2 id="sec-7">7. Experiment 001-B</h2>
+<p>X=[资格条件,采购标的,项目类型,上下文]，用于验证上下文是否显著提升。</p>
+<hr />
+<h2 id="sec-8">8. 上下文是可实验变量</h2>
+<p>A/B 的差异本身就是一个可证伪假设：增加上下文是否减少 FN？</p>
+<hr />
+<h2 id="sec-9">9. 第二步：定义 Y</h2>
+<p>第一版先用二分类：1=存在潜在不合理限制风险，0=未发现明显风险。</p>
+<hr />
+<h2 id="sec-10">10. 为什么第一版不把 Y
+做得太复杂</h2>
+<p>如果同时训练风险类型、依据、理由、建议，很难知道哪一部分导致失败。</p>
+<hr />
+<h2 id="sec-11">11. One Experiment, One Main
+Question</h2>
+<p>一次实验尽量回答一个核心问题。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型①：大模型研发是很多小实验，而不是一个“大项目”。</p>
+</blockquote>
+<hr />
+<h2 id="sec-12">12. Hypothesis-driven
+Development</h2>
+<p>Experiment 001 资格风险；002 上下文；003 Hard Negative；004 7B vs
+14B；005 RAG 提升引用准确率。</p>
+<hr />
+<h2 id="sec-13">13. 第三步：定义数据 Schema</h2>
+<p>sample_id、project_id、text、label、risk_type、category、industry、region、date、difficulty、source、expert、confidence
+等字段不是装饰。</p>
+<hr />
+<h2 id="sec-14">14. project_id 的用途</h2>
+<p>用于项目级 Split，防止同项目泄漏。</p>
+<hr />
+<h2 id="sec-15">15. industry / region 的用途</h2>
+<p>用于 Slice Evaluation 和分布诊断。</p>
+<hr />
+<h2 id="sec-16">16. date 的用途</h2>
+<p>用于 Time Split、Concept Drift 和法规时效判断。</p>
+<hr />
+<h2 id="sec-17">17. difficulty 的用途</h2>
+<p>用于 Hard Positive/Negative 和边界案例分析。</p>
+<hr />
+<h2 id="sec-18">18. Data Schema =
+Future Evaluation Infrastructure</h2>
+<p>今天多保存一个字段，未来就多一个可诊断维度。</p>
+<hr />
+<h2 id="sec-19">19. 第四步：设计样本组成</h2>
+<p>假设第一批 10000 条，可以显式安排明显风险、普通风险、普通正常、Hard
+Negative、Hard Positive、边界案例。</p>
+<hr />
+<h2 id="sec-20">20. 为什么不是简单 50/50</h2>
+<p>类别平衡只是一个维度，真正要保证决策边界附近的样本质量。</p>
+<hr />
+<h2 id="sec-21">21. 第五步：Train/Val/Test Split</h2>
+<p>可以先 8000/1000/1000，但切分单位应是 Project ID。</p>
+<hr />
+<h2 id="sec-22">22. 项目级隔离</h2>
+<p>Project A 的所有条款、公告、答复等必须进入同一 split。</p>
+<hr />
+<h2 id="sec-23">23. 时间外测试</h2>
+<p>过去训练、未来测试，模拟真实部署。</p>
+<hr />
+<h2 id="sec-24">24. Challenge Set</h2>
+<p>专门放未见行业、新地区、Hard Example、同义改写和 OOD 样本。</p>
+<hr />
+<h2 id="sec-25">25. Test 是未来场景模拟器</h2>
+<p>Test 不是“剩余数据”，而是对真实部署的预演。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型②：测试设计本身就是产品设计的一部分。</p>
+</blockquote>
+<hr />
+<h2 id="sec-26">26. 第六步：先建立 Baseline</h2>
+<p>不要一开始就 Fine-tune 14B。</p>
+<hr />
+<h2 id="sec-27">27. Baseline 0：永远预测正常</h2>
+<p>如果风险率30%，Accuracy 可以70%，但 Recall=0。</p>
+<hr />
+<h2 id="sec-28">28. Baseline 1：关键词规则</h2>
+<p>“注册资本/成立年限/本地分公司”等规则可以得到一个朴素起点。</p>
+<hr />
+<h2 id="sec-29">29. Baseline 2：TF-IDF +
+Logistic Regression</h2>
+<p>便宜、可解释，能验证任务本身是否可学。</p>
+<hr />
+<h2 id="sec-30">30. 为什么 Baseline 极重要</h2>
+<p>7B F1=.82，如果 TF-IDF=.81，复杂模型增益很小；如果
+Baseline=.63，提升就很有意义。</p>
+<hr />
+<h2 id="sec-31">31. Improvement over Baseline</h2>
+<p>模型价值来自相对提升和成本收益，而不是孤立漂亮分数。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型③：永远问相对提升。</p>
+</blockquote>
+<hr />
+<h2 id="sec-32">32. 第七步：定义 Primary Metric</h2>
+<p>风险筛查优先 Recall。</p>
+<hr />
+<h2 id="sec-33">33. Secondary Metrics</h2>
+<p>Precision、F1/F2、High-Risk Recall、各 Slice 指标。</p>
+<hr />
+<h2 id="sec-34">34. 第八步：训练前写 Success
+Criteria</h2>
+<p>例如 Recall≥90%、Precision≥80%、High-Risk Recall≥95%，并要求相对
+Baseline 有明显提升。</p>
+<hr />
+<h2 id="sec-35">35. 为什么必须训练前定义成功</h2>
+<p>否则结果出来后容易挑最好看的指标宣布成功。</p>
+<hr />
+<h2 id="sec-36">36. Metric Gaming / Cherry
+Picking</h2>
+<p>Accuracy94%但Recall61%时，如果目标事先写
+Recall≥90%，就不能自欺欺人。</p>
+<hr />
+<h2 id="sec-37">37. 心智模型④：预注册成功标准</h2>
+<p>Define Success → Run → Judge，不要反过来。</p>
+<hr />
+<h2 id="sec-38">38. 第九步：选择第一个模型</h2>
+<p>优先 Logistic Regression、LightGBM/XGBoost 或小型
+Transformer，先验证数据与任务。</p>
+<hr />
+<h2 id="sec-39">39. 复杂度阶梯</h2>
+<p>Rule → Logistic Regression → Small Transformer → 7B →
+14B，每一层都问增益是否值得。</p>
+<hr />
+<h2 id="sec-40">40. 第十步：正式训练</h2>
+<p>假设 Train=8000、Batch=32，则约250 steps/epoch，5 epoch 最多1250
+steps。</p>
+<hr />
+<h2 id="sec-41">41. 训练监控表</h2>
+<p>记录 Train Loss、Val
+Loss、Precision、Recall、F1/F2、LR、Step/Epoch、Best Checkpoint。</p>
+<hr />
+<h2 id="sec-42">42. 曲线案例</h2>
+<p>Epoch3 Val 最好，Epoch4/5 Train 继续改善但 Val 变差，应选择 Epoch3
+附近。</p>
+<hr />
+<h2 id="sec-43">43. 第十一步：Test
+只在模型冻结后打开</h2>
+<p>模型、阈值、超参数确定后再做最终 Test。</p>
+<hr />
+<h2 id="sec-44">44. Confusion Matrix 例子</h2>
+<p>TP=270,FN=30,FP=60,TN=640 → Recall=90%，Precision≈81.8%。</p>
+<hr />
+<h2 id="sec-45">45. 实验通过 ≠ 项目结束</h2>
+<p>达到门槛后真正重要的是 Error Analysis。</p>
+<hr />
+<h2 id="sec-46">46. 把 FN 全拉出来</h2>
+<p>按 Hard Positive、上下文缺失、医疗知识、标签错、新型风险等分类。</p>
+<hr />
+<h2 id="sec-47">47. Root Cause 决定 Experiment
+002</h2>
+<p>如果最大错误来源是上下文缺失，就提出“加入上下文降低 FN”的新假设。</p>
+<hr />
+<h2 id="sec-48">48. Controlled Experiment</h2>
+<p>一次主要改变一个变量，才能知道提升因果来源。</p>
+<hr />
+<h2 id="sec-49">49. 实验日志是知识资产</h2>
+<p>EXP001、002、003 的成功/失败共同形成团队经验。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型⑤：真正能力来自实验积累，而非某次幸运训练。</p>
+</blockquote>
+<hr />
+<h2 id="sec-50">50. Experiment Card</h2>
+<p>Question、Hypothesis、Dataset、Split、Baseline、Model、Metric、Success、Result、Error
+Analysis、Next Experiment 全部记录。</p>
+<hr />
+<h2 id="sec-51">51. Experiment Tracking</h2>
+<p>实验多起来后使用 MLflow/W&amp;B/TensorBoard
+或自建数据库跟踪参数、指标和 artifacts。</p>
+<hr />
+<h2 id="sec-52">52. Data Version</h2>
+<p>没有 dataset_v0.1/v0.2，就无法判断模型提升来自数据还是代码。</p>
+<hr />
+<h2 id="sec-53">53. Reproducibility</h2>
+<p>记录 Random Seed、Dataset Version、Code Version、Base
+Model、Environment、Hyperparameters。</p>
+<hr />
+<h2 id="sec-54">54. Experiment 001 完整闭环</h2>
+<p>业务问题→X/Y→Schema→采集标注→Project
+Split→Baseline→Train→Validation→Threshold→Test→Slice→Error Analysis→Root
+Cause→Experiment002。</p>
+<hr />
+<h2 id="sec-55">55. 第八阶段五个心智模型</h2>
+<p>小实验；Test 模拟未来；Baseline；预注册成功标准；实验积累是知识。</p>
+<hr />
+<h2 id="sec-56">56. 阶段掌握标准</h2>
+<p>给你“训练评分标准审查模型”的需求时，你应自然追问
+X/Y、标签、Split、Baseline、主指标、FN/FP成本、成功门槛、错误归因和下一轮实验。</p>
+<hr />
+<hr />
+<h2 id="sec-57">57. Experiment 001
+的完整实验卡</h2>
+<p><strong>Question</strong>：仅根据供应商资格条件文本，能否识别潜在不合理限制风险？</p>
+<p><strong>Hypothesis</strong>：高质量专家标注数据训练出的文本分类模型，能在项目级隔离测试集上显著超过关键词规则。</p>
+<p><strong>Dataset</strong>：10,000
+条；Train/Val/Test=8000/1000/1000；同一 project_id 不跨集合。</p>
+<p><strong>Primary
+Metric</strong>：Recall；Secondary：Precision、F1/F2、High-Risk
+Recall。</p>
+<p><strong>Success Criteria</strong>：例如
+Recall≥90%、Precision≥80%，且相比关键词 Baseline 的 F1 至少提高 10
+个百分点。成功标准必须在看到结果之前写下。</p>
+<h2 id="sec-58">58. Baseline 0、1、2
+为什么都值得做</h2>
+<p>Baseline 0 永远预测正常，用于暴露类别不平衡；Baseline 1
+使用关键词规则，体现现有人工规则系统能做到什么；Baseline 2 使用 TF-IDF +
+Logistic Regression，验证复杂模型是否真的带来语义增益。</p>
+<p>如果 7B LLM F1=0.82，而 Logistic
+Regression=0.81，就要重新审视复杂度成本；若
+Baseline=0.63、LLM=0.88，增益才非常明确。</p>
+<h2 id="sec-59">59. 数据 Schema
+是未来评测基础设施</h2>
+<p>sample_id、project_id、industry、region、case_date、difficulty、source_type、expert_confidence
+等字段不是装饰。project_id 用于防泄漏；industry 用于 Slice；date
+用于时间泛化；difficulty 用于 Hard Cases；label_confidence
+用于标签复核。</p>
+<p>设计 Schema 时其实已经在设计未来可以问哪些评测问题。</p>
+<h2 id="sec-60">60. Challenge Set 与普通
+Test 的作用不同</h2>
+<p>普通 Test 模拟主流真实部署；Challenge Set 可以故意放未见行业、Hard
+Positive/Negative、同义改写、长文本、特殊地区和
+OOD，用来测鲁棒性。不要把两者合成一个平均分，否则容易失去诊断价值。</p>
+<h2 id="sec-61">61.
+训练前先写 Success Criteria 可以防止 Metric Gaming</h2>
+<p>如果结果 Accuracy=94%、Recall=61%，没有预注册目标时团队很容易宣传
+Accuracy；若训练前已经规定
+Recall≥90%，实验就明确失败。科学实验的价值之一，就是让结果不能事后挑指标解释。</p>
+<h2 id="sec-62">62. 一个 Epoch 表格应该怎样读</h2>
+<p>假设 Epoch 1～3：Train Loss 0.63→0.36，Val Loss 0.59→0.38，Recall
+78%→90%，Precision 76%→82%；Epoch 4～5 Train Loss 继续下降，但 Val Loss
+上升、Precision 跌到 71%。最佳模型更可能是 Epoch 3，而不是最后一轮。</p>
+<h2 id="sec-63">63. Test 之后才真正开始
+Error Analysis</h2>
+<p>如果 Test TP=270、FN=30、FP=60、TN=640，则
+Recall=90%、Precision≈81.8%。即使达到 Success Criteria，也应把 30 个 FN
+全部分类：Hard Positive、上下文缺失、医疗知识、标签错、新型风险等。</p>
+<p>这张错误分布表才决定 Experiment 002 做什么。</p>
+<h2 id="sec-64">64. Experiment 002
+的控制实验示例</h2>
+<p>若最大根因是上下文缺失，提出 Hypothesis
+002：“加入采购标的和上下文可显著降低 FN”。只改变 X，从单条条款升级为
+[条款,采购标的,上下文]，其余数据、模型、阈值尽量保持不变。</p>
+<p>若 Recall 从 90% 提高到 94%，才有证据支持“上下文有效”。</p>
+<h2 id="sec-65">65. Experiment Log
+也是模型资产</h2>
+<p>真正有价值的不是只剩一个 <code>model_v27.pt</code>，而是知道
+Experiment 001 什么有效、002 什么无效、003
+为什么失败。随着实验积累，团队形成的是 Empirical
+Knowledge，而不是一次幸运训练。</p>
+<h2 id="sec-66">66. 第八阶段五个核心心智模型</h2>
+<ol type="1">
+<li>大模型项目应该拆成一串可证伪的小实验。</li>
+<li>Test Set 不是剩余数据，而是未来使用场景模拟器。</li>
+<li>模型价值来自相对 Baseline 的提升和成本差异。</li>
+<li>成功标准必须在看到结果之前定义。</li>
+<li>实验记录、失败结论和错误分析都是研发资产。</li>
+</ol>
+<div class="bottomnav"><a class="navbtn" href="stage07.html">← 上一页</a><a class="navbtn" href="stage09.html">下一页 →</a></div></article></main></div><script>function toggleTheme(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';localStorage.setItem('course-theme',r.dataset.theme)}document.documentElement.dataset.theme=localStorage.getItem('course-theme')||'light';</script></body></html>

@@ -1,126 +1,307 @@
-<!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 4 阶段：概率、Loss 与 Gradient · 政府采购模型训练课</title><style>
-:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
-[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
-@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
-@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a class="active" href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#chain">完整计算链</a><a href="#logit">Logit</a><a href="#sigmoid">Sigmoid</a><a href="#ce">Cross Entropy</a><a href="#gradient">Gradient</a><a href="#backprop">Backpropagation</a><a href="#optimizer">Optimizer</a><a href="#lossmetric">Loss 与 Metric</a><a href="#confidence">Confidence</a><a href="#mental">专家心智模型</a><a href="#example">完整例子</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 04</div><h1>第一课 · 第 4 阶段：概率、Loss 与 Gradient</h1><p>Logit、Sigmoid、Cross Entropy、Gradient 与 Backpropagation</p><div class="chips"><span class="chip">Logit</span><span class="chip">Sigmoid</span><span class="chip">Cross Entropy</span><span class="chip">Gradient 与 Backpropagation</span></div></section><section class="section" data-search="" id="chain"><h2>一、把训练黑箱打开：从输入到参数更新的完整链条</h2>
-<div class="formula">X → z(Logit) → Sigmoid → p → Cross Entropy → Loss → Gradient → Optimizer → 参数更新</div>
-<p>这一阶段回答：模型为什么输出 0.73？这个数字从哪里来？Loss 为什么能惩罚“自信地答错”？Gradient 又怎样把最终错误传给不同参数？</p>
-</section><section class="section" data-search="" id="logit"><h2>二、Logit：模型内部先得到一个不受 0～1 限制的原始评分</h2>
-<p>仍用最简单线性模型：</p><div class="formula">z = w₁x₁ + w₂x₂ + w₃x₃ + b</div>
-<p>z 可以是 -5、-1、0、2、8，并不天然是概率。直觉：</p>
-<pre>z 很大正数 → 更倾向风险
-z 很大负数 → 更倾向无风险
-z ≈ 0      → 比较犹豫</pre>
-<p>这个 z 就是 Logit。它是模型内部的“原始证据分数”。</p>
-</section><section class="section" data-search="" id="sigmoid"><h2>三、Sigmoid：把任意实数压缩到 0～1</h2>
-<div class="formula">σ(z) = 1 / (1 + e^(-z))</div>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>Logit z</th><th>Sigmoid(z)</th></tr></thead><tbody><tr><td>-5</td><td>≈0.007</td></tr><tr><td>-2</td><td>≈0.12</td></tr><tr><td>0</td><td>0.50</td></tr><tr><td>2</td><td>≈0.88</td></tr><tr><td>5</td><td>≈0.993</td></tr></tbody></table></div>
-<p>于是一个二分类模型可以写成：</p><div class="formula">p = P(Y=1|X) = σ(wᵀX + b)</div>
-<p>这就是 Logistic Regression 的核心形式。现代神经网络最后做二分类，也常有类似的“Logit → 概率”结构。</p>
-<div class="card warn"><b>注意 Calibration：</b><p>模型输出 0.82 不天然等于现实世界“真的有 82% 违规概率”。如果希望 0.8 预测的一批样本最终约 80% 为真，还需要概率校准。</p></div>
-</section><section class="section" data-search="" id="ce"><h2>四、Binary Cross Entropy：为什么“非常自信地答错”惩罚更大？</h2>
-<div class="formula">L = -[ y·log(p) + (1-y)·log(1-p) ]</div>
-<p>看起来复杂，但只有两种情况：</p>
-<div class="grid2"><div class="card"><b>当 y=1</b><div class="formula">L = -log(p)</div><p>正确类别概率越接近 1，Loss 越小。</p></div><div class="card"><b>当 y=0</b><div class="formula">L = -log(1-p)</div><p>模型越把概率推向 0，Loss 越小。</p></div></div>
-<h3>真实 y=1 时的典型 Loss</h3>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>p</th><th>Loss=-log(p)</th><th>直觉</th></tr></thead><tbody><tr><td>0.99</td><td>≈0.01</td><td>非常好</td></tr><tr><td>0.90</td><td>≈0.105</td><td>不错</td></tr><tr><td>0.50</td><td>≈0.693</td><td>犹豫</td></tr><tr><td>0.20</td><td>≈1.609</td><td>明显错</td></tr><tr><td>0.01</td><td>≈4.605</td><td>非常自信地错</td></tr></tbody></table></div>
-<div class="quote">Cross Entropy 的核心直觉：让模型把越来越多概率质量放到正确答案上，并强烈惩罚“对正确类别给极低概率”。</div>
-</section><section class="section" data-search="" id="gradient"><h2>五、Gradient：Loss 已经知道“错多少”，接下来要知道“参数往哪改”</h2>
-<p>对于一个参数 w：</p><div class="formula">dL/dw</div>
-<p>它表示：如果 w 稍微增加一点，Loss 会怎样变化。</p>
-<ul><li>dL/dw &gt; 0：w 增大会让 Loss 增大，所以为了下降，w 应减小。</li><li>dL/dw &lt; 0：w 增大会让 Loss 减小，所以可以增大 w。</li></ul>
-<p>梯度同时提供<b>方向 + 敏感程度</b>。梯度下降：</p>
-<div class="formula">w(new) = w(old) - η · ∂L/∂w</div>
-</section><section class="section" data-search="" id="backprop"><h2>六、Sigmoid + Cross Entropy 为什么特别漂亮？从 p-y 到 Backpropagation</h2>
-<p>对 <code>Sigmoid + Binary Cross Entropy</code>，Loss 对 Logit 的导数可以简化为：</p>
-<div class="formula">∂L/∂z = p - y</div>
-<p>直觉非常清楚：</p>
-<ul><li>y=1，p=0.2 → p-y=-0.8：错误很大，要强烈推动风险方向。</li><li>y=1，p=0.95 → -0.05：已经很好，只需小调整。</li><li>y=0，p=0.9 → +0.9：模型非常自信地错，需要大调整。</li></ul>
-<p>如果：</p><div class="formula">z = w₁x₁ + w₂x₂ + w₃x₃ + b</div>
-<p>通过链式法则：</p><div class="formula">∂L/∂w₁ = (p-y)·x₁
-∂L/∂w₂ = (p-y)·x₂
-∂L/∂w₃ = (p-y)·x₃</div>
-<p>这已经是 Backpropagation 的核心直觉：<b>最终错误沿计算图向后传播，把“责任”分配给每一个参与预测的参数。</b></p>
-</section><section class="section" data-search="" id="optimizer"><h2>七、Forward、Backward、Optimizer：神经网络再大，学习骨架也没变</h2>
-<pre>Forward Pass：X → Layer1 → Layer2 → … → Logit → Prediction
-Loss：预测 vs 正确答案
-Backward Pass：Loss → 最后一层 → … → 第一层，计算每个参数 Gradient
-Optimizer：根据 Gradient 更新 Parameters</pre>
-<div class="grid2"><div class="card"><b>Gradient</b><p>导航：告诉你坡度与方向。</p></div><div class="card"><b>Optimizer</b><p>走路方法：SGD、Adam、AdamW 等。</p></div></div>
-<div class="card mental"><b>Credit Assignment Problem：</b><p>真正困难的不是“知道模型错了”，而是数十亿参数里哪些参数该为这次错误负责。Backpropagation 就是在做信用/责任分配。</p></div>
-</section><section class="section" data-search="" id="lossmetric"><h2>八、Loss 和 Metric 不是一回事</h2>
-<p>第三阶段学了 Precision / Recall / F1，现在又用了 Cross Entropy。两者职责不同：</p>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>概念</th><th>用途</th><th>特点</th></tr></thead><tbody><tr><td>Loss</td><td>直接训练参数</td><td>通常连续、可微，适合计算 Gradient</td></tr><tr><td>Metric</td><td>业务评价</td><td>可以包含阈值和离散规则，不一定可微</td></tr></tbody></table></div>
-<p>即使业务最看重 Recall，训练也可能用 Cross Entropy，再通过 Class Weight、Focal Loss、采样和 Threshold 让系统更重视漏报。</p>
-<div class="quote">业务指标和训练 Loss 有关系，但不一定是同一个东西。</div>
-</section><section class="section" data-search="" id="confidence"><h2>九、Score、Probability、Decision、Confidence、Evidence 要分开</h2>
-<p>成熟政府采购系统最好区分：</p>
-<pre>模型内部 Score / Logit
-↓
-概率输出 p
-↓
-业务 Threshold
-↓
-最终 Decision
-↓
-Evidence / 法规 / 相似案例
-↓
-人工复核</pre>
-<p>高 Confidence ≠ Truth。模型即使输出 0.99 也可能在 OOD、新政策、分布漂移或错误数据上自信地错。</p>
-<div class="card good"><b>ProcurementLM 更专业的输出：</b><pre>判断：高风险
-模型分数：0.93
-法规依据：2 条有效依据
-相似案例：3 个
-适用地区/时间：已核验
-数据外程度：低
-建议：人工复核</pre></div>
-</section><section class="section" data-search="" id="mental"><h2>十、本阶段 5 个专家核心心智模型</h2>
-<ol class="stage-list"><li><b>Score 与 Decision 分离：</b>模型先形成连续评分，业务再依据成本切阈值。</li><li><b>Loss 定义“什么错得更严重”：</b>优化目标塑造模型行为。</li><li><b>Gradient 是信用分配机制：</b>告诉每个参数该往哪里、改多少。</li><li><b>学习是微小更新的累积：</b>单个样本只是轻轻推动参数。</li><li><b>Confidence ≠ Truth：</b>高置信度仍需校准、证据和外部验证。</li></ol>
-</section><section class="section" data-search="" id="example"><h2>十一、完整政府采购训练例子：一条样本怎样改变参数？</h2>
-<p>样本：</p><pre>X：供应商必须在本市设立分公司
-Y：1</pre>
-<p>模型当前预测：</p><div class="formula">z=-2 → Sigmoid(z)≈0.12 → p≈0.12</div>
-<p>模型严重低估风险。于是 Cross Entropy 较高，而且：</p><div class="formula">p-y = 0.12 - 1 = -0.88</div>
-<p>错误信号通过 Backpropagation 传给相关参数。假设这个样本主要激活“本地机构”特征，则对应权重被推动调整。重复大量样本后：</p>
-<div class="formula">p：0.12 → 0.27 → 0.62 → 0.88 …</div>
-<div class="quote">经验 → 错误 → 反馈 → 梯度 → 参数 → 能力。</div>
-<label class="check"><input class="learn-check" data-key="s4_complete" type="checkbox"/><span><b>阶段 4 掌握：</b>我能解释 Logit、Sigmoid、Cross Entropy、Gradient、Backpropagation，并理解为什么 Loss 与业务 Metric 要分开。</span></label></section>
-<section class="section" data-search="" id="deep4"><h2>十二、深化理解：从一个梯度公式看到“知识进入参数”的全过程</h2>
-<h3>1. 用具体数值更新一次 w₂</h3>
-<p>样本“必须在本市设立分公司”，设 X=[0,1,0]，y=1，当前 p=0.2：</p>
-<div class="formula">p-y = -0.8
-∂L/∂w₂ = (p-y)·x₂ = -0.8×1 = -0.8</div>
-<p>如果 Learning Rate η=0.1：</p>
-<div class="formula">w₂(new) = w₂(old) - 0.1×(-0.8)
-        = w₂(old) + 0.08</div>
-<p>下一次相似输入的 Logit 会更容易变大，风险概率也会提高。这个“+0.08”就是一条经验对参数世界产生的微小痕迹。</p>
-<h3>2. 为什么一个样本不等于一条永久规则？</h3>
-<p>因为下一批样本还会继续推参数。如果只根据一条案例巨大更新，模型会极不稳定。现代训练就是大量样本不断“拉扯”参数，最终在数据分布和 Loss 共同作用下形成折中表示。</p>
-<h3>3. 为什么不能简单把 Recall 直接当普通 Loss？</h3>
-<p>Recall 依赖 Threshold 和离散计数。p 从 0.499 变到 0.501 时，分类可能突然从 0 跳到 1；这种函数不适合普通梯度下降直接求连续梯度。Cross Entropy 等可微 Loss 提供细腻的训练信号，再用 Threshold/Metric 评价业务结果。</p>
-<h3>4. Score、Probability 与现实概率的区别</h3>
-<p>模型输出 0.9，可能只是模型在自身训练分布下非常确信。如果部署进入完全没见过的领域，0.9 也可能不可靠。需要校准、OOD 检测、证据检索和人工机制共同约束。</p>
-<h3>5. 从 Logistic Regression 到 70B LLM，本质没有变</h3>
-<pre>小模型：X → z → p → Loss → Gradient → 更新少量参数
-神经网络：X → Layer1 → … → LayerN → Loss → Backprop → 更新百万/亿参数
-LLM：Tokens → Transformer Blocks → Token logits → Cross Entropy → Backprop → 更新数十亿参数</pre>
-<div class="quote">规模变了、表示变了、计算图变深了，但“Forward → Loss → Backward → Update”没有变。</div>
-</section>
-<div class="pager"><a href="stage03.html">← 上一阶段</a><a href="stage05.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
-const root=document.documentElement;
-const keyTheme='proc_ml_theme';
-const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
-document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
-document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
-document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
-const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
-const checks=[...document.querySelectorAll('.learn-check')];
-checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
-function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
-update();
-const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
-</script></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第4阶段：概率、Loss、Gradient 与反向传播</title><style>:root{--bg:#f7f8fb;--panel:#fff;--text:#1d2433;--muted:#697386;--line:#e5e9f0;--accent:#3559e0;--code:#f2f4f8;--quote:#eef3ff;--math:#fbfcff}html[data-theme="dark"]{--bg:#111318;--panel:#191c23;--text:#edf0f7;--muted:#aab2c0;--line:#2b303a;--accent:#8ea4ff;--code:#20242d;--quote:#1d2744;--math:#151923}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.82}.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh}aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 16px}aside h1{font-size:17px;margin:0 0 8px}aside p{font-size:12px;color:var(--muted);margin:0 0 14px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}button,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 9px;cursor:pointer;text-decoration:none;font-size:13px}.toc{display:flex;flex-direction:column;gap:3px}.toc a{display:flex;gap:9px;text-decoration:none;color:var(--muted);font-size:13px;padding:7px 8px;border-radius:7px}.toc a:hover{background:var(--code);color:var(--text)}.toc a span{min-width:27px;color:var(--accent);font-weight:700}main{max-width:1040px;width:100%;padding:44px 56px 90px}article{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:46px 54px;box-shadow:0 8px 28px rgba(0,0,0,.03)}h1{font-size:34px;line-height:1.3;margin-top:0}h2{font-size:24px;margin-top:52px;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:20px}h3{font-size:19px;margin-top:30px}p{margin:12px 0}blockquote{margin:20px 0;padding:14px 18px;background:var(--quote);border-left:4px solid var(--accent);border-radius:8px}pre{overflow:auto;background:var(--code);padding:16px 18px;border-radius:10px;border:1px solid var(--line);line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}th{background:var(--code)}hr{border:0;border-top:1px solid var(--line);margin:38px 0}p>math[display="block"]{display:block;width:max-content;max-width:100%;margin:22px auto;padding:13px 18px;background:var(--math);border:1px solid var(--line);border-radius:10px;overflow-x:auto;font-size:1.12em}math{font-family:"STIX Two Math","Cambria Math","Times New Roman",serif}.topnote{font-size:14px;color:var(--muted);margin-bottom:28px;padding:12px 14px;background:var(--code);border-radius:10px}.bottomnav{display:flex;justify-content:space-between;gap:12px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{display:block}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}article{padding:26px 20px}.toc{max-height:360px;overflow:auto}}@media print{aside{display:none}.layout{display:block}main{padding:0;max-width:none}article{border:0;box-shadow:none;padding:0}}</style></head><body><div class="layout"><aside><h1>第一课 · 第 4 阶段</h1><p>原文级 Markdown → MathML HTML · 49 个编号内容</p><div class="tools"><a class="navbtn" href="index.html">首页</a><button onclick="toggleTheme()">深/浅</button><button onclick="window.print()">打印</button></div><nav class="toc"><a href="#sec-1"><span>1</span>第四阶段总链路</a><a href="#sec-2"><span>2</span>为什么模型不直接输出 0/1</a><a href="#sec-3"><span>3</span>Logit z</a><a href="#sec-4"><span>4</span>Logit 的直觉</a><a href="#sec-5"><span>5</span>Sigmoid</a><a href="#sec-6"><span>6</span>Sigmoid 数值直觉</a><a href="#sec-7"><span>7</span>Logistic Regression</a><a href="#sec-8"><span>8</span>概率分数不等于真实概率</a><a href="#sec-9"><span>9</span>Binary Cross Entropy</a><a href="#sec-10"><span>10</span>当 y=1</a><a href="#sec-11"><span>11</span>当 y=0</a><a href="#sec-12"><span>12</span>自信地错会被重罚</a><a href="#sec-13"><span>13</span>Cross Entropy 的核心直觉</a><a href="#sec-14"><span>14</span>Loss 的“几何形状”</a><a href="#sec-15"><span>15</span>Gradient</a><a href="#sec-16"><span>16</span>Gradient Descent</a><a href="#sec-17"><span>17</span>BCE + Sigmoid 的漂亮结果</a><a href="#sec-18"><span>18</span>当 y=1,p=.2</a><a href="#sec-19"><span>19</span>当 y=1,p=.95</a><a href="#sec-20"><span>20</span>当 y=0,p=.9</a><a href="#sec-21"><span>21</span>线性权重的梯度</a><a href="#sec-22"><span>22</span>这就是 Credit Assignment 的起点</a><a href="#sec-23"><span>23</span>Forward Pass</a><a href="#sec-24"><span>24</span>Backward Pass</a><a href="#sec-25"><span>25</span>Backpropagation</a><a href="#sec-26"><span>26</span>Optimizer</a><a href="#sec-27"><span>27</span>Learning Rate 再理解</a><a href="#sec-28"><span>28</span>Loss 与 Metric 不同</a><a href="#sec-29"><span>29</span>业务重视 Recall 怎么办</a><a href="#sec-30"><span>30</span>Score 与 Decision 分离</a><a href="#sec-31"><span>31</span>为什么不同风险可以不同 Threshold</a><a href="#sec-32"><span>32</span>Confidence ≠ Truth</a><a href="#sec-33"><span>33</span>政府采购例子：高置信错误</a><a href="#sec-34"><span>34</span>第四阶段五个心智模型</a><a href="#sec-35"><span>35</span>一句最重要的话</a><a href="#sec-36"><span>36</span>思维实验：p=.99 但错了</a><a href="#sec-37"><span>37</span>第四阶段掌握标准</a><a href="#sec-38"><span>38</span>为什么不让模型直接输出 0 或 1</a><a href="#sec-39"><span>39</span>Sigmoid 数值直觉</a><a href="#sec-40"><span>40</span>Binary Cross Entropy 为什么适合概率分类</a><a href="#sec-41"><span>41</span>Cross Entropy 的核心直觉：把概率质量推向正确答案</a><a href="#sec-42"><span>42</span>最漂亮的一条导数：Sigmoid + BCE 得到 p-y</a><a href="#sec-43"><span>43</span>误差信号如何进一步传给权重</a><a href="#sec-44"><span>44</span>Forward、Backward、Optimizer 三者不要混淆</a><a href="#sec-45"><span>45</span>Loss 与 Metric 为什么可以不同</a><a href="#sec-46"><span>46</span>Score 与 Decision 必须分离</a><a href="#sec-47"><span>47</span>Confidence ≠ Truth</a><a href="#sec-48"><span>48</span>一个采购条款的单步更新直觉</a><a href="#sec-49"><span>49</span>第四阶段五个核心心智模型</a></nav></aside><main><article><div class="topnote">唯一内容源：<strong>stage04.md</strong>。HTML 不压缩正文；所有 LaTeX 公式在构建时转换为浏览器原生 MathML。</div><h1 id="第一课-第-4-阶段概率lossgradient-与反向传播">第一课 · 第 4
+阶段：概率、Loss、Gradient 与反向传播</h1>
+<blockquote>
+<p><strong>原文级教材源文件</strong>：本 Markdown
+是该阶段唯一内容源。HTML
+由本文件直接生成，不再二次压缩、合并知识点或改写公式。</p>
+</blockquote>
+<p>这一阶段第一次真正进入“训练内部”：<code>Logit → Sigmoid → Probability → Cross Entropy → Gradient → Backprop → 参数更新</code>。</p>
+<p>核心链路：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>→</mo><mi>z</mi><mo>→</mo><mi>σ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mi>p</mi><mo>→</mo><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mo>→</mo><mi>G</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>i</mi><mi>e</mi><mi>n</mi><mi>t</mi><mo>→</mo><mi>U</mi><mi>p</mi><mi>d</mi><mi>a</mi><mi>t</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">
+X \rightarrow z \rightarrow \sigma(z) \rightarrow p \rightarrow Loss \rightarrow Gradient \rightarrow Update
+</annotation></semantics></math></p>
+<p>最重要的认识是：模型并不理解我们的业务目标，它只在努力降低我们定义的
+Loss。</p>
+<hr />
+<h2 id="sec-1">1. 第四阶段总链路</h2>
+<p>这一阶段把“预测分数如何变成 Loss，再变成参数更新”完整串起来。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>X → z → Sigmoid → p → Cross Entropy → Loss → Gradient → 参数更新</p>
+</blockquote>
+<hr />
+<h2 id="sec-2">2. 为什么模型不直接输出 0/1</h2>
+<p>如果只有硬分类，训练无法区分“差一点错”和“极其自信地错”。连续分数提供更细反馈。</p>
+<hr />
+<h2 id="sec-3">3. Logit z</h2>
+<p>线性模型先产生一个不受限制的原始分数。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>z=wᵀX+b</p>
+</blockquote>
+<hr />
+<h2 id="sec-4">4. Logit 的直觉</h2>
+<p>z 很大为正时倾向风险，z 很大为负时倾向正常，z≈0 时模型犹豫。</p>
+<hr />
+<h2 id="sec-5">5. Sigmoid</h2>
+<p>把任意实数压到 0～1。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>σ(z)=1/(1+e^{-z})</p>
+</blockquote>
+<hr />
+<h2 id="sec-6">6. Sigmoid 数值直觉</h2>
+<p>z=-5≈0.007，-2≈0.12，0=0.5，2≈0.88，5≈0.993。</p>
+<hr />
+<h2 id="sec-7">7. Logistic Regression</h2>
+<p>把线性 logit 与 Sigmoid 结合，得到二分类概率分数。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>P(Y=1|X)=σ(wᵀX+b)</p>
+</blockquote>
+<hr />
+<h2 id="sec-8">8. 概率分数不等于真实概率</h2>
+<p>模型输出 0.82 不自动意味着现实有 82% 概率存在风险；是否能这样解释要看
+Calibration。</p>
+<hr />
+<h2 id="sec-9">9. Binary Cross Entropy</h2>
+<p>二分类常用交叉熵衡量概率预测。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>L=−[y log p +(1−y)log(1−p)]</p>
+</blockquote>
+<hr />
+<h2 id="sec-10">10. 当 y=1</h2>
+<p>Loss 简化为 −log p。预测越接近 1，Loss 越小。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>y=1 ⇒ L=−log p</p>
+</blockquote>
+<hr />
+<h2 id="sec-11">11. 当 y=0</h2>
+<p>Loss 简化为 −log(1−p)。预测越接近 0，Loss 越小。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>y=0 ⇒ L=−log(1−p)</p>
+</blockquote>
+<hr />
+<h2 id="sec-12">12. 自信地错会被重罚</h2>
+<p>真实 y=1 时，p=.99→Loss≈.01，p=.5→.693，p=.2→1.609，p=.01→4.605。</p>
+<hr />
+<h2 id="sec-13">13. Cross Entropy 的核心直觉</h2>
+<p>它不断推动正确答案的概率质量上升，并强烈惩罚高置信度错误。</p>
+<hr />
+<h2 id="sec-14">14. Loss 的“几何形状”</h2>
+<p>不同 Loss 对不同错误的惩罚方式不同，因此 Loss
+本身就是我们对模型学习方向的设计。</p>
+<hr />
+<h2 id="sec-15">15. Gradient</h2>
+<p>∂L/∂w 表示参数轻微变化对 Loss 的影响方向和敏感度。</p>
+<hr />
+<h2 id="sec-16">16. Gradient Descent</h2>
+<p>沿 Loss 下降方向更新参数。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>w_new=w_old−η∂L/∂w</p>
+</blockquote>
+<hr />
+<h2 id="sec-17">17. BCE + Sigmoid 的漂亮结果</h2>
+<p>对 logit 的导数非常简洁。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>∂L/∂z=p−y</p>
+</blockquote>
+<hr />
+<h2 id="sec-18">18. 当 y=1,p=.2</h2>
+<p>p−y=-.8，说明需要强烈把 z 往上推。</p>
+<hr />
+<h2 id="sec-19">19. 当 y=1,p=.95</h2>
+<p>p−y=-.05，只需小幅修正。</p>
+<hr />
+<h2 id="sec-20">20. 当 y=0,p=.9</h2>
+<p>p−y=.9，说明模型高置信度错，需要强烈把 z 往下推。</p>
+<hr />
+<h2 id="sec-21">21. 线性权重的梯度</h2>
+<p>如果 z=wᵀx+b，则每个权重梯度包含对应输入特征。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>∂L/∂w_i=(p−y)x_i</p>
+</blockquote>
+<hr />
+<h2 id="sec-22">22. 这就是 Credit Assignment
+的起点</h2>
+<p>最终错误信号如何分配回每个参数，是后面 Backprop 的核心问题。</p>
+<hr />
+<h2 id="sec-23">23. Forward Pass</h2>
+<p>输入从前往后经过模型得到预测。</p>
+<hr />
+<h2 id="sec-24">24. Backward Pass</h2>
+<p>从 Loss 反向计算各层参数梯度。</p>
+<hr />
+<h2 id="sec-25">25. Backpropagation</h2>
+<p>反向传播不是“把答案传回去”，而是高效应用链式法则计算梯度。</p>
+<hr />
+<h2 id="sec-26">26. Optimizer</h2>
+<p>梯度给方向，Optimizer 决定如何利用当前与历史梯度更新参数。</p>
+<hr />
+<h2 id="sec-27">27. Learning Rate 再理解</h2>
+<p>η 是每次参数移动尺度。过大振荡/发散，过小收敛缓慢。</p>
+<hr />
+<h2 id="sec-28">28. Loss 与 Metric 不同</h2>
+<p>Loss 是可微训练目标；Recall/F1 等 Metric
+是业务评估指标，通常不能直接拿来反向传播。</p>
+<hr />
+<h2 id="sec-29">29. 业务重视 Recall 怎么办</h2>
+<p>可以通过 Class Weight、Focal Loss、采样、阈值、Cost-sensitive
+设计让训练更接近业务目标。</p>
+<hr />
+<h2 id="sec-30">30. Score 与 Decision 分离</h2>
+<p>模型负责输出连续 Score；业务层通过 Threshold 与策略把 Score
+变成行动。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>X → Score/Probability → Threshold → Decision</p>
+</blockquote>
+<hr />
+<h2 id="sec-31">31. 为什么不同风险可以不同
+Threshold</h2>
+<p>高代价 FN 的风险类型可以用更宽松阈值保障召回。</p>
+<hr />
+<h2 id="sec-32">32. Confidence ≠ Truth</h2>
+<p>模型越自信不代表越接近现实；这将在第 11 阶段进入 Calibration
+与不确定性。</p>
+<hr />
+<h2 id="sec-33">33. 政府采购例子：高置信错误</h2>
+<p>模型把“项目地点在本市”判 0.99 风险，说明它可能学了关键词捷径；Cross
+Entropy 会在正确标签下强烈纠正这类错误。</p>
+<hr />
+<h2 id="sec-34">34. 第四阶段五个心智模型</h2>
+<p>Score 与 Decision 分离；Loss 定义错误惩罚；Gradient
+是信用分配；训练是微小参数更新的累积；Confidence 不等于 Truth。</p>
+<hr />
+<h2 id="sec-35">35. 一句最重要的话</h2>
+<p>模型并不理解我们的业务目标，它只在努力降低我们定义的 Loss。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>如果业务目标没有进入数据、Loss、采样、阈值或系统策略，模型不会凭空替我们优化它。</p>
+</blockquote>
+<hr />
+<h2 id="sec-36">36. 思维实验：p=.99 但错了</h2>
+<p>为什么比 p=.51 错得更值得关注？因为它既带来更大 Cross
+Entropy，也暴露模型内部可能存在非常确定的错误规律。</p>
+<hr />
+<h2 id="sec-37">37. 第四阶段掌握标准</h2>
+<p>你应能解释 Logit、Sigmoid、Cross
+Entropy、Gradient、Forward/Backward、Optimizer，以及 Loss 与 Metric
+的区别。</p>
+<hr />
+<hr />
+<h2 id="sec-38">38. 为什么不让模型直接输出 0 或
+1</h2>
+<p>如果模型只输出硬分类，我们无法区分“差一点错”和“非常自信地错”。连续分数让训练系统知道错误程度，也允许后续使用不同
+Threshold。</p>
+<p>最简单二分类模型先计算 Logit：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><msup><mi>w</mi><mi>T</mi></msup><mi>X</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">
+z=w^TX+b
+</annotation></semantics></math></p>
+<p>再用 Sigmoid 映射到 0～1：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>=</mo><mi>σ</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>z</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+p=\sigma(z)=\frac{1}{1+e^{-z}}
+</annotation></semantics></math></p>
+<h2 id="sec-39">39. Sigmoid 数值直觉</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: right;">z</th>
+<th style="text-align: right;">p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-5</td>
+<td style="text-align: right;">≈0.007</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-2</td>
+<td style="text-align: right;">≈0.12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">≈0.88</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">≈0.993</td>
+</tr>
+</tbody>
+</table>
+<p>z=0 表示模型处于边界；z 大幅为正或负表示模型把样本推向某一侧。这个 p
+是模型分数，不自动等于真实世界经过校准的客观概率。</p>
+<h2 id="sec-40">40. Binary Cross
+Entropy 为什么适合概率分类</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><mi>−</mi><mrow><mo stretchy="true" form="prefix">[</mo><mi>y</mi><mo>log</mo><mi>p</mi><mo>+</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>log</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+L=-[y\log p+(1-y)\log(1-p)]
+</annotation></semantics></math></p>
+<p>当 y=1 时，Loss=-log p。预测 0.99 的 Loss 约 0.01，预测 0.5 是
+0.693，预测 0.2 是 1.609，预测 0.01 达到约
+4.605。它会特别重罚“非常自信地答错”。</p>
+<h2 id="sec-41">41. Cross
+Entropy 的核心直觉：把概率质量推向正确答案</h2>
+<p>Loss
+并不要求模型先形成我们理解的法律概念，它只是让正确标签的概率变高、错误标签的概率变低。模型内部最终形成什么表示，是大量这种压力共同作用的结果。</p>
+<h2 id="sec-42">42.
+最漂亮的一条导数：Sigmoid + BCE 得到 p-y</h2>
+<p>对于二分类：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>L</mi></mrow><mrow><mi>∂</mi><mi>z</mi></mrow></mfrac><mo>=</mo><mi>p</mi><mo>−</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">
+\frac{\partial L}{\partial z}=p-y
+</annotation></semantics></math></p>
+<p>若真实 y=1、模型 p=0.2，则误差信号为 -0.8，更新压力很强；若
+p=0.95，则只有 -0.05，说明已经接近正确方向，不需要大改。</p>
+<h2 id="sec-43">43. 误差信号如何进一步传给权重</h2>
+<p>在线性模型中：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>L</mi></mrow><mrow><mi>∂</mi><msub><mi>w</mi><mi>i</mi></msub></mrow></mfrac><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>p</mi><mo>−</mo><mi>y</mi><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">
+\frac{\partial L}{\partial w_i}=(p-y)x_i
+</annotation></semantics></math></p>
+<p>这就是 Credit Assignment
+的最小版本：最终错误会沿计算图向后分配到对结果有贡献的参数。深层神经网络的
+Backpropagation 本质上把同样思想扩展到很多层。</p>
+<h2 id="sec-44">44.
+Forward、Backward、Optimizer 三者不要混淆</h2>
+<p>Forward：用当前参数从 X 算到预测；Backward：从 Loss
+往回计算梯度；Optimizer：根据梯度和自己的更新规则真正修改参数。</p>
+<p>可以用类比：Gradient 是坡度方向，Optimizer 是走路策略，Learning Rate
+是步长。</p>
+<h2 id="sec-45">45. Loss 与 Metric
+为什么可以不同</h2>
+<p>训练需要可微 Loss，因此常用 Cross Entropy；业务评估可能更关心
+Recall、F2、High-Risk Recall。可以通过 Class Weight、Focal
+Loss、Sampling、Threshold 和成本敏感策略，让训练目标更贴近业务指标。</p>
+<h2 id="sec-46">46. Score 与 Decision 必须分离</h2>
+<p>完整链路应该是：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>→</mo><mi>S</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>e</mi><mo>→</mo><mi>T</mi><mi>h</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>h</mi><mi>o</mi><mi>l</mi><mi>d</mi><mo>→</mo><mi>D</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">
+X\rightarrow Score\rightarrow Threshold\rightarrow Decision
+</annotation></semantics></math></p>
+<p>这意味着同一模型可以在不同业务流程使用不同 Decision
+Policy，不必为了每个阈值重新训练模型。</p>
+<h2 id="sec-47">47. Confidence ≠ Truth</h2>
+<p>模型输出 0.82 不自动意味着“现实世界有 82%
+概率违规”。是否可以把模型概率当成现实概率，需要额外做
+Calibration。这个提醒会在第 11
+阶段发展成完整的概率校准与选择性预测体系。</p>
+<h2 id="sec-48">48. 一个采购条款的单步更新直觉</h2>
+<p>若条款真实是风险 y=1，模型只给 p=0.1，它会产生很大 Loss 和负的
+p-y，参数更新会尝试把未来类似输入的 z
+往正方向推。如果同类正确样本反复出现，这种微小更新会累计成稳定模式。</p>
+<p>但若标签本身错成
+y=0，同样机制会非常认真地把模型往错误方向教。这再次说明数据和标签是训练系统的一部分。</p>
+<h2 id="sec-49">49. 第四阶段五个核心心智模型</h2>
+<ol type="1">
+<li><strong>Score 与 Decision
+分离</strong>：模型分数不是最终业务动作。</li>
+<li><strong>Loss 定义错误的几何形状</strong>：不同 Loss
+对不同错误施加不同压力。</li>
+<li><strong>Gradient 是 Credit
+Assignment</strong>：决定每个参数应该承担多少纠错责任。</li>
+<li><strong>训练是无数微小参数更新的累积</strong>：不是一次“灌知识”。</li>
+<li><strong>Confidence ≠
+Truth</strong>：概率必须经过评测、校准和证据验证。</li>
+</ol>
+<p>如果只记一句：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><mi>模</mi><mi>型</mi><mi>并</mi><mi>不</mi><mi>理</mi><mi>解</mi><mi>我</mi><mi>们</mi><mi>的</mi><mi>业</mi><mi>务</mi><mi>目</mi><mi>标</mi><mi>，</mi><mi>它</mi><mi>只</mi><mi>在</mi><mi>努</mi><mi>力</mi><mi>降</mi><mi>低</mi><mi>我</mi><mi>们</mi><mi>定</mi><mi>义</mi><mi>的</mi><mi>L</mi><mi>o</mi><mi>s</mi><mi>s</mi><mi>。</mi></mrow></menclose><annotation encoding="application/x-tex">
+\boxed{模型并不理解我们的业务目标，它只在努力降低我们定义的Loss。}
+</annotation></semantics></math></p>
+<div class="bottomnav"><a class="navbtn" href="stage03.html">← 上一页</a><a class="navbtn" href="stage05.html">下一页 →</a></div></article></main></div><script>function toggleTheme(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';localStorage.setItem('course-theme',r.dataset.theme)}document.documentElement.dataset.theme=localStorage.getItem('course-theme')||'light';</script></body></html>

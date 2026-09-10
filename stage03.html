@@ -1,140 +1,281 @@
-<!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 3 阶段：如何正确评价一个模型 · 政府采购模型训练课</title><style>
-:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
-[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
-@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
-@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a class="active" href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#matrix">混淆矩阵</a><a href="#accuracy">Accuracy 为什么会骗人</a><a href="#precision">Precision</a><a href="#recall">Recall</a><a href="#threshold">Threshold</a><a href="#f1">F1 / Fβ</a><a href="#slice">Slice Evaluation</a><a href="#business">业务代价</a><a href="#proc">ProcurementLM 指标体系</a><a href="#mental">专家心智模型</a><a href="#quiz">小测</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 03</div><h1>第一课 · 第 3 阶段：如何正确评价一个模型</h1><p>混淆矩阵、Precision、Recall、F1、Threshold 与业务代价</p><div class="chips"><span class="chip">混淆矩阵</span><span class="chip">Precision</span><span class="chip">Recall</span><span class="chip">F1</span><span class="chip">Threshold 与业务代价</span></div></section><section class="section" data-search="" id="matrix"><h2>一、Confusion Matrix：分类模型的错误不止一种</h2>
-<p>假设测试 1000 条采购条款：真正有风险 100 条，真正无风险 900 条。模型得到：</p>
-<div class="tablewrap"><table class="tbl"><thead><tr><th></th><th>实际有风险</th><th>实际无风险</th></tr></thead><tbody><tr><td><b>预测有风险</b></td><td>TP = 70</td><td>FP = 10</td></tr><tr><td><b>预测无风险</b></td><td>FN = 30</td><td>TN = 890</td></tr></tbody></table></div>
-<ul><li><b>TP：</b>正确抓住风险。</li><li><b>FP：</b>误报——正常条款被报警。</li><li><b>FN：</b>漏报——真实风险被放过。</li><li><b>TN：</b>正确判断正常。</li></ul>
-<div class="card mental"><b>第一条专家认知：</b>错误不是一种。政府采购合规审查里，FN（漏掉真正风险）的代价往往高于一次 FP（多一次人工复核）。</div>
-</section><section class="section" data-search="" id="accuracy"><h2>二、Accuracy 为什么会骗人？</h2>
-<div class="formula">Accuracy = (TP + TN) / (TP + TN + FP + FN)</div>
-<p>代入上面的例子：</p><div class="formula">Accuracy = (70 + 890) / 1000 = 96%</div>
-<p>听起来非常优秀，但真实 100 个风险只找到 70 个，也就是漏掉 30%。如果风险样本本来就少，Accuracy 更容易制造错觉。</p>
-<h3>类别不平衡的极端例子</h3>
-<p>假设 95% 条款正常、5% 风险。一个模型无论输入什么都回答“无风险”，Accuracy 也有 95%，但：</p>
-<div class="formula">Recall = 0</div>
-<p>业务上几乎没有价值。</p>
-<div class="card warn"><b>Baseline 思维：</b><p>别人说“模型准确率 98%”时，先问正负样本比例和最简单基线是多少。Compared to what?</p></div>
-</section><section class="section" data-search="" id="precision"><h2>三、Precision：模型报警时，我能多相信它？</h2>
-<div class="formula">Precision = TP / (TP + FP)</div>
-<p>例子里：</p><div class="formula">Precision = 70 / (70 + 10) = 87.5%</div>
-<p>翻译成业务语言：模型每报警 100 个案例，大约 87.5 个是真正值得关注的风险。</p>
-<p>Precision 太低会造成大量假警报，最终形成 <b>Alarm Fatigue（警报疲劳）</b>：专家开始忽略模型提示。</p>
-</section><section class="section" data-search="" id="recall"><h2>四、Recall：真实风险到底找全了多少？</h2>
-<div class="formula">Recall = TP / (TP + FN)</div>
-<p>例子里：</p><div class="formula">Recall = 70 / (70 + 30) = 70%</div>
-<p>这意味着 100 个真实风险只发现 70 个。</p>
-<div class="grid2"><div class="card"><b>Precision</b><p>站在“模型报出来的风险”这边看：<b>报得准不准？</b></p></div><div class="card"><b>Recall</b><p>站在“现实真正存在的风险”这边看：<b>找得全不全？</b></p></div></div>
-<h3>政府采购第一轮筛查通常更关心 Recall</h3>
-<p>如果系统后面还有人工复核，第一道扫描宁可多报几个候选，也要尽量减少重大风险漏报。于是可以做两阶段架构：</p>
-<pre>采购文件
-  ↓
-高 Recall 风险扫描
-  ↓
-候选风险
-  ↓
-更强模型 + RAG + Rules + 上下文复核
-  ↓
-提高 Precision
-  ↓
-人工确认</pre>
-</section><section class="section" data-search="" id="threshold"><h2>五、Threshold：模型输出概率之后，业务怎么把它切成“报/不报”？</h2>
-<p>模型通常先输出风险分数/概率：</p>
-<pre>条款 A：0.96
-条款 B：0.81
-条款 C：0.63
-条款 D：0.48
-条款 E：0.21</pre>
-<p>如果 Threshold=0.5，则 A/B/C 报警，D/E 不报警。</p>
-<div class="grid2"><div class="card"><b>降低阈值</b><p>报警更多 → Recall 往往上升 → Precision 往往下降。</p></div><div class="card"><b>提高阈值</b><p>报警更谨慎 → Precision 往往上升 → Recall 往往下降。</p></div></div>
-<div class="quote">Threshold 本身就是业务决策，不是“默认 0.5”就天然正确。</div>
-<p>政府采购还可以按风险类型设置不同阈值：重大合规风险阈值低一些，普通文字优化建议阈值高一些，避免提示泛滥。</p>
-</section><section class="section" data-search="" id="f1"><h2>六、F1 与 Fβ：怎么综合 Precision 和 Recall？</h2>
-<div class="formula">F1 = 2 × Precision × Recall / (Precision + Recall)</div>
-<p>F1 使用调和平均，意味着 Precision 和 Recall 任何一个特别差，F1 都会明显下降。它避免“一个指标很漂亮，另一个烂得离谱”。</p>
-<p>但 F1 默认两者同等重要。若政府采购筛查更重视 Recall，可以使用：</p>
-<div class="formula">Fβ = (1+β²) × (Precision×Recall) / (β²×Precision + Recall)
-β &gt; 1 → 更重视 Recall
-例如 F₂</div>
-<div class="card mental"><b>专家认知：</b>不存在永远最好的指标。Metric 必须服从业务代价。</div>
-</section><section class="section" data-search="" id="slice"><h2>七、Macro / Micro 与 Slice Evaluation：总分会掩盖模型真正的弱点</h2>
-<h3>Micro vs Macro</h3>
-<p>多分类时，大类别可能有 10,000 样本，小类别只有 500。Micro 更受大类别影响；Macro 会先分别评价各类再平均，因此更能看见长尾类别。</p>
-<h3>Slice Evaluation：按业务维度切开看</h3>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>切片维度</th><th>示例</th></tr></thead><tbody><tr><td>风险类型</td><td>资格条件 / 技术参数 / 评分标准 / 商务要求 / 程序</td></tr><tr><td>风险等级</td><td>高 / 中 / 低</td></tr><tr><td>采购方式</td><td>公开招标 / 磋商 / 谈判 / 询价 / 单一来源</td></tr><tr><td>项目类型</td><td>货物 / 工程 / 服务</td></tr><tr><td>行业</td><td>医疗 / IT / 物业 / 教育 / 工程 / 车辆</td></tr><tr><td>难度</td><td>明显 / 普通 / 边界 / 争议</td></tr></tbody></table></div>
-<p>Overall Recall=92% 看似很好，但如果医疗设备 Slice 只有 61%，在医疗场景上线仍然危险。</p>
-</section><section class="section" data-search="" id="business"><h2>八、机器学习本质上是在管理不同类型的错误成本</h2>
-<div class="formula">Expected Cost = C_FN × FN + C_FP × FP</div>
-<p>如果漏掉重大风险的成本远高于多做一次复核，那么系统就应该偏向减少 FN，即提高 Recall，哪怕接受一些 FP。</p>
-<p>还可以进一步做 Risk-Weighted Evaluation：</p>
-<pre>高风险漏报 Cost = 100
-中风险漏报 Cost = 20
-低风险漏报 Cost = 5</pre>
-<p>这就从“所有错误都一样”升级成 Cost-sensitive Evaluation。</p>
-<h3>业务语言比指标名称更有沟通价值</h3>
-<p>不要只说 Recall=0.94。可以说：</p>
-<div class="quote">每 100 个真实风险，模型大约能找到 94 个；每报警 100 个案例，大约有 87 个经过专家确认确实值得关注。</div>
-</section><section class="section" data-search="" id="proc"><h2>九、ProcurementLM 第一套评价体系应该怎么设计？</h2>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>能力层</th><th>指标</th><th>业务含义</th></tr></thead><tbody>
-<tr><td>风险发现</td><td>Recall / High-Risk Recall</td><td>真实风险有没有尽量找全</td></tr>
-<tr><td>误报控制</td><td>Precision</td><td>报警内容是否值得专家看</td></tr>
-<tr><td>分类能力</td><td>Macro F1 / F2</td><td>不同风险类别是否都能处理</td></tr>
-<tr><td>法规依据</td><td>Citation Accuracy / Valid Citation Rate</td><td>依据是否真实、适用、有效</td></tr>
-<tr><td>理由</td><td>Expert Correctness</td><td>分析逻辑是否站得住</td></tr>
-<tr><td>修改建议</td><td>Expert Acceptance</td><td>建议是否可执行</td></tr>
-<tr><td>幻觉</td><td>Hallucination Rate</td><td>是否编造法规、案例、事实</td></tr>
-</tbody></table></div>
-<p>复杂 LLM 输出不能只用一个 Accuracy。风险判断对、法规依据错，必须分别计分。</p>
-</section><section class="section" data-search="" id="mental"><h2>十、本阶段 5 个专家核心心智模型</h2>
-<ol class="stage-list"><li><b>错误有不同类型：</b>FP 与 FN 的代价要分开。</li><li><b>Accuracy 会骗人：</b>先看类别分布和 Baseline。</li><li><b>指标服从业务目标：</b>到底优先“找得全”还是“报得准”？</li><li><b>Threshold 是业务决策：</b>Precision/Recall 的平衡不是纯数学问题。</li><li><b>平均值掩盖问题：</b>真正要看错误分布、Slice 和高风险子集。</li></ol>
-</section><section class="section" data-search="" id="quiz"><h2>十一、本阶段小实验</h2>
-<p>1000 条测试数据：真实风险 200，真实无风险 800。模型正确发现风险 180，漏掉 20，误报正常 60，正确判断正常 740：</p>
-<div class="formula">TP=180, FN=20, FP=60, TN=740
-Accuracy = (180+740)/1000 = 92%
-Precision = 180/(180+60) = 75%
-Recall = 180/(180+20) = 90%</div>
-<p>业务翻译：<b>每 100 个真实风险约能找到 90 个；模型每报警 100 个，大约 75 个是真的风险。</b></p>
-<label class="check"><input class="learn-check" data-key="s3_complete" type="checkbox"/><span><b>阶段 3 掌握：</b>我能从混淆矩阵计算并解释 Accuracy、Precision、Recall、F1，并能根据政府采购业务代价理解 Threshold 和高风险召回率。</span></label></section>
-<section class="section" data-search="" id="deep3"><h2>十二、深化理解：从“指标”进入真正的业务决策</h2>
-<h3>1. False Negative Rate：把 Recall 翻译成“每100个漏几个”</h3>
-<div class="formula">FNR = FN / (TP+FN) = 1 - Recall</div>
-<p>Recall=92% 就等于 FNR=8%。对业务人员可以直接说：“每 100 个真实风险，大约漏 8 个。”这种表达往往比一个抽象小数更容易决定是否上线。</p>
-<h3>2. 三个模型，谁最好？没有脱离场景的答案</h3>
-<div class="tablewrap"><table class="tbl"><thead><tr><th>模型</th><th>Precision</th><th>Recall</th><th>可能适用场景</th></tr></thead><tbody><tr><td>A</td><td>98%</td><td>55%</td><td>只在极确定时才自动执行的高精度动作</td></tr><tr><td>B</td><td>83%</td><td>97%</td><td>第一轮风险扫描，后面有人/系统复核</td></tr><tr><td>C</td><td>91%</td><td>90%</td><td>较均衡的辅助审查</td></tr></tbody></table></div>
-<p>所以模型优劣是 <b>Model × Scenario</b> 的函数，不是一个绝对排行榜。</p>
-<h3>3. Multi-class：风险类型不平衡时为什么看 Macro F1？</h3>
-<p>如果资格条件 10,000 条、合同条款 500 条，Micro 指标会被大类别主导。Macro 先给每个类别同等权重，更容易暴露“小而重要”的长尾风险类型。</p>
-<h3>4. 复杂 LLM 输出要拆成多维 Y 与多维 Metric</h3>
-<pre>模型输出：
-风险：是
-类别：资格条件
-等级：高
-依据：法规A第X条
-理由：……
-建议：……</pre>
-<p>可能出现“风险判断对、类别对、依据错、理由部分正确、建议很好”。所以评价必须分别计算，而不能把整段回答粗暴判成“对/错”。</p>
-<div class="formula">Y = [Risk, Type, Severity, Basis, Reason, Suggestion]
-Metric = [Recall, MacroF1, CitationAccuracy, ExpertScore, AcceptanceRate...]</div>
-<h3>5. 两阶段风险系统为什么是一个重要架构模式？</h3>
-<p>第一阶段用低 Threshold 做高 Recall Candidate Generation；第二阶段利用完整上下文、RAG、规则引擎、强模型提高 Precision；最终再交给人工。这和搜索、反欺诈、医学筛查等高风险系统的思路类似。</p>
-<div class="quote">真正的机器学习系统，不是在追求 Error=0，而是在按照业务代价管理不同类型的错误。</div>
-</section>
-<div class="pager"><a href="stage02.html">← 上一阶段</a><a href="stage04.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
-const root=document.documentElement;
-const keyTheme='proc_ml_theme';
-const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
-document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
-document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
-document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
-const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
-const checks=[...document.querySelectorAll('.learn-check')];
-checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
-function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
-update();
-const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
-</script></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第3阶段：如何正确评价一个模型</title><style>:root{--bg:#f7f8fb;--panel:#fff;--text:#1d2433;--muted:#697386;--line:#e5e9f0;--accent:#3559e0;--code:#f2f4f8;--quote:#eef3ff;--math:#fbfcff}html[data-theme="dark"]{--bg:#111318;--panel:#191c23;--text:#edf0f7;--muted:#aab2c0;--line:#2b303a;--accent:#8ea4ff;--code:#20242d;--quote:#1d2744;--math:#151923}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.82}.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh}aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 16px}aside h1{font-size:17px;margin:0 0 8px}aside p{font-size:12px;color:var(--muted);margin:0 0 14px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}button,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 9px;cursor:pointer;text-decoration:none;font-size:13px}.toc{display:flex;flex-direction:column;gap:3px}.toc a{display:flex;gap:9px;text-decoration:none;color:var(--muted);font-size:13px;padding:7px 8px;border-radius:7px}.toc a:hover{background:var(--code);color:var(--text)}.toc a span{min-width:27px;color:var(--accent);font-weight:700}main{max-width:1040px;width:100%;padding:44px 56px 90px}article{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:46px 54px;box-shadow:0 8px 28px rgba(0,0,0,.03)}h1{font-size:34px;line-height:1.3;margin-top:0}h2{font-size:24px;margin-top:52px;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:20px}h3{font-size:19px;margin-top:30px}p{margin:12px 0}blockquote{margin:20px 0;padding:14px 18px;background:var(--quote);border-left:4px solid var(--accent);border-radius:8px}pre{overflow:auto;background:var(--code);padding:16px 18px;border-radius:10px;border:1px solid var(--line);line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}th{background:var(--code)}hr{border:0;border-top:1px solid var(--line);margin:38px 0}p>math[display="block"]{display:block;width:max-content;max-width:100%;margin:22px auto;padding:13px 18px;background:var(--math);border:1px solid var(--line);border-radius:10px;overflow-x:auto;font-size:1.12em}math{font-family:"STIX Two Math","Cambria Math","Times New Roman",serif}.topnote{font-size:14px;color:var(--muted);margin-bottom:28px;padding:12px 14px;background:var(--code);border-radius:10px}.bottomnav{display:flex;justify-content:space-between;gap:12px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{display:block}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}article{padding:26px 20px}.toc{max-height:360px;overflow:auto}}@media print{aside{display:none}.layout{display:block}main{padding:0;max-width:none}article{border:0;box-shadow:none;padding:0}}</style></head><body><div class="layout"><aside><h1>第一课 · 第 3 阶段</h1><p>原文级 Markdown → MathML HTML · 51 个编号内容</p><div class="tools"><a class="navbtn" href="index.html">首页</a><button onclick="toggleTheme()">深/浅</button><button onclick="window.print()">打印</button></div><nav class="toc"><a href="#sec-1"><span>1</span>第三阶段总问题：模型到底“好”在哪里？</a><a href="#sec-2"><span>2</span>Confusion Matrix 四格</a><a href="#sec-3"><span>3</span>TP：真正风险被发现</a><a href="#sec-4"><span>4</span>FP：误报</a><a href="#sec-5"><span>5</span>FN：漏报</a><a href="#sec-6"><span>6</span>TN：正确放行</a><a href="#sec-7"><span>7</span>一个 1000 样本例子</a><a href="#sec-8"><span>8</span>Accuracy</a><a href="#sec-9"><span>9</span>为什么 Accuracy 会骗人</a><a href="#sec-10"><span>10</span>Baseline 必须一起看</a><a href="#sec-11"><span>11</span>Precision：报得准不准</a><a href="#sec-12"><span>12</span>Precision 的业务含义</a><a href="#sec-13"><span>13</span>Recall：找得全不全</a><a href="#sec-14"><span>14</span>为什么第一道筛查通常优先 Recall</a><a href="#sec-15"><span>15</span>两阶段系统</a><a href="#sec-16"><span>16</span>Precision / Recall Trade-off</a><a href="#sec-17"><span>17</span>Threshold 不是默认 0.5</a><a href="#sec-18"><span>18</span>不同风险类型可以不同阈值</a><a href="#sec-19"><span>19</span>F1</a><a href="#sec-20"><span>20</span>为什么 F1 不是终极指标</a><a href="#sec-21"><span>21</span>Fβ</a><a href="#sec-22"><span>22</span>Micro F1</a><a href="#sec-23"><span>23</span>Macro F1</a><a href="#sec-24"><span>24</span>Class Imbalance 再回看</a><a href="#sec-25"><span>25</span>High-Risk Recall</a><a href="#sec-26"><span>26</span>Slice Evaluation</a><a href="#sec-27"><span>27</span>平均值为什么会掩盖问题</a><a href="#sec-28"><span>28</span>把指标翻译成业务语言</a><a href="#sec-29"><span>29</span>Expected Cost</a><a href="#sec-30"><span>30</span>指标服从业务目标</a><a href="#sec-31"><span>31</span>法规依据也要有指标</a><a href="#sec-32"><span>32</span>解释和建议也要评估</a><a href="#sec-33"><span>33</span>幻觉率</a><a href="#sec-34"><span>34</span>一个推荐的 ProcurementLM 指标树</a><a href="#sec-35"><span>35</span>第三阶段五个心智模型</a><a href="#sec-36"><span>36</span>思维实验：两个模型怎么选</a><a href="#sec-37"><span>37</span>第三阶段掌握标准</a><a href="#sec-38"><span>38</span>用 1000 个案例完整读一遍 Confusion Matrix</a><a href="#sec-39"><span>39</span>Accuracy 为什么会在类别不平衡时骗人</a><a href="#sec-40"><span>40</span>Precision：模型报出来的东西有多可信</a><a href="#sec-41"><span>41</span>Recall：真实风险到底找回了多少</a><a href="#sec-42"><span>42</span>为什么很多风险系统采用“两阶段架构”</a><a href="#sec-43"><span>43</span>Threshold 不是模型内部真理，而是业务策略</a><a href="#sec-44"><span>44</span>不同风险类型可以使用不同阈值</a><a href="#sec-45"><span>45</span>F1 与 Fβ</a><a href="#sec-46"><span>46</span>Macro 与 Micro：长尾风险类型为什么更适合看 Macro</a><a href="#sec-47"><span>47</span>Slice Evaluation：平均值是最容易骗人的数字之一</a><a href="#sec-48"><span>48</span>把模型指标翻译成专家能理解的业务语言</a><a href="#sec-49"><span>49</span>Expected Cost：把 FP 与 FN 放进同一决策框架</a><a href="#sec-50"><span>50</span>ProcurementLM 的指标树</a><a href="#sec-51"><span>51</span>第三阶段五个核心心智模型</a></nav></aside><main><article><div class="topnote">唯一内容源：<strong>stage03.md</strong>。HTML 不压缩正文；所有 LaTeX 公式在构建时转换为浏览器原生 MathML。</div><h1 id="第一课-第-3-阶段如何正确评价一个模型">第一课 · 第 3
+阶段：如何正确评价一个模型</h1>
+<blockquote>
+<p><strong>原文级教材源文件</strong>：本 Markdown
+是该阶段唯一内容源。HTML
+由本文件直接生成，不再二次压缩、合并知识点或改写公式。</p>
+</blockquote>
+<p>这一阶段把“模型好不好”变成可以计算、可以对应业务成本的问题。重点是
+Confusion Matrix、Accuracy、Precision、Recall、F1/Fβ、阈值以及 Slice
+Evaluation。</p>
+<p>对于政府采购首轮风险筛查，通常需要特别关注漏报
+FN，因为很多场景下：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mi>N</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>&gt;</mo><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>F</mi><mi>P</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+Cost(FN) &gt; Cost(FP)
+</annotation></semantics></math></p>
+<p>但这不是固定真理，最终指标必须服从具体业务目标。</p>
+<hr />
+<h2 id="sec-1">1.
+第三阶段总问题：模型到底“好”在哪里？</h2>
+<p>单一 Accuracy 不能描述风险模型。第三阶段建立 Confusion
+Matrix、Precision、Recall、F1/Fβ、Threshold 和业务成本。</p>
+<hr />
+<h2 id="sec-2">2. Confusion Matrix 四格</h2>
+<p>二分类的全部错误可以先拆成 TP、FP、FN、TN。</p>
+<hr />
+<h2 id="sec-3">3. TP：真正风险被发现</h2>
+<p>这是我们希望系统捕获的正确报警。</p>
+<hr />
+<h2 id="sec-4">4. FP：误报</h2>
+<p>模型报警但专家确认无明显风险。过多 FP 会造成审核疲劳。</p>
+<hr />
+<h2 id="sec-5">5. FN：漏报</h2>
+<p>真正风险被模型放过。风险筛查场景里往往比 FP 更危险。</p>
+<hr />
+<h2 id="sec-6">6. TN：正确放行</h2>
+<p>正常条款被正确判断为无明显风险。</p>
+<hr />
+<h2 id="sec-7">7. 一个 1000 样本例子</h2>
+<p>设 TP=70、FP=10、FN=30、TN=890。下面所有指标都可由这四个数得到。</p>
+<hr />
+<h2 id="sec-8">8. Accuracy</h2>
+<p>正确预测占全部样本比例。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Accuracy=(TP+TN)/(TP+TN+FP+FN)</p>
+</blockquote>
+<hr />
+<h2 id="sec-9">9. 为什么 Accuracy 会骗人</h2>
+<p>95% 样本正常时，永远预测正常也有 95% Accuracy，但 Recall=0。</p>
+<hr />
+<h2 id="sec-10">10. Baseline 必须一起看</h2>
+<p>任何漂亮分数都要和“永远预测多数类”“关键词规则”等最简单基线比较。</p>
+<hr />
+<h2 id="sec-11">11. Precision：报得准不准</h2>
+<p>在模型报出的风险里，有多少是真的。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Precision=TP/(TP+FP)</p>
+</blockquote>
+<hr />
+<h2 id="sec-12">12. Precision 的业务含义</h2>
+<p>Precision 低意味着专家被大量假报警淹没，最终可能产生 Alarm
+Fatigue。</p>
+<hr />
+<h2 id="sec-13">13. Recall：找得全不全</h2>
+<p>在所有真实风险里，有多少被发现。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Recall=TP/(TP+FN)</p>
+</blockquote>
+<hr />
+<h2 id="sec-14">14. 为什么第一道筛查通常优先
+Recall</h2>
+<p>假阳性通常还能人工排除，而假阴性可能直接穿透审查流程。</p>
+<hr />
+<h2 id="sec-15">15. 两阶段系统</h2>
+<p>第一阶段用高 Recall 扫描，第二阶段用更强模型、RAG、规则和专家提高
+Precision。</p>
+<hr />
+<h2 id="sec-16">16. Precision / Recall
+Trade-off</h2>
+<p>通常降低阈值会报更多风险：Recall 上升、Precision
+下降；提高阈值则相反。</p>
+<hr />
+<h2 id="sec-17">17. Threshold 不是默认 0.5</h2>
+<p>0.5
+只是常见习惯，不是业务真理。阈值应该由成本、风险类型和校准决定。</p>
+<hr />
+<h2 id="sec-18">18. 不同风险类型可以不同阈值</h2>
+<p>重大资格排他风险可以用更低阈值保障
+Recall；低影响提示可用更高阈值减少噪声。</p>
+<hr />
+<h2 id="sec-19">19. F1</h2>
+<p>Precision 和 Recall 的调和平均。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>F1=2PR/(P+R)</p>
+</blockquote>
+<hr />
+<h2 id="sec-20">20. 为什么 F1 不是终极指标</h2>
+<p>F1 默认同等看待 Precision 与 Recall，但业务未必如此。</p>
+<hr />
+<h2 id="sec-21">21. Fβ</h2>
+<p>β&gt;1 时更重视 Recall，例如 F2。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Fβ=(1+β²)PR/(β²P+R)</p>
+</blockquote>
+<hr />
+<h2 id="sec-22">22. Micro F1</h2>
+<p>把所有样本整体统计，大类容易占主导。</p>
+<hr />
+<h2 id="sec-23">23. Macro F1</h2>
+<p>先按类别计算再平均，更能暴露长尾类别。</p>
+<hr />
+<h2 id="sec-24">24. Class Imbalance 再回看</h2>
+<p>类别极不均衡时，必须同时报告类别分布和多数类基线。</p>
+<hr />
+<h2 id="sec-25">25. High-Risk Recall</h2>
+<p>重大风险可以单独设一条更严格指标，避免总体分数掩盖关键漏报。</p>
+<hr />
+<h2 id="sec-26">26. Slice Evaluation</h2>
+<p>按风险类型、采购方式、行业、地区、项目类型、难度分别统计。</p>
+<hr />
+<h2 id="sec-27">27. 平均值为什么会掩盖问题</h2>
+<p>总体 Recall 92%，医疗技术参数可能只有
+58%。这对跨行业产品是严重风险。</p>
+<hr />
+<h2 id="sec-28">28. 把指标翻译成业务语言</h2>
+<p>Recall 92% ≈ 每 100 个真实风险仍漏约 8 个；Precision 87% ≈ 每 100
+个报警约 13 个是假警。</p>
+<hr />
+<h2 id="sec-29">29. Expected Cost</h2>
+<p>把 FP/FN 乘以各自业务成本，可以把指标变成决策问题。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>ExpectedCost=C_FN·FN + C_FP·FP</p>
+</blockquote>
+<hr />
+<h2 id="sec-30">30. 指标服从业务目标</h2>
+<p>模型不是为了追求某个学术数字，而是管理不同错误类型的业务代价。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>核心心智模型：指标必须从业务风险倒推。</p>
+</blockquote>
+<hr />
+<h2 id="sec-31">31. 法规依据也要有指标</h2>
+<p>除了风险判断，还需要 Citation Accuracy、Valid Citation Rate 等。</p>
+<hr />
+<h2 id="sec-32">32. 解释和建议也要评估</h2>
+<p>Expert Correctness、Expert Acceptance、Suggestion Acceptance
+可以衡量推理与建议质量。</p>
+<hr />
+<h2 id="sec-33">33. 幻觉率</h2>
+<p>LLM 系统必须单独监控虚构法规、虚构案例、无依据断言。</p>
+<hr />
+<h2 id="sec-34">34. 一个推荐的 ProcurementLM
+指标树</h2>
+<p>风险发现用 Recall，误报控制用 Precision，分类用 Macro
+F1/F2，重大风险用 High-Risk Recall，依据用 Citation
+Accuracy，解释用专家评分，幻觉单独统计。</p>
+<hr />
+<h2 id="sec-35">35. 第三阶段五个心智模型</h2>
+<p>错误有类型；Accuracy 会骗人；指标服从业务；Threshold
+是业务决策；平均值掩盖弱 Slice。</p>
+<hr />
+<h2 id="sec-36">36. 思维实验：两个模型怎么选</h2>
+<p>A: Recall 98%, Precision 45%；B: Recall 88%, Precision
+90%。如果这是第一道高风险筛查，A
+可能更适合第一层，但需要第二层去噪。</p>
+<hr />
+<h2 id="sec-37">37. 第三阶段掌握标准</h2>
+<p>你应能从 Confusion Matrix
+计算核心指标，并能根据业务代价解释为什么选择某个阈值。</p>
+<hr />
+<hr />
+<h2 id="sec-38">38. 用 1000
+个案例完整读一遍 Confusion Matrix</h2>
+<p>假设测试集中 TP=70、FP=10、FN=30、TN=890。总共 1000 条，其中真实风险
+100 条。模型找出了 70 条，但漏掉 30 条；它一共报警 80 条，其中 10
+条是误报。</p>
+<p>这个四格表比单一 Accuracy 更接近真实业务，因为 FP 和 FN
+造成的后果并不相同。</p>
+<h2 id="sec-39">39. Accuracy
+为什么会在类别不平衡时骗人</h2>
+<p>如果真实世界 95% 都是正常条款，模型永远预测“正常”，也有：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>c</mi><mi>c</mi><mi>u</mi><mi>r</mi><mi>a</mi><mi>c</mi><mi>y</mi><mo>=</mo><mn>95</mn><mi>%</mi></mrow><annotation encoding="application/x-tex">
+Accuracy=95\%
+</annotation></semantics></math></p>
+<p>但：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">
+Recall=0
+</annotation></semantics></math></p>
+<p>对于风险筛查几乎没有价值。因此每次看到高
+Accuracy，第一反应都应该检查类别分布和最简单 Baseline。</p>
+<h2 id="sec-40">40.
+Precision：模型报出来的东西有多可信</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+Precision=\frac{TP}{TP+FP}
+</annotation></semantics></math></p>
+<p>在上面的例子中 Precision=70/80=87.5%。可以翻成业务语言：模型每报 100
+个风险，大约 87～88 个是真的。如果 Precision
+太低，专家会被大量假警报淹没，最终出现 Alarm Fatigue。</p>
+<h2 id="sec-41">41.
+Recall：真实风险到底找回了多少</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+Recall=\frac{TP}{TP+FN}
+</annotation></semantics></math></p>
+<p>上例 Recall=70/100=70%。翻成业务语言：每 100 个真实风险中，模型漏掉约
+30 个。对政府采购首轮合规扫描，Recall 往往比 Accuracy
+更值得优先关注。</p>
+<h2 id="sec-42">42.
+为什么很多风险系统采用“两阶段架构”</h2>
+<p>第一阶段使用较低阈值、高
+Recall，宁可多报一些候选；第二阶段再使用更强模型、RAG、规则和上下文提高
+Precision。这样把“找全”和“判断准”拆成两个不同子问题。</p>
+<p>这比要求一个模型一次同时实现极高 Recall 与极高 Precision
+更容易工程化。</p>
+<h2 id="sec-43">43. Threshold
+不是模型内部真理，而是业务策略</h2>
+<p>模型输出连续风险分数
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>。真正形成分类决策时还需要阈值
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mn>𝟙</mn><mrow><mo stretchy="true" form="prefix">[</mo><mi>p</mi><mo>≥</mo><mi>T</mi><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+Decision=\mathbb{1}[p\ge T]
+</annotation></semantics></math></p>
+<p>降低 T 通常会提高 Recall、降低 Precision；提高 T 通常相反。默认 0.5
+只是一种方便，不是政府采购业务自动正确的阈值。</p>
+<h2 id="sec-44">44.
+不同风险类型可以使用不同阈值</h2>
+<p>高代价风险，例如严重资格限制，可以设置更低阈值追求高
+Recall；低影响提示则可以更强调
+Precision。阈值策略应该与错误成本连接，而不是全系统只有一个数字。</p>
+<h2 id="sec-45">45. F1 与 Fβ</h2>
+<p>F1 是 Precision 与 Recall 的调和平均：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>1</mn><mo>=</mo><mn>2</mn><mfrac><mrow><mi>P</mi><mi>R</mi></mrow><mrow><mi>P</mi><mo>+</mo><mi>R</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+F1=2\frac{PR}{P+R}
+</annotation></semantics></math></p>
+<p>如果业务更重视 Recall，可以用：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>β</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><msup><mi>β</mi><mn>2</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mrow><mi>P</mi><mi>R</mi></mrow><mrow><msup><mi>β</mi><mn>2</mn></msup><mi>P</mi><mo>+</mo><mi>R</mi></mrow></mfrac><mo>,</mo><mspace width="1.0em"></mspace><mi>β</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">
+F_\beta=(1+\beta^2)\frac{PR}{\beta^2P+R},\quad \beta&gt;1
+</annotation></semantics></math></p>
+<p>例如 F2 会比 F1 更重视 Recall。但 F2
+仍只是代理指标，不能替代真正业务成本。</p>
+<h2 id="sec-46">46. Macro 与
+Micro：长尾风险类型为什么更适合看 Macro</h2>
+<p>Micro 指标把所有样本合在一起计算，高频类别主导结果；Macro
+则先计算每个类别，再平均。若资格条件有三万条、罕见程序风险只有几百条，Micro
+可能掩盖长尾类别完全不会的问题。</p>
+<h2 id="sec-47">47. Slice
+Evaluation：平均值是最容易骗人的数字之一</h2>
+<p>政府采购可以按严重程度、采购方式、货物/服务/工程、行业、地区、年份、难度、Hard
+Negative/Positive 等切片。总体 F1=0.90
+不足以支持“模型可靠”，必须知道最差 Slice 在哪里。</p>
+<h2 id="sec-48">48.
+把模型指标翻译成专家能理解的业务语言</h2>
+<p>Recall 92% 更直观的表达是：每 100 个真实风险大约漏 8 个。Precision
+87% 则是：每 100 个报警大约有 13
+个需要人工排除。业务团队只有理解这种后果，才能正确选择阈值。</p>
+<h2 id="sec-49">49. Expected Cost：把
+FP 与 FN 放进同一决策框架</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mi>x</mi><mi>p</mi><mi>e</mi><mi>c</mi><mi>t</mi><mi>e</mi><mi>d</mi><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo>=</mo><msub><mi>C</mi><mrow><mi>F</mi><mi>N</mi></mrow></msub><mo>⋅</mo><mi>F</mi><mi>N</mi><mo>+</mo><msub><mi>C</mi><mrow><mi>F</mi><mi>P</mi></mrow></msub><mo>⋅</mo><mi>F</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">
+ExpectedCost=C_{FN}\cdot FN+C_{FP}\cdot FP
+</annotation></semantics></math></p>
+<p>如果一个严重漏报的平均成本远高于一次人工误报复核，那么即使 F1
+略低，高 Recall
+策略仍可能更合理。最终优化的是错误成本，而不是数学指标本身。</p>
+<h2 id="sec-50">50. ProcurementLM 的指标树</h2>
+<p>风险发现看 Recall；误报控制看 Precision；多风险类型看 Macro
+F1/F2；重大风险单独看 High-Risk Recall；法规依据看 Citation Accuracy /
+Valid Citation Rate；理由看 Expert Correctness；修改建议看 Expert
+Acceptance；生成模型还要看 Hallucination Rate。</p>
+<h2 id="sec-51">51. 第三阶段五个核心心智模型</h2>
+<ol type="1">
+<li>错误有不同类型，FP 与 FN 不能混成一个“错”。</li>
+<li>Accuracy 会被类别分布欺骗，必须检查 Baseline。</li>
+<li>指标服从业务目标，不是业务服从指标。</li>
+<li>Threshold 是业务决策层，而不是模型固定常数。</li>
+<li>平均值会掩盖局部弱点，必须做 Slice Evaluation。</li>
+</ol>
+<div class="bottomnav"><a class="navbtn" href="stage02.html">← 上一页</a><a class="navbtn" href="stage04.html">下一页 →</a></div></article></main></div><script>function toggleTheme(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';localStorage.setItem('course-theme',r.dataset.theme)}document.documentElement.dataset.theme=localStorage.getItem('course-theme')||'light';</script></body></html>

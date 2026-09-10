@@ -1,0 +1,122 @@
+[
+  {
+    "stage": 1,
+    "title": "模型到底在“学习”什么？",
+    "sections": 45,
+    "chars": 6679,
+    "mathml_expressions": 15,
+    "raw_display_delimiters": 0,
+    "md_sha256": "8b539119ae1264e33500d239255c1a9d673f7736092ad3ddac81906f24de51fd",
+    "html_sha256": "f56700d1f584219d25ede4b618b427206612ef02d30e2cf37ad81dc76e20c870"
+  },
+  {
+    "stage": 2,
+    "title": "欠拟合、过拟合与泛化诊断",
+    "sections": 51,
+    "chars": 6099,
+    "mathml_expressions": 3,
+    "raw_display_delimiters": 0,
+    "md_sha256": "6318f1f5d1ece85015951e36d8d055e16bab27f183a62682e94ea17a8fac1335",
+    "html_sha256": "6be41444a27e4d30d411bfb560af8052f5ca02b8108f8113108ed244a1d70daf"
+  },
+  {
+    "stage": 3,
+    "title": "如何正确评价一个模型",
+    "sections": 51,
+    "chars": 5380,
+    "mathml_expressions": 11,
+    "raw_display_delimiters": 0,
+    "md_sha256": "81df1b44925da894154ca105b6bb6bf1785339c937dfdb014b7677dcb4683b87",
+    "html_sha256": "0f69eb1e4b87bd8a60d910f6c8cef551761523535d0186047eeb9c8602a8d084"
+  },
+  {
+    "stage": 4,
+    "title": "概率、Loss、Gradient 与反向传播",
+    "sections": 49,
+    "chars": 5450,
+    "mathml_expressions": 8,
+    "raw_display_delimiters": 0,
+    "md_sha256": "319568a2647d88794e389813811ffe67e9c060e444439cc045e86a18ad0c5193",
+    "html_sha256": "1b4a88a06566f72a10071d6c2a975fa7ecf5b236bd4c2836318a35e30ebca48c"
+  },
+  {
+    "stage": 5,
+    "title": "Batch、Step、Epoch 与真实训练过程",
+    "sections": 60,
+    "chars": 6534,
+    "mathml_expressions": 8,
+    "raw_display_delimiters": 0,
+    "md_sha256": "d4e11e74ca60f3224f79f2fca6664cb139a9c31b4f9b60d052adc4c99bf51b55",
+    "html_sha256": "fd5e1563e1309c816740e2406ac501ca910ad05bed7e30710ea1b10d2730e971"
+  },
+  {
+    "stage": 6,
+    "title": "数据分布、采样与“数据即模型”",
+    "sections": 71,
+    "chars": 7057,
+    "mathml_expressions": 7,
+    "raw_display_delimiters": 0,
+    "md_sha256": "e8c5105d103a176fae069fc6bc09047a47bbc404e8a5ed69001b868d73bcf3ed",
+    "html_sha256": "36e71a9c0f75d48699fe92ea57bd197773aa670255b0a9765700e5654deb3ecb"
+  },
+  {
+    "stage": 7,
+    "title": "模型诊断——Bias、Drift、OOD 与数据污染",
+    "sections": 61,
+    "chars": 6197,
+    "mathml_expressions": 5,
+    "raw_display_delimiters": 0,
+    "md_sha256": "f2bc94e4a33170c19d83d15ddb4bbf155d59398844ea33ee0dca39b7f28c40e7",
+    "html_sha256": "8f1cd2c5d26bf341ab8d3106dd6c4170057dc09312168dc4dd9c3b258b76a384"
+  },
+  {
+    "stage": 8,
+    "title": "完整机器学习实验——ProcurementML Experiment 001",
+    "sections": 66,
+    "chars": 7034,
+    "mathml_expressions": 1,
+    "raw_display_delimiters": 0,
+    "md_sha256": "c608595c07707593a069f7cf7eb24f2f7f6a2bec94202b5559def299f986ffab",
+    "html_sha256": "fb0ed6fd61bf80b9bfcffb6aa786f096a914ba53e813e8a1f64c97e354d896c4"
+  },
+  {
+    "stage": 9,
+    "title": "工程化与可复现性——Versioning、Tracking、Registry",
+    "sections": 68,
+    "chars": 7185,
+    "mathml_expressions": 3,
+    "raw_display_delimiters": 0,
+    "md_sha256": "c97e8858106eb489a0ba082752aca37cdef30d7e48751c301ec4884eb9e134cf",
+    "html_sha256": "2aa408e0bf3e2154a438154bd6a50f838b318b6524945199d81e001316d73a66"
+  },
+  {
+    "stage": 10,
+    "title": "Production ML——监控、反馈与持续学习",
+    "sections": 74,
+    "chars": 6888,
+    "mathml_expressions": 2,
+    "raw_display_delimiters": 0,
+    "md_sha256": "625cea318c95595b8f56d2602137eabab8116c65f272b388e835763c518bb1fc",
+    "html_sha256": "b529ad3dad442abb309783d7ef8d978991dca3075a8aebfdabd8b50cd8c76cfb"
+  },
+  {
+    "stage": 11,
+    "title": "不确定性、校准、选择性预测与风险控制",
+    "sections": 73,
+    "chars": 6849,
+    "mathml_expressions": 5,
+    "raw_display_delimiters": 0,
+    "md_sha256": "0830b45f4caf781bf97467de4b6d7bc2b171af60d9d176f146eb5a7969b6a95d",
+    "html_sha256": "d6fb031e3262c6f9ee327ec32a82238c0df254e09149e4934b6076550fbd5bac"
+  },
+  {
+    "stage": 12,
+    "title": "因果、相关性、反事实与稳定泛化",
+    "sections": 55,
+    "chars": 14266,
+    "mathml_expressions": 97,
+    "raw_display_delimiters": 0,
+    "md_sha256": "c5378680765f99c095508c6155c1ded21312844f07303631000a4c316c989e3c",
+    "html_sha256": "6187b5fd5d50a4b6ca814b8cedeff5acff60a532015850212651e4037020730e"
+  }
+]

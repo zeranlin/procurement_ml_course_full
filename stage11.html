@@ -1,30 +1,323 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 11 阶段：不确定性、校准与风险控制 · 政府采购模型训练课</title><style>
-:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
-[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
-@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
-@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html" class="active">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#map">总地图</a><a href="#score">Score ≠ Truth</a><a href="#calibration">Calibration</a><a href="#uncertainty">两类不确定性</a><a href="#reliability">ECE / Brier</a><a href="#selective">Selective Prediction</a><a href="#systemconfidence">System Confidence</a><a href="#ood">OOD</a><a href="#conditional">条件性预测</a><a href="#policy">Decision Policy</a><a href="#riskcoverage">Risk-Coverage</a><a href="#voi">Value of Information</a><a href="#mental">心智模型</a><a href="#mastery">掌握标准</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 11</div><h1>第一课 · 第 11 阶段：不确定性、校准与风险控制</h1><p>从“模型能不能答对”升级到“模型什么时候值得被信任”：概率校准、不确定性、OOD、选择性预测和风险驱动自动化。</p><div class="chips"><span class="chip">Calibration</span><span class="chip">Uncertainty</span><span class="chip">OOD</span><span class="chip">Abstention</span><span class="chip">Risk-Coverage</span><span class="chip">Decision Policy</span></div></section><section class="section" id="map" data-search><h2>一、第 11 阶段总地图：模型什么时候值得相信？</h2><div class="quote">真正危险的模型不是“经常说不知道”，而是实际上不知道，却非常自信地给出结论。</div><div class="formula">Prediction → Confidence → Calibration → Uncertainty → OOD → Abstention → Risk Control</div><p>本阶段从“怎样让模型做得更对”升级到“什么时候可以自动化、什么时候必须降级或交给专家”。</p></section><section class="section" id="score" data-search><h2>二、Score / Probability / Confidence / Truth 不是一回事</h2><p>模型输出 RiskScore=0.92，首先只是当前模型下的预测分数，并不天然意味着“现实中有 92% 概率违规”。</p><div class="formula">Model Score ≠ Calibrated Real-world Probability ≠ Truth</div><div class="card mental"><b>核心心智模型 ①：答案和对答案的把握程度是两种能力。</b><p>成熟系统要考虑 Prediction + Confidence + Evidence + Uncertainty。</p></div></section><section class="section" id="calibration" data-search><h2>三、Calibration：模型说“80%”时，长期是否真的约有 80% 正确？</h2><p>把所有预测在 0.8 附近的案例拿出来，如果模型校准良好，其中真正正类比例应该大致接近 80%。</p><div class="formula">Predicted 80% ≈ Empirical Positive Rate 80%  → Well Calibrated</div><p>模型可以 Accuracy 很高但过度自信，也可以分类不错但总是过于保守。Accuracy ≠ Calibration。</p></section><section class="section" id="uncertainty" data-search><h2>四、两类核心不确定性：问题本身难确定，还是模型知道得不够？</h2><div class="grid2"><div class="card warn"><b>Aleatoric / Information Uncertainty</b><p>现实信息本身不足或专家合理分歧，即使完美模型也需要更多事实或裁量。</p></div><div class="card warn"><b>Epistemic Uncertainty</b><p>模型经验不足、知识缺失或进入陌生领域；理论上可通过更多数据/知识降低。</p></div></div><p>例如核设施特殊采购，模型没经验更偏 Epistemic；某技术参数是否排他但没有市场竞争数据，则是当前证据不足导致的决策不确定性。</p><div class="card mental"><b>核心心智模型 ②：不确定时先问“缺模型能力，还是缺现实信息？”</b><p>前者补模型/数据，后者应该补上下文、市场信息、法规证据或专家调查。</p></div></section><section class="section" id="reliability" data-search><h2>五、Reliability Diagram、ECE 与 Brier Score：不确定性也可以被测量</h2><p>把预测按 0.1、0.2…0.9 区间分桶，比较平均预测概率与真实发生率。例如模型在 0.9 桶实际只有 72% 正类，说明高置信区明显 Overconfident。</p><div class="grid2"><div class="card"><b>ECE</b><p>Expected Calibration Error：衡量各置信区间“说自己多确定”和“实际多正确”的差距。</p></div><div class="card"><b>Brier Score</b><p>平均 (p-y)²，评价概率预测质量；越小通常越好。</p></div></div><p>Precision/Recall 在某个 Threshold 下把 p=0.51 与 p=0.99 都压成同一个类别，因此完整评估要区分 Ranking、Classification、Calibration。</p></section><section class="section" id="calibrate" data-search><h2>六、概率校准不一定要重新训练整个模型</h2><p>经典方法包括 Platt Scaling、Isotonic Regression、Temperature Scaling。深度模型中 Temperature Scaling 很常见：</p><div class="formula">Softmax(z) → Softmax(z / T)</div><p>T&gt;1 会把过于极端的 Logit 压平；分类答案可能不变，但输出概率更接近真实正确率。</p><div class="card mental"><b>核心心智模型 ③：准确性与可信度必须分别优化。</b><p>当概率参与人工分流、自动化权限和风险排序时，Calibration 不是装饰。</p></div></section><section class="section" id="selective" data-search><h2>七、Selective Prediction：不会的时候不自动回答，是一种能力</h2><p>Model A 100% 问题都答，Accuracy=85%；Model B 自动处理 70%，这部分 Accuracy=97%，剩余 30% 转专家。对专业高风险流程，B 可能更有价值。</p><div class="formula">Coverage ↓  通常可以换取  Risk / Error ↓</div><p>这形成新的 Trade-off：Automation Coverage ↔ Reliability。</p></section><section class="section" id="zones" data-search><h2>八、Risk-Based Automation：把自动化按风险分层</h2><div class="tablewrap"><table class="tbl"><thead><tr><th>区域</th><th>条件示例</th><th>动作</th></tr></thead><tbody><tr><td>Zone A</td><td>高置信、非 OOD、证据充分、规则无冲突</td><td>高确定性自动提示</td></tr><tr><td>Zone B</td><td>中等置信或证据一般</td><td>AI 分析 + 专家确认</td></tr><tr><td>Zone C</td><td>低置信 / OOD / 上下文缺失</td><td>不输出确定结论，转人工或补信息</td></tr></tbody></table></div></section><section class="section" id="systemconfidence" data-search><h2>九、System Confidence ≠ Model Probability</h2><p>真正系统可信度可以综合模型分数、OOD、Evidence Quality、Context Completeness、Rule Consistency：</p><div class="formula">C = [C_model, C_retrieval, C_evidence, C_context, C_distribution]</div><p>即使 Model p=0.97，如果法规检索弱、OOD 高、上下文缺失，最终系统也应该谨慎，而不是展示“97% 违规”。</p></section><section class="section" id="ood" data-search><h2>十、OOD 与不确定性：模型进入陌生区域时要降低自动化</h2><p>可用信号包括 Embedding 与训练数据距离、最近邻相似度、输出 Entropy、多模型分歧、专门 OOD Detector、元数据是否超出支持范围。</p><pre>训练分布：  ● ● ● ● ●
-                    ×  ← 新项目距离很远，可能 OOD</pre><p>Fluent Answer ≠ In Distribution。大模型遇到 OOD 仍可能流畅且自信地回答。</p></section><section class="section" id="ensemble" data-search><h2>十一、多模型分歧也可以成为 Uncertainty Signal</h2><p>A/B/C 都判断风险，相对稳定；A=高风险、B=无风险、C=中风险，则分歧本身应该触发专家复核。</p><p>Ensemble 或 Monte Carlo Dropout 的直觉也是多次略有差异的预测：0.91/0.93/0.90 很稳定；0.13/0.89/0.48/0.77 则高度不确定。</p></section><section class="section" id="llm" data-search><h2>十二、LLM 的“置信度”不是一个维度</h2><p>生成式系统可能风险分类很稳定，但法规依据不确定；也可能引用正确，但修改建议质量一般。因此可以分别评估：</p><div class="formula">Confidence_classification / Confidence_citation / Confidence_reasoning / Confidence_suggestion</div><p>这比一个笼统的“AI Confidence=92%”更符合专业工作。</p></section><section class="section" id="conditional" data-search><h2>十三、Conditional Prediction：输出结论成立的条件，而不是假装绝对确定</h2><div class="quote">如果该业绩数量要求不能证明与项目履约复杂度存在合理关联，则存在较高不合理限制风险。</div><p>很多政府采购判断本质是 Conclusion | Assumptions。模型可以告诉用户：若市场调查显示只有少数供应商满足，风险上升；若能证明特殊履约必要性，风险下降。</p><div class="card mental"><b>核心心智模型 ④：专业 AI 不只输出答案，还应该输出“答案成立的条件”。</b><p>这会把系统从分类器升级为决策支持工具。</p></div></section><section class="section" id="policy" data-search><h2>十四、Decision Policy 与模型必须分离</h2><div class="formula">Model: X → Score</div><div class="formula">Policy: Score + Evidence + OOD + Business Cost → Action</div><p>同样 p=0.75，在“文字优化建议”场景可以直接提示，但在“自动否定供应商资格”这种高影响决策里绝不能自动执行。</p><p>可以建立纵深防御：Model → RAG Evidence → Rule Engine → Human Review，防止单一模型错误直接穿透到最终业务。</p></section><section class="section" id="ladder" data-search><h2>十五、自动化阶梯：权限越高，证据和人工监督要求越高</h2><pre>信息检索
-  ↓
-风险提示
-  ↓
-修改建议
-  ↓
-推荐结论
-  ↓
-自动执行决策</pre><div class="formula">Automation Authority ↑  ⇒  Required Reliability / Evidence / Oversight ↑</div><p>政府采购高影响场景更适合 Decision Support，而不是未经人工确认的 Autonomous Final Decision。</p></section><section class="section" id="riskcoverage" data-search><h2>十六、Error Budget 与 Risk-Coverage Curve</h2><p>模型无法做到 Error=0，因此可以为高代价错误设 Error Budget，例如 Critical FN Rate &lt; 1%。超过门槛则停止自动化或降级人工。</p><div class="tablewrap"><table class="tbl"><thead><tr><th>自动覆盖率</th><th>自动处理错误率</th></tr></thead><tbody><tr><td>100%</td><td>8%</td></tr><tr><td>90%</td><td>5%</td></tr><tr><td>75%</td><td>2.5%</td></tr><tr><td>60%</td><td>1.0%</td></tr><tr><td>40%</td><td>0.3%</td></tr></tbody></table></div><p>业务真正选择的是：“我愿意自动处理多少，换取什么可靠性？”而不是盲目追求 100% 自动化。</p></section><section class="section" id="case" data-search><h2>十七、完整系统案例：为什么 0.91 的 RiskScore 也可能必须转人工</h2><div class="tablewrap"><table class="tbl"><tbody><tr><td>ParserQuality</td><td>0.97</td></tr><tr><td>DomainConfidence（医疗设备）</td><td>0.55</td></tr><tr><td>RiskScore</td><td>0.91</td></tr><tr><td>EvidenceConfidence</td><td>0.42</td></tr><tr><td>OODScore</td><td>0.76</td></tr></tbody></table></div><p>虽然模型“很自信”，但领域覆盖弱、证据弱、OOD 高，最终 System Policy 应优先人工复核。</p></section><section class="section" id="voi" data-search><h2>十八、Value of Information：不确定时，不只说“不知道”，还要问下一条什么信息最值钱</h2><p>例如无法判断技术参数是否具有排他性时，可以主动请求：可满足品牌数量、采购需求必要性说明、替代技术方案、同类项目市场情况。</p><div class="formula">用最小信息成本，最大程度降低决策不确定性</div><p>这与 Active Learning 的思想相通：一个问“下一条标哪个样本”，另一个问“当前案例下一步补什么信息”。</p></section><section class="section" id="mental" data-search><h2>十九、第 11 阶段的 5 个专家核心心智模型</h2><div class="grid2"><div class="card mental"><b>① 答案与自知能力分离</b><p>做对是一种能力，知道自己可能做错是另一种能力。</p></div><div class="card mental"><b>② 区分不确定性的来源</b><p>问题本身不确定，与模型知识不足，不是一回事。</p></div><div class="card mental"><b>③ Accuracy 与 Calibration 分离</b><p>概率必须被校准后才能更可靠地参与业务决策。</p></div><div class="card mental"><b>④ 专业系统需要选择性预测</b><p>不可靠时拒答、补信息、转专家是一种能力。</p></div><div class="card mental"><b>⑤ 优化最终业务风险</b><p>目标不是最高自信或最高自动化，而是控制高代价错误。</p></div></div><div class="quote">一个可靠模型，不只是知道答案，还应该知道什么时候自己的答案不值得被完全相信。</div></section><section class="section" id="mastery" data-search><h2>二十、掌握标准</h2><label class="check"><input class="learn-check" data-key="s11_1" type="checkbox"><span>看到 p=0.98 时，我不会自动解释成“98% 现实概率”，会先问是否校准。</span></label><label class="check"><input class="learn-check" data-key="s11_2" type="checkbox"><span>我能区分 Epistemic 与现实/信息不足造成的不确定性。</span></label><label class="check"><input class="learn-check" data-key="s11_3" type="checkbox"><span>我理解 Coverage-Risk Trade-off，以及为什么拒答可以提高专业系统可靠性。</span></label><label class="check"><input class="learn-check" data-key="s11_4" type="checkbox"><span>我知道 System Confidence 应综合模型、证据、OOD、上下文与规则一致性。</span></label><label class="check"><input class="learn-check" data-key="s11_5" type="checkbox"><span>我能把模型 Score 与最终 Decision Policy 分离，并按业务错误代价决定自动化程度。</span></label></section><div class="pager"><a href="stage10.html">← 上一阶段</a><a href="stage12.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
-const root=document.documentElement;
-const keyTheme='proc_ml_theme';
-const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
-document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
-document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
-document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
-const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
-const checks=[...document.querySelectorAll('.learn-check')];
-checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
-function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
-update();
-const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
-</script></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第11阶段：不确定性、校准、选择性预测与风险控制</title><style>:root{--bg:#f7f8fb;--panel:#fff;--text:#1d2433;--muted:#697386;--line:#e5e9f0;--accent:#3559e0;--code:#f2f4f8;--quote:#eef3ff;--math:#fbfcff}html[data-theme="dark"]{--bg:#111318;--panel:#191c23;--text:#edf0f7;--muted:#aab2c0;--line:#2b303a;--accent:#8ea4ff;--code:#20242d;--quote:#1d2744;--math:#151923}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.82}.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh}aside{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--line);padding:22px 16px}aside h1{font-size:17px;margin:0 0 8px}aside p{font-size:12px;color:var(--muted);margin:0 0 14px}.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}button,.navbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:6px 9px;cursor:pointer;text-decoration:none;font-size:13px}.toc{display:flex;flex-direction:column;gap:3px}.toc a{display:flex;gap:9px;text-decoration:none;color:var(--muted);font-size:13px;padding:7px 8px;border-radius:7px}.toc a:hover{background:var(--code);color:var(--text)}.toc a span{min-width:27px;color:var(--accent);font-weight:700}main{max-width:1040px;width:100%;padding:44px 56px 90px}article{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:46px 54px;box-shadow:0 8px 28px rgba(0,0,0,.03)}h1{font-size:34px;line-height:1.3;margin-top:0}h2{font-size:24px;margin-top:52px;padding-top:16px;border-top:1px solid var(--line);scroll-margin-top:20px}h3{font-size:19px;margin-top:30px}p{margin:12px 0}blockquote{margin:20px 0;padding:14px 18px;background:var(--quote);border-left:4px solid var(--accent);border-radius:8px}pre{overflow:auto;background:var(--code);padding:16px 18px;border-radius:10px;border:1px solid var(--line);line-height:1.55}code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid var(--line);padding:10px 12px;text-align:left}th{background:var(--code)}hr{border:0;border-top:1px solid var(--line);margin:38px 0}p>math[display="block"]{display:block;width:max-content;max-width:100%;margin:22px auto;padding:13px 18px;background:var(--math);border:1px solid var(--line);border-radius:10px;overflow-x:auto;font-size:1.12em}math{font-family:"STIX Two Math","Cambria Math","Times New Roman",serif}.topnote{font-size:14px;color:var(--muted);margin-bottom:28px;padding:12px 14px;background:var(--code);border-radius:10px}.bottomnav{display:flex;justify-content:space-between;gap:12px;margin-top:50px;padding-top:24px;border-top:1px solid var(--line)}@media(max-width:900px){.layout{display:block}aside{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}main{padding:18px}article{padding:26px 20px}.toc{max-height:360px;overflow:auto}}@media print{aside{display:none}.layout{display:block}main{padding:0;max-width:none}article{border:0;box-shadow:none;padding:0}}</style></head><body><div class="layout"><aside><h1>第一课 · 第 11 阶段</h1><p>原文级 Markdown → MathML HTML · 73 个编号内容</p><div class="tools"><a class="navbtn" href="index.html">首页</a><button onclick="toggleTheme()">深/浅</button><button onclick="window.print()">打印</button></div><nav class="toc"><a href="#sec-1"><span>1</span>第十一阶段总问题：什么时候值得相信模型？</a><a href="#sec-2"><span>2</span>从风险分数开始</a><a href="#sec-3"><span>3</span>Calibration</a><a href="#sec-4"><span>4</span>Accuracy ≠ Calibration</a><a href="#sec-5"><span>5</span>Overconfidence</a><a href="#sec-6"><span>6</span>Underconfidence</a><a href="#sec-7"><span>7</span>为什么政府采购需要 Calibration</a><a href="#sec-8"><span>8</span>答案与把握程度是两种能力</a><a href="#sec-9"><span>9</span>Probability / Confidence / Certainty</a><a href="#sec-10"><span>10</span>Aleatoric Uncertainty</a><a href="#sec-11"><span>11</span>政府采购中的 Aleatoric</a><a href="#sec-12"><span>12</span>Epistemic Uncertainty</a><a href="#sec-13"><span>13</span>Epistemic 例子</a><a href="#sec-14"><span>14</span>信息不足与模型不足要区分</a><a href="#sec-15"><span>15</span>Reliability Diagram</a><a href="#sec-16"><span>16</span>高置信区过度自信</a><a href="#sec-17"><span>17</span>ECE</a><a href="#sec-18"><span>18</span>Brier Score</a><a href="#sec-19"><span>19</span>为什么 Precision/Recall 不够</a><a href="#sec-20"><span>20</span>Ranking / Classification / Calibration 三层</a><a href="#sec-21"><span>21</span>排序好但概率不可信</a><a href="#sec-22"><span>22</span>Platt Scaling</a><a href="#sec-23"><span>23</span>Isotonic Regression</a><a href="#sec-24"><span>24</span>Temperature Scaling</a><a href="#sec-25"><span>25</span>校准不等于重新训练分类能力</a><a href="#sec-26"><span>26</span>准确性和可信度要分别优化</a><a href="#sec-27"><span>27</span>Selective Prediction</a><a href="#sec-28"><span>28</span>为什么拒答是一种能力</a><a href="#sec-29"><span>29</span>Coverage</a><a href="#sec-30"><span>30</span>Risk</a><a href="#sec-31"><span>31</span>Coverage ↔ Reliability Trade-off</a><a href="#sec-32"><span>32</span>Risk-Based Automation Zones</a><a href="#sec-33"><span>33</span>不能只看单一 Confidence</a><a href="#sec-34"><span>34</span>System Confidence ≠ Model Probability</a><a href="#sec-35"><span>35</span>可信度向量</a><a href="#sec-36"><span>36</span>OOD 检测思路</a><a href="#sec-37"><span>37</span>Embedding 距离直觉</a><a href="#sec-38"><span>38</span>模型分歧是 Uncertainty Signal</a><a href="#sec-39"><span>39</span>Ensemble / MC Dropout 直觉</a><a href="#sec-40"><span>40</span>LLM 的不确定性是多维的</a><a href="#sec-41"><span>41</span>分类对但依据错</a><a href="#sec-42"><span>42</span>Uncertainty-aware AI</a><a href="#sec-43"><span>43</span>答案成立的条件</a><a href="#sec-44"><span>44</span>Conditional Prediction</a><a href="#sec-45"><span>45</span>Risk Control 的目标</a><a href="#sec-46"><span>46</span>Defense in Depth</a><a href="#sec-47"><span>47</span>多信号一致才自动高风险</a><a href="#sec-48"><span>48</span>Model 与 Decision Policy 分离</a><a href="#sec-49"><span>49</span>同一分数在不同业务动作中意义不同</a><a href="#sec-50"><span>50</span>Cost-sensitive Risk Control</a><a href="#sec-51"><span>51</span>自动化阶梯</a><a href="#sec-52"><span>52</span>政府采购更适合 Decision Support</a><a href="#sec-53"><span>53</span>Error Budget</a><a href="#sec-54"><span>54</span>Abstention Threshold 也要评估</a><a href="#sec-55"><span>55</span>Risk-Coverage Curve</a><a href="#sec-56"><span>56</span>最安全的自动化程度</a><a href="#sec-57"><span>57</span>Value of Information</a><a href="#sec-58"><span>58</span>VoI 与 Active Learning</a><a href="#sec-59"><span>59</span>第十一阶段五个心智模型</a><a href="#sec-60"><span>60</span>阶段掌握标准</a><a href="#sec-61"><span>61</span>“模型给 0.92”到底能不能读成“92%概率有风险”</a><a href="#sec-62"><span>62</span>一个直观 Calibration 例子</a><a href="#sec-63"><span>63</span>Reliability Diagram、ECE 与 Brier Score</a><a href="#sec-64"><span>64</span>Aleatoric 与 Epistemic Uncertainty</a><a href="#sec-65"><span>65</span>Selective Prediction：模型不需要每题都自动回答</a><a href="#sec-66"><span>66</span>Risk-Coverage Curve</a><a href="#sec-67"><span>67</span>System Confidence 不等于 Model Probability</a><a href="#sec-68"><span>68</span>多维置信度向量</a><a href="#sec-69"><span>69</span>Decision Policy 与 Model 必须分离</a><a href="#sec-70"><span>70</span>Defense in Depth：让单个模型错误不直接穿透到高影响决策</a><a href="#sec-71"><span>71</span>Error Budget 与风险门禁</a><a href="#sec-72"><span>72</span>Value of Information：不知道时下一步应该问什么</a><a href="#sec-73"><span>73</span>第十一阶段五个核心心智模型</a></nav></aside><main><article><div class="topnote">唯一内容源：<strong>stage11.md</strong>。HTML 不压缩正文；所有 LaTeX 公式在构建时转换为浏览器原生 MathML。</div><h1 id="第一课-第-11-阶段不确定性校准选择性预测与风险控制">第一课 · 第
+11 阶段：不确定性、校准、选择性预测与风险控制</h1>
+<blockquote>
+<p><strong>原文级教材源文件</strong>：本 Markdown
+是该阶段唯一内容源。HTML
+由本文件直接生成，不再二次压缩、合并知识点或改写公式。</p>
+</blockquote>
+<p>这一阶段研究模型的“自知能力”：答案正确与否是一种能力，知道自己的答案是否值得相信是另一种能力。</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>d</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>→</mo><mi>C</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>→</mo><mi>C</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>b</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>→</mo><mi>U</mi><mi>n</mi><mi>c</mi><mi>e</mi><mi>r</mi><mi>t</mi><mi>a</mi><mi>i</mi><mi>n</mi><mi>t</mi><mi>y</mi><mo>→</mo><mi>O</mi><mi>O</mi><mi>D</mi><mo>→</mo><mi>A</mi><mi>b</mi><mi>s</mi><mi>t</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>→</mo><mi>R</mi><mi>i</mi><mi>s</mi><mi>k</mi><mi>C</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>r</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">
+Prediction \rightarrow Confidence \rightarrow Calibration \rightarrow Uncertainty \rightarrow OOD \rightarrow Abstention \rightarrow RiskControl
+</annotation></semantics></math></p>
+<p>重点包括概率校准、Aleatoric/Epistemic Uncertainty、Selective
+Prediction、Risk-Coverage、Decision Policy 与高代价错误控制。</p>
+<hr />
+<h2 id="sec-1">1.
+第十一阶段总问题：什么时候值得相信模型？</h2>
+<p>专业系统不仅追求答对，还要知道什么时候不应该完全相信自己的答案。</p>
+<hr />
+<h2 id="sec-2">2. 从风险分数开始</h2>
+<p>RiskScore=.92 首先只是模型分数，不自动等于“现实中92%违规”。</p>
+<hr />
+<h2 id="sec-3">3. Calibration</h2>
+<p>如果模型说 80% 的一组样本，长期真的约 80% 为正类，才叫校准良好。</p>
+<hr />
+<h2 id="sec-4">4. Accuracy ≠ Calibration</h2>
+<p>两个准确率同为90%的模型，一个可能总给0.99而明显过度自信。</p>
+<hr />
+<h2 id="sec-5">5. Overconfidence</h2>
+<p>模型概率比真实正确率系统性更极端。</p>
+<hr />
+<h2 id="sec-6">6. Underconfidence</h2>
+<p>模型其实经常答对，却总给很保守分数。</p>
+<hr />
+<h2 id="sec-7">7. 为什么政府采购需要
+Calibration</h2>
+<p>概率可能参与人工复核优先级、自动化区间和风险排序。</p>
+<hr />
+<h2 id="sec-8">8. 答案与把握程度是两种能力</h2>
+<p>Prediction + Confidence + Evidence + Uncertainty 应逐步分开表示。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型①：做对和知道自己可能错，是不同能力。</p>
+</blockquote>
+<hr />
+<h2 id="sec-9">9. Probability / Confidence /
+Certainty</h2>
+<p>数学概率、模型自信和现实是否确定不是同一个概念。</p>
+<hr />
+<h2 id="sec-10">10. Aleatoric Uncertainty</h2>
+<p>问题本身带不可约不确定性。</p>
+<hr />
+<h2 id="sec-11">11. 政府采购中的 Aleatoric</h2>
+<p>“5个同类业绩是否合理”在缺少项目规模、市场竞争和必要性时可能本来就无唯一答案。</p>
+<hr />
+<h2 id="sec-12">12. Epistemic Uncertainty</h2>
+<p>模型因为经验/知识不足而不确定，理论上可通过更多数据、知识或更好模型降低。</p>
+<hr />
+<h2 id="sec-13">13. Epistemic 例子</h2>
+<p>模型没见过核设施特殊采购，属于认知边界。</p>
+<hr />
+<h2 id="sec-14">14. 信息不足与模型不足要区分</h2>
+<p>缺现实信息时应 Ask for More Information，而不是盲目加参数。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型②：先判断不确定性来自世界还是模型。</p>
+</blockquote>
+<hr />
+<h2 id="sec-15">15. Reliability Diagram</h2>
+<p>把预测分箱，比较平均预测概率与真实正类比例。</p>
+<hr />
+<h2 id="sec-16">16. 高置信区过度自信</h2>
+<p>模型说90%，实际只有72%，说明高分区域校准差。</p>
+<hr />
+<h2 id="sec-17">17. ECE</h2>
+<p>Expected Calibration Error 衡量分箱后预测概率与实际频率的偏差。</p>
+<hr />
+<h2 id="sec-18">18. Brier Score</h2>
+<p>平均 (p−y)²，衡量概率预测质量。</p>
+<hr />
+<h2 id="sec-19">19. 为什么 Precision/Recall
+不够</h2>
+<p>它们依赖某个 Threshold，把 p=.51 与 p=.99 都压成同一个类别。</p>
+<hr />
+<h2 id="sec-20">20. Ranking /
+Classification / Calibration 三层</h2>
+<p>排序能力、阈值分类能力、概率可信度应分别评估。</p>
+<hr />
+<h2 id="sec-21">21. 排序好但概率不可信</h2>
+<p>风险分数都比正常高，但所有概率整体偏高，仍然可能校准差。</p>
+<hr />
+<h2 id="sec-22">22. Platt Scaling</h2>
+<p>训练后用简单概率映射重新校准。</p>
+<hr />
+<h2 id="sec-23">23. Isotonic Regression</h2>
+<p>非参数单调校准方法，适合某些数据规模。</p>
+<hr />
+<h2 id="sec-24">24. Temperature Scaling</h2>
+<p>深度模型常见，用温度 T 调整 logit 的尖锐程度。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Softmax(z/T)</p>
+</blockquote>
+<hr />
+<h2 id="sec-25">25. 校准不等于重新训练分类能力</h2>
+<p>类别排序可不变，但概率更符合真实频率。</p>
+<hr />
+<h2 id="sec-26">26. 准确性和可信度要分别优化</h2>
+<p>Correct + Well Calibrated 才适合进入风险策略。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型③：高 Accuracy 不能替代 Calibration。</p>
+</blockquote>
+<hr />
+<h2 id="sec-27">27. Selective Prediction</h2>
+<p>模型只在足够可靠时自动回答，不可靠时 Abstain。</p>
+<hr />
+<h2 id="sec-28">28. 为什么拒答是一种能力</h2>
+<p>70% 自动处理、97% 准确 + 30%
+人工，可能比100%自动、85%准更有价值。</p>
+<hr />
+<h2 id="sec-29">29. Coverage</h2>
+<p>模型自动处理多少比例的问题。</p>
+<hr />
+<h2 id="sec-30">30. Risk</h2>
+<p>在自动处理部分里的错误率。</p>
+<hr />
+<h2 id="sec-31">31. Coverage ↔︎ Reliability
+Trade-off</h2>
+<p>覆盖越高，通常不得不接更多难例；降低 Coverage 可以降低风险。</p>
+<hr />
+<h2 id="sec-32">32. Risk-Based Automation
+Zones</h2>
+<p>高可信自动提示；中等可信专家确认；低可信/OOD 直接人工。</p>
+<hr />
+<h2 id="sec-33">33. 不能只看单一 Confidence</h2>
+<p>真正系统可信度还要结合 OOD、Evidence、Context Completeness、Rule
+Consistency。</p>
+<hr />
+<h2 id="sec-34">34. System Confidence ≠
+Model Probability</h2>
+<p>模型0.97但无相关法规、OOD=.92，系统仍应谨慎。</p>
+<hr />
+<h2 id="sec-35">35. 可信度向量</h2>
+<p>可以分别记录 Model、Retrieval、Evidence、Context、Distribution
+的置信度。</p>
+<hr />
+<h2 id="sec-36">36. OOD 检测思路</h2>
+<p>Embedding 距离、最近邻、模型分歧、Entropy、专门
+Detector、元数据超范围。</p>
+<hr />
+<h2 id="sec-37">37. Embedding 距离直觉</h2>
+<p>新样本远离训练样本云，说明分布外风险更高。</p>
+<hr />
+<h2 id="sec-38">38. 模型分歧是 Uncertainty
+Signal</h2>
+<p>A/B/C 模型意见差异大时，优先人工复核。</p>
+<hr />
+<h2 id="sec-39">39. Ensemble / MC Dropout 直觉</h2>
+<p>多次略有差异预测非常不稳定，说明认知不确定性高。</p>
+<hr />
+<h2 id="sec-40">40. LLM 的不确定性是多维的</h2>
+<p>分类、引用、推理、建议都可以各自有 Confidence。</p>
+<hr />
+<h2 id="sec-41">41. 分类对但依据错</h2>
+<p>Risk 判断稳定不代表法规引用可靠，因此 Citation Confidence
+要独立。</p>
+<hr />
+<h2 id="sec-42">42. Uncertainty-aware AI</h2>
+<p>输出中应说明当前缺少哪些事实和为什么不能形成确定结论。</p>
+<hr />
+<h2 id="sec-43">43. 答案成立的条件</h2>
+<p>专业 AI 应输出 Conclusion | Assumptions，而不是无条件断言。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型④：答案应带条件和证据边界。</p>
+</blockquote>
+<hr />
+<h2 id="sec-44">44. Conditional Prediction</h2>
+<p>“若市场调查显示只有极少数供应商满足，则风险上升；若有充分必要性证明，则风险下降。”</p>
+<hr />
+<h2 id="sec-45">45. Risk Control 的目标</h2>
+<p>模型不可能零错误，目标是降低高代价错误穿透业务流程的概率。</p>
+<hr />
+<h2 id="sec-46">46. Defense in Depth</h2>
+<p>模型→RAG验证→规则→专家，多道防线让单次模型错误不必直接变最终错误。</p>
+<hr />
+<h2 id="sec-47">47. 多信号一致才自动高风险</h2>
+<p>ModelScore、EvidenceScore、OOD、Rule Match 共同决定 Action。</p>
+<hr />
+<h2 id="sec-48">48. Model 与 Decision Policy
+分离</h2>
+<p>模型输出 Score；Policy 根据 Score+Evidence+OOD+Cost 决定行动。</p>
+<blockquote>
+<p><strong>公式 / 关键表达</strong></p>
+<p>Action=f(Prediction,Uncertainty,Evidence,Cost)</p>
+</blockquote>
+<hr />
+<h2 id="sec-49">49.
+同一分数在不同业务动作中意义不同</h2>
+<p>普通提示可容忍较低门槛，自动否定供应商资格则需要极高标准和人工监督。</p>
+<hr />
+<h2 id="sec-50">50. Cost-sensitive Risk
+Control</h2>
+<p>自动化权限越高，所需可靠性、证据和人工监督越高。</p>
+<hr />
+<h2 id="sec-51">51. 自动化阶梯</h2>
+<p>信息检索→风险提示→修改建议→推荐结论→自动执行，风险逐层升高。</p>
+<hr />
+<h2 id="sec-52">52. 政府采购更适合 Decision
+Support</h2>
+<p>高影响场景不应把模型当最终责任主体。</p>
+<hr />
+<h2 id="sec-53">53. Error Budget</h2>
+<p>例如 Critical FN Rate&lt;1%，超出预算就暂停自动化或降级。</p>
+<hr />
+<h2 id="sec-54">54. Abstention Threshold
+也要评估</h2>
+<p>Coverage90%但CriticalError4%可能不如Coverage65%且0.5%。</p>
+<hr />
+<h2 id="sec-55">55. Risk-Coverage Curve</h2>
+<p>展示自动化覆盖率与自动处理错误率之间的关系。</p>
+<hr />
+<h2 id="sec-56">56. 最安全的自动化程度</h2>
+<p>目标不是自动化越多越好，而是 Expected Business
+Risk↓、Efficiency↑。</p>
+<blockquote>
+<p><strong>专家心智模型</strong></p>
+<p>心智模型⑤：优化高代价错误，而不是模型自信。</p>
+</blockquote>
+<hr />
+<h2 id="sec-57">57. Value of Information</h2>
+<p>当前不确定时，系统应告诉用户下一条什么信息最能降低不确定性。</p>
+<hr />
+<h2 id="sec-58">58. VoI 与 Active Learning</h2>
+<p>一个问“下一个标哪个样本”，一个问“当前案例补什么信息”，本质都是最大化信息增益。</p>
+<hr />
+<h2 id="sec-59">59. 第十一阶段五个心智模型</h2>
+<p>答案与自知分离；区分两类不确定性；Accuracy与Calibration分离；选择性预测；优化业务风险。</p>
+<hr />
+<h2 id="sec-60">60. 阶段掌握标准</h2>
+<p>看到 RiskScore=.98
+的陌生医疗项目时，你应追问：校准过吗、OOD吗、领域覆盖、上下文、RAG证据、规则冲突、业务代价、是否应该转人工。</p>
+<hr />
+<hr />
+<h2 id="sec-61">61. “模型给
+0.92”到底能不能读成“92%概率有风险”</h2>
+<p>不能自动这样解释。0.92
+首先只是当前模型在当前分布下的输出分数。只有经过
+Calibration，并且确认当前数据与校准集足够相似，才更有资格把它当成近似现实概率使用。</p>
+<h2 id="sec-62">62. 一个直观 Calibration 例子</h2>
+<p>从历史预测中找 100 个分数约 0.8 的案例。如果长期真实正类比例也约
+80%，模型在这个区间校准较好；如果真实只有 55%，说明明显
+Overconfidence。</p>
+<p>Accuracy 高与 Calibration 好是两个独立维度。</p>
+<h2 id="sec-63">63. Reliability
+Diagram、ECE 与 Brier Score</h2>
+<p>Reliability Diagram 比较每个置信度桶的平均预测与真实发生率；ECE
+把这些偏差汇总成一个校准误差；Brier Score
+计算概率预测的平方误差。它们都在回答分类 Accuracy
+无法回答的问题：<strong>概率值本身是否可信。</strong></p>
+<h2 id="sec-64">64. Aleatoric 与 Epistemic
+Uncertainty</h2>
+<p>Aleatoric：问题本身或现有事实就存在不可约不确定性，例如缺少市场供应数据，专家也无法唯一判断。Epistemic：模型知识不足，例如从未见过某特殊设备领域；补数据、知识或模型可能降低。</p>
+<p>诊断不确定性时必须先问：缺的是模型能力，还是现实信息？</p>
+<h2 id="sec-65">65. Selective
+Prediction：模型不需要每题都自动回答</h2>
+<p>模型可以只处理自己最可靠的 70%，剩下 30% 转人工。若这 70%
+Accuracy=97%，对政府采购可能比 100% 自动化但 Accuracy=85% 更有价值。</p>
+<p>核心 Trade-off 是 Coverage 与 Risk。</p>
+<h2 id="sec-66">66. Risk-Coverage Curve</h2>
+<p>随着自动化门槛提高，Coverage
+通常下降、自动处理错误率下降。业务可以明确选择：例如自动 60% 但 Critical
+Error&lt;1%，而不是追求 100% 自动处理。</p>
+<p>这让“自动化率”从宣传数字变成可治理的风险参数。</p>
+<h2 id="sec-67">67. System
+Confidence 不等于 Model Probability</h2>
+<p>可以综合：Model Confidence、OOD、Evidence Quality、Context
+Completeness、Rule Consistency。即使模型 p=0.97，如果 OOD 高、RAG
+没找到有效证据、上下文残缺，系统也应该降级为人工复核。</p>
+<h2 id="sec-68">68. 多维置信度向量</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><msub><mi>C</mi><mrow><mi>m</mi><mi>o</mi><mi>d</mi><mi>e</mi><mi>l</mi></mrow></msub><mo>,</mo><msub><mi>C</mi><mrow><mi>r</mi><mi>e</mi><mi>t</mi><mi>r</mi><mi>i</mi><mi>e</mi><mi>v</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>,</mo><msub><mi>C</mi><mrow><mi>e</mi><mi>v</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi></mrow></msub><mo>,</mo><msub><mi>C</mi><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>x</mi><mi>t</mi></mrow></msub><mo>,</mo><msub><mi>C</mi><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>t</mi><mi>r</mi><mi>i</mi><mi>b</mi><mi>u</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi></mrow></msub><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">
+C=[C_{model},C_{retrieval},C_{evidence},C_{context},C_{distribution}]
+</annotation></semantics></math></p>
+<p>生成式系统还可以分别评估 classification、citation、reasoning 和
+suggestion 的可信度，因为“判断对”与“依据对”并不是同一件事。</p>
+<h2 id="sec-69">69. Decision Policy 与 Model
+必须分离</h2>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>θ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>X</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>→</mo><mi>S</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">
+f_\theta(X)\rightarrow Score
+</annotation></semantics></math></p>
+<p>而业务动作由：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>S</mi><mi>c</mi><mi>o</mi><mi>r</mi><mi>e</mi><mo>,</mo><mi>U</mi><mi>n</mi><mi>c</mi><mi>e</mi><mi>r</mi><mi>t</mi><mi>a</mi><mi>i</mi><mi>n</mi><mi>t</mi><mi>y</mi><mo>,</mo><mi>E</mi><mi>v</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo>,</mo><mi>C</mi><mi>o</mi><mi>s</mi><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+Action=g(Score,Uncertainty,Evidence,Cost)
+</annotation></semantics></math></p>
+<p>同一个 0.75
+分数，在“提示专家多看一眼”和“自动否定供应商资格”两个场景中显然不能采取同样动作。</p>
+<h2 id="sec-70">70.
+Defense in Depth：让单个模型错误不直接穿透到高影响决策</h2>
+<p>风险模型 → 法规 RAG → Rule Engine →
+专家复核可以形成多道防线。高风险自动标记甚至可以要求
+ModelScore、EvidenceScore、OOD、规则一致性同时达到标准，否则自动降级。</p>
+<h2 id="sec-71">71. Error Budget 与风险门禁</h2>
+<p>可以提前定义 Critical FN Rate
+的最大允许值。如果超过阈值，停止某类自动化并转人工，而不是继续运行等待更多事故。专业
+AI 的目标不是零错误，而是让高代价错误难以穿透系统。</p>
+<h2 id="sec-72">72. Value of
+Information：不知道时下一步应该问什么</h2>
+<p>“不确定”不应只是结束语。系统可以指出降低不确定性最有价值的信息：项目规模、市场可满足品牌数、技术参数必要性、替代方案、同类采购情况等。</p>
+<p>Active Learning 问“下一条该标哪个案例”，Value of Information
+问“当前案例下一步该补什么事实”，二者都在最大化信息增益。</p>
+<h2 id="sec-73">73. 第十一阶段五个核心心智模型</h2>
+<ol type="1">
+<li>答案和对答案的自知能力是两种不同能力。</li>
+<li>不确定性要区分问题本身不确定与模型知道得不够。</li>
+<li>Accuracy 与 Calibration 必须分别评估和优化。</li>
+<li>拒答、补信息、转专家是专业系统能力，不是失败。</li>
+<li>最终目标是最小化高代价业务错误，而不是最大化模型自信或自动化率。</li>
+</ol>
+<p>如果只记一句：</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><menclose notation="box"><mrow><mi>可</mi><mi>靠</mi><mi>模</mi><mi>型</mi><mi>不</mi><mi>仅</mi><mi>要</mi><mi>尽</mi><mi>量</mi><mi>答</mi><mi>对</mi><mi>，</mi><mi>还</mi><mi>要</mi><mi>知</mi><mi>道</mi><mi>什</mi><mi>么</mi><mi>时</mi><mi>候</mi><mi>自</mi><mi>己</mi><mi>的</mi><mi>答</mi><mi>案</mi><mi>不</mi><mi>值</mi><mi>得</mi><mi>被</mi><mi>完</mi><mi>全</mi><mi>相</mi><mi>信</mi><mi>。</mi></mrow></menclose><annotation encoding="application/x-tex">
+\boxed{可靠模型不仅要尽量答对，还要知道什么时候自己的答案不值得被完全相信。}
+</annotation></semantics></math></p>
+<div class="bottomnav"><a class="navbtn" href="stage10.html">← 上一页</a><a class="navbtn" href="stage12.html">下一页 →</a></div></article></main></div><script>function toggleTheme(){const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark';localStorage.setItem('course-theme',r.dataset.theme)}document.documentElement.dataset.theme=localStorage.getItem('course-theme')||'light';</script></body></html>
