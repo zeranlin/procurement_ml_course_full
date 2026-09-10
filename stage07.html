@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 7 阶段：模型诊断——Bias、Drift、OOD 与数据污染 · 政府采购模型训练课</title><style>
+:root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
+[data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
+@media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
+@media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
+</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a class="active" href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#map">总地图</a><a href="#databias">Data Bias</a><a href="#label">Label Bias</a><a href="#drift">Distribution Shift</a><a href="#ood">OOD / Abstention</a><a href="#contam">Data Contamination</a><a href="#shortcut">Spurious Correlation</a><a href="#diagnosis">ML Diagnosis</a><a href="#case">完整诊断案例</a><a href="#taxonomy">Error Taxonomy</a><a href="#mental">专家心智模型</a><a href="#experiment">科学实验闭环</a></nav></aside><main class="main">
+<section class="hero"><div class="eyebrow">COURSE 01 · STAGE 07</div><h1>第一课 · 第 7 阶段：模型诊断——数据偏差、标签偏差、分布漂移、OOD 与数据污染</h1><p>从“会训练模型”进入“会诊断模型”：效果不好时，先判断错误来自数据、标签、切分、分布、模型、优化还是部署，而不是立刻换大模型。</p><div class="chips"><span class="chip">Diagnosis</span><span class="chip">Data Bias</span><span class="chip">Label Noise</span><span class="chip">Drift</span><span class="chip">OOD</span><span class="chip">Contamination</span></div></section>
+<section class="section" data-search="" id="map"><h2>一、第 7 阶段总地图：Diagnosis before Optimization</h2><p>前六阶段我们已经知道如何定义 X/Y、训练、评价和设计数据。第 7 阶段真正解决的是：</p><div class="quote">模型做不好时，到底应该改什么？</div><p>一个错误可能来自至少七层：</p><div class="formula">Data → Label → Split → Distribution → Model → Optimization → Deployment</div>
+<div class="tablewrap"><table class="tbl"><thead><tr><th>现象</th><th>可能真正原因</th></tr></thead><tbody>
+<tr><td>医疗设备技术参数漏报</td><td>医疗数据覆盖不足</td></tr><tr><td>专家答案前后矛盾</td><td>标签噪声 / 标注标准不统一</td></tr><tr><td>离线好、线上差</td><td>分布漂移 / 测试污染 / 处理链路不一致</td></tr><tr><td>同项目 Test 得分异常高</td><td>Project Leakage</td></tr><tr><td>新政策后能力下降</td><td>Concept Drift</td></tr><tr><td>陌生专业项目高置信度乱答</td><td>OOD + 校准问题</td></tr></tbody></table></div>
+<div class="card mental"><b>专家的第一反应：</b><p>一个错误现象 ≠ 一个唯一原因。先定位根因，再决定加数据、修标签、加 RAG、换模型还是调训练。</p></div></section>
+<section class="section" data-search="" id="databias"><h2>二、Data Bias：模型永远存在“经验边界”</h2><p>假设训练集共 100,000 条，但分布如下：</p><pre>IT           70,000
+办公用品      15,000
+物业           8,000
+医疗设备       4,000
+工程           2,000
+其他           1,000</pre><p>总体 Recall 可能达到 92%，医疗设备却只有 63%。这不一定说明模型“不会推理”，更可能说明医疗采购经验明显不足。</p>
+<h3>Sampling Bias：采样偏差</h3><p>如果风险案例主要从“投诉处理决定”生成，模型看到的是 <code>P(X | 投诉项目)</code>，但上线面对的是 <code>P(X | 全部采购项目)</code>。它可能学会投诉项目特有的语言，而不是真正的风险规律。</p>
+<h3>Representation Bias：代表性偏差</h3><p>中央级数据很多、县级很少；IT 很多、医疗很少；公开招标很多、特殊采购方式很少——都会让“政府采购模型”实际上只精通某一部分政府采购。</p>
+<div class="quote">不要只问“ProcurementLM 会不会政府采购”，而要问：它在哪些分布中经过验证？</div>
+<div class="card good"><b>Model Envelope（能力包络）示例：</b><pre>时间：2023–2026
+对象：货物 / 服务为主
+地区：中央、省、市数据充分
+行业：IT、物业、医疗较多
+风险：资格、参数、评分常见风险覆盖充分
+边界：极特殊工程/科研采购覆盖有限</pre></div></section>
+<section class="section" data-search="" id="label"><h2>三、Label Bias / Label Noise：标签不是天然真理</h2><p>如果真实风险案例被错误标成无风险，那么模型预测正确时反而会被 Loss 惩罚：</p><div class="formula">错误 Label → 错误 Loss → 错误 Gradient → 错误 Parameter Update</div>
+<h3>专家分歧本身也是数据</h3><p>例如同一评分条款：</p><pre>专家 A：高风险
+专家 B：需结合项目规模
+专家 C：中风险</pre><p>任务本身可能具有不确定性。强制压成单一 0/1 标签，会损失重要信息。更成熟的数据可以保存专家投票、争议等级和条件化结论。</p>
+<div class="card mental"><b>核心认知：</b><p>Ground Truth 并不总等于 Absolute Truth。它通常是当前专家体系对现实的最佳测量。</p></div>
+<h3>模型与专家不一致时的三种结果</h3><ol><li>模型错 → 进入 Hard Negative / Hard Positive。</li><li>专家错 → 修正 Label。</li><li>双方都有合理依据 → 标记 Borderline / Ambiguous。</li></ol><p>因此专业数据生产必须包含复核（Adjudication）流程。</p></section>
+<section class="section" data-search="" id="drift"><h2>四、Distribution Shift：上线世界不是静止的</h2><div class="formula">P_train(X,Y) ≠ P_deploy(X,Y)</div>
+<h3>1. Covariate Shift</h3><p><code>P(X)</code> 变化，但 <code>P(Y|X)</code> 大体稳定。例如训练时 IT 占 70%，部署时医疗占 60%。</p>
+<h3>2. Label Shift</h3><p><code>P(Y)</code> 变化。例如行业规范改善后风险条款比例从 20% 降到 5%，原先阈值可能不再合适。</p>
+<h3>3. Concept Drift</h3><p><code>P(Y|X)</code> 本身变化。这对政府采购最重要：新法规、新政策、新监管口径可能让“同一个 X”在不同时间得到不同 Y。</p>
+<div class="formula">Y = f(X, time, jurisdiction, applicable_rules)</div>
+<p>因此法规知识库至少应跟踪：</p><pre>document_id
+title
+jurisdiction
+publish_date
+effective_date
+expiry_date
+status
+supersedes
+superseded_by</pre>
+<div class="quote">模型是某一时刻数据分布的快照，不是永久有效的真理容器。</div></section>
+<section class="section" data-search="" id="ood"><h2>五、OOD：模型碰到“自己没见过的世界”怎么办？</h2><p>OOD = Out-of-Distribution。比如训练主要覆盖 IT、物业、办公、医疗，突然遇到非常特殊的科研设施采购：极专业参数、安全要求和稀有履约场景都远离训练分布。</p><div class="formula">X_new ∉ typical(P_train(X))</div>
+<h3>危险：模型不一定会主动说“我不会”</h3><p>大型语言模型即使面对 OOD，也可能继续生成非常流畅、非常自信的答案。</p><div class="quote">Fluent Answer ≠ In-Distribution ≠ Reliable Answer</div>
+<h3>Abstention / Selective Prediction</h3><p>成熟专业系统应允许：</p><pre>当前项目与已验证分布差异较大
+缺少足够相似历史案例
+法规证据不足
+模型不确定性较高
+→ 转人工专家复核</pre>
+<div class="card good"><b>可靠 ProcurementLM 的能力应包含：</b><div class="formula">Predict + Estimate Uncertainty + Detect OOD + Abstain</div></div><p>“知道什么时候不该自动回答”本身就是专业能力。</p></section>
+<section class="section" data-search="" id="contam"><h2>六、Data Contamination：测试集被污染，会制造虚假的安全感</h2><h3>Exact Duplicate</h3><p>Train 和 Test 出现完全相同条款，答对几乎不能证明泛化能力。</p>
+<h3>Near Duplicate</h3><p>“注册资本不得低于5000万元”与“注册资金至少为人民币五千万元”文字不同但语义几乎相同。</p>
+<h3>Project Leakage</h3><pre>同一个采购项目：
+招标文件 → Train
+质疑答复 → Train
+投诉决定 → Test</pre><p>文件不同，但答案关系已经泄漏。因此政府采购数据往往要以 <b>Project</b> 而不是 Document 作为隔离单元。</p>
+<h3>Template / Organization Leakage</h3><p>同一代理机构高度重复模板随机拆到 Train/Test，模型可能学的是机构模板而非业务规律。更严格测试应尝试跨机构、跨模板、跨地区泛化。</p>
+<h3>Future Leakage</h3><p>在“采购文件发布时预测风险”的任务里，如果输入包含后续更正公告、投诉结果、中标结果，就是用未来预测过去。</p>
+<div class="card danger"><b>最危险的后果：False Confidence。</b><p>模型本来一般，但被污染的 Test 得分极高，团队因此误以为已经达到上线标准。</p></div></section>
+<section class="section" data-search="" id="shortcut"><h2>七、Spurious Correlation / Shortcut Learning：模型可能“答对但理由错”</h2><p>模型可能利用与业务无关的信号：机构名称、模板页眉、某些关键词、文件格式等。</p><h3>Counterfactual Test：反事实测试</h3><p>只改变一个因素，观察输出是否异常变化：</p><pre>原句：供应商须在本市注册 → Risk 0.95
+只改：本市 → 项目所在地 → Risk 0.20</pre><p>如果语义核心没有大幅变化，模型却剧烈改变，可能说明它依赖某个表面词。</p>
+<h3>Perturbation Test：扰动测试</h3><p>保持语义不变，改写措辞：</p><pre>注册资本不得低于5000万元
+≈ 实缴资本应达到人民币五千万元以上</pre><p>如果性能大幅下降，说明模型过度依赖词面。</p>
+<h3>保留关键词，改变语义</h3><pre>采购文件不得以供应商注册资本作为不合理限制条件。</pre><p>如果模型只看到“注册资本”仍判高风险，说明学到了 Keyword，而不是 Semantic Meaning。</p></section>
+<section class="section" data-search="" id="diagnosis"><h2>八、ML Diagnosis：用分层诊断代替“炼丹”</h2><h3>第一层：Train / Validation</h3><div class="tablewrap"><table class="tbl"><thead><tr><th>Train</th><th>Validation</th><th>优先怀疑</th></tr></thead><tbody><tr><td>差</td><td>差</td><td>数据、标签、模型容量、优化</td></tr><tr><td>好</td><td>差</td><td>过拟合、分布差异</td></tr><tr><td>好</td><td>好</td><td>继续验证真实部署</td></tr><tr><td>差</td><td>好</td><td>评估流程/数据异常</td></tr></tbody></table></div>
+<h3>第二层：Slice Evaluation</h3><pre>Overall Recall = 90%
+资格 = 96%
+评分 = 92%
+技术 = 68%
+  └─ IT 技术 = 90%
+  └─ 医疗技术 = 52%
+      └─ 明显案例 = 92%
+      └─ 边界案例 = 37%</pre><p>这样把“模型不行”定位成“医疗技术参数边界案例能力不足”。</p>
+<h3>第三层：Confidence × Correctness</h3><div class="tablewrap"><table class="tbl"><thead><tr><th></th><th>正确</th><th>错误</th></tr></thead><tbody><tr><td>高置信度</td><td>稳定能力</td><td><b>最高价值错误</b></td></tr><tr><td>低置信度</td><td>边界/不确定</td><td>相对预期错误</td></tr></tbody></table></div>
+<h3>第四层：人工 Root Cause Review</h3><p>对 100 个 FN 做归因：</p><pre>输入缺上下文    28%
+Label 问题      19%
+医疗知识缺失    24%
+真正推理错误    16%
+法规更新         8%
+其他             5%</pre><div class="quote">只有 16% 真的是“模型脑子不够聪明”——直接换 70B 很可能治不了其余 84%。</div></section>
+<section class="section" data-search="" id="case"><h2>九、完整政府采购诊断案例：从“客户说医疗漏报多”到根因</h2><ol class="stage-list"><li><b>发现症状：</b>ProcurementLM V0.3 总体 Recall=91%，但医疗客户反馈漏报明显。</li><li><b>Slice：</b>医疗 Recall=61%，确认不是主观感受。</li><li><b>继续切片：</b>资格 90%、评分 82%、技术参数 42%。</li><li><b>查 Train Distribution：</b>20,000 条技术参数数据里，医疗只有 700 条。</li><li><b>审错题：</b>大量涉及专用设备兼容、临床使用场景、特殊市场供应。</li><li><b>根因判断：</b>主要是 Data Coverage Gap，而不是模型容量。</li><li><b>修复：</b>补医疗 Hard Positive、Hard Negative、市场竞争案例和专家标注。</li><li><b>重新训练：</b>医疗技术参数 Recall 从 42% → 79%。</li></ol>
+<div class="quote">这就是 Diagnosis-driven Training：先定位，再动手。</div>
+<h3>另一个典型：判断正确、法规引用错误</h3><p>如果风险判断 95%，Citation Accuracy 只有 61%，优先优化 RAG：法规切分、metadata、时效/地区过滤、Retriever、Reranker，而不是反复 Fine-tune 风险分类器。</p></section>
+<section class="section" data-search="" id="taxonomy"><h2>十、Error Taxonomy：错误必须可归因</h2><p>未来 ProcurementLM 不应该只记录 <code>correct=false</code>。建议至少保留：</p><pre>{
+  "task": "technical_requirement_review",
+  "prediction": "no_risk",
+  "ground_truth": "risk",
+  "confidence": 0.94,
+  "error_type": "false_negative",
+  "root_cause": "domain_coverage_gap",
+  "domain": "medical_device",
+  "difficulty": "hard_positive",
+  "ood_score": 0.81,
+  "label_review": "confirmed",
+  "recommended_action": "add_training_examples"
+}</pre>
+<p>系统级错误可以归入：</p><div class="chips"><span class="chip">Data</span><span class="chip">Label</span><span class="chip">Knowledge</span><span class="chip">Reasoning</span><span class="chip">Retrieval</span><span class="chip">Rule</span><span class="chip">OOD</span><span class="chip">Deployment</span></div>
+<div class="quote">成熟系统必须能够回答：Why did this fail?</div></section>
+<section class="section" data-search="" id="mental"><h2>十一、本阶段 5 个专家核心心智模型</h2><ol class="stage-list"><li><b>模型有经验边界：</b>不是简单问“会不会”，而是问“在哪些分布里会”。</li><li><b>标签只是现实的测量：</b>专家也会错，专家分歧本身也是数据。</li><li><b>模型是数据分布的快照：</b>业务、法规和数据变化都会造成 Drift。</li><li><b>可靠系统必须知道自己不会：</b>OOD 检测、不确定性和 Abstention 很重要。</li><li><b>先诊断再优化：</b>Error Analysis 决定应改数据、标签、知识、模型还是系统。</li></ol>
+<div class="quote">模型表现差，不要先问“换什么模型”，先问“错误来自哪一层”。</div>
+<label class="check"><input class="learn-check" data-key="s7_complete" type="checkbox"/><span><b>阶段 7 掌握：</b>我能用 Data Bias、Label Noise、Drift、OOD、Contamination、Slice 与 Root Cause Analysis 系统诊断 ProcurementLM 的失败原因。</span></label></section>
+<section class="section" data-search="" id="experiment"><h2>十二、从“炼丹”进入科学实验：Hypothesis → Experiment → Measurement</h2><p>不要一次同时改模型、LR、数据、Batch、Prompt、Loss 和 RAG。否则指标从 78% 涨到 85%，你仍然不知道为什么。</p><h3>更科学的实验：</h3><pre>Experiment A：只增加 Hard Negative
+Experiment B：只增加医疗数据
+Experiment C：只换 14B
+Experiment D：只优化 RAG
+→ 比较 ΔMetric</pre><div class="formula">Hypothesis → Controlled Experiment → Measurement → Diagnosis → Next Hypothesis</div><p>例如提出假设：</p><div class="card mental"><b>H1：</b><p>“医疗技术参数表现差，主要因为医疗训练数据覆盖不足。”</p></div><p>然后只补相应数据并复测。如果 Slice Recall 显著提高，假设得到支持；如果没有，就继续寻找其他根因。</p>
+<h3>阶段 7 条件反射</h3><div class="tablewrap"><table class="tbl"><thead><tr><th>现象</th><th>第一批想到的诊断方向</th></tr></thead><tbody><tr><td>Train 好、线上差</td><td>Leakage / Drift / Distribution / Serving skew</td></tr><tr><td>某行业特别差</td><td>Coverage / OOD</td></tr><tr><td>模型和专家冲突</td><td>Adjudicate Label，不要自动认定模型错</td></tr><tr><td>新法规后下降</td><td>Concept Drift</td></tr><tr><td>同义改写后失效</td><td>Shortcut / lexical overfit</td></tr><tr><td>Test 异常高</td><td>Contamination / Leakage</td></tr><tr><td>高置信度大量答错</td><td>错误规律 / OOD / Calibration</td></tr></tbody></table></div>
+<div class="card good"><b>最终认知：</b><p>机器学习研发越来越像科学实验。能力提升来自“提出可验证的原因假设，然后用控制实验确认”，而不是随机试参数。</p></div></section>
+<div class="pager"><a href="stage06.html">← 上一阶段</a><a href="stage08.html">下一阶段：完整机器学习实验 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
+const root=document.documentElement;
+const keyTheme='proc_ml_theme';
+const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
+document.getElementById('themeBtn')?.addEventListener('click',()=>{const n=root.getAttribute('data-theme')==='dark'?'light':'dark';root.setAttribute('data-theme',n);localStorage.setItem(keyTheme,n)});
+document.getElementById('fontBtn')?.addEventListener('click',()=>{document.body.classList.toggle('largefont');document.body.style.fontSize=document.body.classList.contains('largefont')?'18px':''});
+document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
+const s=document.getElementById('search'); if(s){s.addEventListener('input',()=>{const q=s.value.trim().toLowerCase();document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hide',q && !el.innerText.toLowerCase().includes(q))})})}
+const checks=[...document.querySelectorAll('.learn-check')];
+checks.forEach(c=>{const k='proc_ml_'+c.dataset.key;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');update()})});
+function update(){const done=checks.filter(c=>c.checked).length;const bar=document.getElementById('progressBar');const text=document.getElementById('progressText');if(bar)bar.style.width=(checks.length?done/checks.length*100:0)+'%';if(text)text.textContent=`本页进度 ${done} / ${checks.length}`}
+update();
+const links=[...document.querySelectorAll('.nav a[href^="#"]')];const targets=[...document.querySelectorAll('.section[id]')];if('IntersectionObserver' in window){const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.remove('active'));document.querySelector(`.nav a[href="#${e.target.id}"]`)?.classList.add('active')}}),{rootMargin:'-15% 0px -70% 0px'});targets.forEach(t=>obs.observe(t))}
+</script></body></html>

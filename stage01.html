@@ -1,11 +1,12 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 1 阶段：模型到底在“学习”什么？ · 政府采购模型训练课</title><style>
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 1 阶段：模型到底在“学习”什么？ · 政府采购模型训练课</title><style>
 :root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
 [data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
 @media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
 @media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课六阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html" class="active">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html" >阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html" >阶段 03 · 如何正确评价一个模型</a><a href="stage04.html" >阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html" >阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html" >阶段 06 · 数据分布、采样与“数据即模型”</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#map">本阶段高度</a><a href="#sample">Sample / Dataset</a><a href="#xy">X 与 Y</a><a href="#model">Model / Parameters</a><a href="#loss">Loss 与 Gradient</a><a href="#generalization">泛化</a><a href="#split">Train / Validation / Test</a><a href="#mental">专家心智模型</a><a href="#quiz">小测验</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 01</div><h1>第一课 · 第 1 阶段：模型到底在“学习”什么？</h1><p>X、Y、样本、模型、Loss、参数、梯度与泛化</p><div class="chips"><span class="chip">X</span><span class="chip">Y</span><span class="chip">样本</span><span class="chip">模型</span><span class="chip">Loss</span><span class="chip">参数</span><span class="chip">梯度与泛化</span></div></section><section class="section" id="map" data-search><h2>一、先从高度上理解：机器学习到底在学什么？</h2>
+</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a class="active" href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#map">本阶段高度</a><a href="#sample">Sample / Dataset</a><a href="#xy">X 与 Y</a><a href="#model">Model / Parameters</a><a href="#loss">Loss 与 Gradient</a><a href="#generalization">泛化</a><a href="#split">Train / Validation / Test</a><a href="#mental">专家心智模型</a><a href="#quiz">小测验</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 01</div><h1>第一课 · 第 1 阶段：模型到底在“学习”什么？</h1><p>X、Y、样本、模型、Loss、参数、梯度与泛化</p><div class="chips"><span class="chip">X</span><span class="chip">Y</span><span class="chip">样本</span><span class="chip">模型</span><span class="chip">Loss</span><span class="chip">参数</span><span class="chip">梯度与泛化</span></div></section><section class="section" data-search="" id="map"><h2>一、先从高度上理解：机器学习到底在学什么？</h2>
 <div class="quote">机器学习 = 从有限历史样本中寻找一个能够泛化到未知样本的映射规律。</div>
 <div class="formula">X  ──→  Model fθ  ──→  Ŷ
                      │
@@ -21,7 +22,7 @@
                能不能继续有效？
                    Generalization</div>
 <p>政府采购领域的第一个训练任务可以非常简单：输入一个供应商资格条件，输出“是否存在潜在不合理限制风险”。从专家视角看，这已经包含了机器学习的全部骨架：<b>任务定义 → 数据 → 模型 → 反馈 → 参数更新 → 泛化</b>。</p>
-<div class="card mental"><b>第一层专家认知：</b>不要先问“用什么大模型、多少 GPU”。先把任何问题还原成 <code>X → Y</code>：模型看到什么？我们希望它最终做出什么判断？</div></section><section class="section" id="sample" data-search><h2>二、Sample 与 Dataset：数据不是文件，而是“经验”</h2>
+<div class="card mental"><b>第一层专家认知：</b>不要先问“用什么大模型、多少 GPU”。先把任何问题还原成 <code>X → Y</code>：模型看到什么？我们希望它最终做出什么判断？</div></section><section class="section" data-search="" id="sample"><h2>二、Sample 与 Dataset：数据不是文件，而是“经验”</h2>
 <p>一条经过专家确认的训练数据：</p>
 <pre>输入 X：供应商须在项目所在地设有分公司。
 正确答案 Y：存在潜在风险（1）</pre>
@@ -30,7 +31,7 @@
 <p>这就是 Dataset（数据集）。真正需要建立的认知不是“我有多少 PDF”，而是：</p>
 <div class="quote">数据量 ≠ 经验量。高质量的反馈，通常比简单堆积文件更值钱。</div>
 <div class="grid2"><div class="card warn"><b>低价值原始文件</b><p>10 万份采购 PDF，如果没有任务、标签和有效反馈，并不自动等于 10 万条监督训练经验。</p></div><div class="card good"><b>高价值专家样本</b><p>原条款 + 上下文 + 风险标签 + 风险类别 + 法规依据 + 判断理由 + 修改建议，可以同时训练多种能力。</p></div></div>
-</section><section class="section" id="xy" data-search><h2>三、X 与 Y：任务定义决定了你究竟在训练什么</h2>
+</section><section class="section" data-search="" id="xy"><h2>三、X 与 Y：任务定义决定了你究竟在训练什么</h2>
 <h3>1. 什么是 X？</h3>
 <p>X 是模型在做判断时能够看到的信息。政府采购中，X 可能只有一句条款，也可能包含：</p>
 <div class="formula">X = [条款文本, 采购标的, 项目类型, 采购方式, 履约地点, 项目背景, 上下文, 时间, 地区]</div>
@@ -50,7 +51,7 @@ Y = 0  → 无风险</div>
   修改建议
 }</pre>
 <div class="card danger"><b>标签就是老师。</b><p>如果专家把大量真正有风险的案例错误标成“无风险”，模型会被系统性教错。模型不会自动知道“老师的答案册写错了”。</p></div>
-</section><section class="section" id="model" data-search><h2>四、Model 与 Parameters：训练真正改变的是什么？</h2>
+</section><section class="section" data-search="" id="model"><h2>四、Model 与 Parameters：训练真正改变的是什么？</h2>
 <p>先不用神经网络。假设我们人为定义三个特征：</p>
 <ul><li>x₁：是否出现注册资本限制</li><li>x₂：是否要求本地机构</li><li>x₃：是否限制企业成立年限</li></ul>
 <p>最简单的模型可以写成：</p>
@@ -60,7 +61,7 @@ Y = 0  → 无风险</div>
 <div class="quote">训练模型不是把知识复制进模型；训练真正发生的事情，是数据通过错误反馈不断改变参数 θ。</div>
 <pre>训练前：w₁=0.2, w₂=0.1, w₃=0.3
 训练后：w₁=2.31, w₂=1.87, w₃=1.46</pre>
-</section><section class="section" id="loss" data-search><h2>五、Prediction、Loss 与 Gradient：模型为什么会从“不会”逐渐变成“会”</h2>
+</section><section class="section" data-search="" id="loss"><h2>五、Prediction、Loss 与 Gradient：模型为什么会从“不会”逐渐变成“会”</h2>
 <p>假设真实样本：</p><pre>X：注册资本不得低于5000万元
 Y：1（风险）</pre>
 <p>模型预测 <code>Ŷ=0.2</code>。我们必须量化“错了多少”，这就是 Loss。为了直觉理解，先用平方误差：</p>
@@ -72,7 +73,7 @@ Y：1（风险）</pre>
 <div class="formula">θ(new) = θ(old) - η · ∇θ L</div>
 <p>η 是 Learning Rate。可以把训练想成下山：Loss 是高度，Gradient 告诉你坡度，学习率决定一步走多远。</p>
 <div class="card mental"><b>学习 = Error Correction。</b><p>Prediction → Error → Loss → Gradient → Parameters Update。重复几十万、几百万次后，参数逐渐形成数据中稳定的规律。</p></div>
-</section><section class="section" id="generalization" data-search><h2>六、Generalization：真正的能力不是“背会”，而是“遇到新题还能做对”</h2>
+</section><section class="section" data-search="" id="generalization"><h2>六、Generalization：真正的能力不是“背会”，而是“遇到新题还能做对”</h2>
 <p>假设模型在训练数据里发现了一个错误捷径：</p>
 <div class="formula">“凡是出现数字的资格条件 → 风险”</div>
 <p>训练集中很多风险条款恰好有“5000万元”“10年”等数字，于是模型取得很高训练分数。但遇到：</p>
@@ -82,12 +83,12 @@ Y：1（风险）</pre>
 <p>真正要追求的是：</p>
 <div class="formula">面对真实未来分布 P(real) 中没见过的数据，模型仍然具有较低错误率。</div>
 <p>这就是 Generalization（泛化）。</p>
-</section><section class="section" id="split" data-search><h2>七、为什么需要 Train / Validation / Test？</h2>
+</section><section class="section" data-search="" id="split"><h2>七、为什么需要 Train / Validation / Test？</h2>
 <div class="tablewrap"><table class="tbl"><thead><tr><th>数据集</th><th>角色</th><th>模型是否反复看</th></tr></thead><tbody><tr><td>Train</td><td>教材 + 练习题，用于直接更新参数</td><td>会</td></tr><tr><td>Validation</td><td>模拟考试，用来选模型、调超参数、观察过拟合</td><td>间接参与开发决策</td></tr><tr><td>Test</td><td>最终考试，用来评估真正泛化</td><td>尽量不要在开发中反复看</td></tr></tbody></table></div>
 <p>政府采购领域尤其要防止 Data Leakage。一个项目往往同时有采购公告、招标文件、更正公告、中标公告、质疑答复、投诉处理决定。如果这些文件被随机拆到不同数据集，模型可能已经通过 Train 看过同一项目的线索。</p>
 <div class="card danger"><b>项目级泄漏：</b><p>招标文件 → Train；投诉处理决定 → Test。表面是两个文件，本质可能是“同一道题拆到了不同试卷”。</p></div>
 <p>因此真实项目里通常要按 <b>Project ID</b> 隔离，并在需要预测未来时采用时间切分。</p>
-</section><section class="section" id="mental" data-search><h2>八、本阶段对应的 5 个专家核心心智模型</h2>
+</section><section class="section" data-search="" id="mental"><h2>八、本阶段对应的 5 个专家核心心智模型</h2>
 <div class="tablewrap"><table class="tbl"><thead><tr><th>心智模型</th><th>专家真正关心的问题</th></tr></thead><tbody>
 <tr><td><b>① 数据 = 经验</b></td><td>这条数据给了模型什么反馈？不是“有多少文件”。</td></tr>
 <tr><td><b>② 信息决定上限</b></td><td>X 是否包含做出正确判断真正需要的信息？</td></tr>
@@ -96,15 +97,15 @@ Y：1（风险）</pre>
 <tr><td><b>⑤ 能力 = 泛化</b></td><td>没见过的新项目、新措辞、新领域还能不能有效？</td></tr>
 </tbody></table></div>
 <div class="quote">训练模型 = 给模型大量精心设计的经验 + 告诉它哪里错了 + 不断调整参数 + 最终希望它对未知问题仍然有效。</div>
-</section><section class="section" id="quiz" data-search><h2>九、本阶段小测与掌握标准</h2>
+</section><section class="section" data-search="" id="quiz"><h2>九、本阶段小测与掌握标准</h2>
 <details><summary>题 1：在“判断采购资格条件是否存在风险”中，X 与 Y 分别是什么？</summary><p>X 是模型能够看到的输入信息；Y 是经过定义和标注的目标答案。根据任务不同，Y 可以是 0/1，也可以是风险类型、依据、理由等结构。</p></details>
 <details><summary>题 2：模型预测风险概率 0.2，专家标签为 1。Loss 的作用是什么？</summary><p>把预测与目标的差异转成可优化的数字，为后续计算梯度和更新参数提供反馈。</p></details>
 <details><summary>题 3：训练过程中真正发生变化的是什么？</summary><p>模型参数 θ，而不是原始文件、专家标签或法规本身。</p></details>
 <details><summary>题 4：Train 99.8%，Test 62%，模型好吗？</summary><p>通常不好，说明训练与未知数据之间存在很大泛化差距，可能发生过拟合、泄漏或分布问题。</p></details>
 <details><summary>题 5：大量标签错误会怎样？</summary><p>模型会系统性学习错误规律，因为训练目标本身就是错误的。</p></details>
 <details><summary>题 6：用自己的话解释“机器学习到底在学习什么？”</summary><p>参考：它通过大量样本与错误反馈调整参数，寻找一个能把输入映射到目标并迁移到未知样本的规律。</p></details>
-<label class="check"><input type="checkbox" class="learn-check" data-key="s1_complete"><span><b>阶段 1 掌握：</b>我能解释 X、Y、Sample、Dataset、Parameter、Loss、Gradient、Generalization，并能用政府采购案例说明它们。</span></label></section>
-<section class="section" id="deep1" data-search><h2>十、深化理解：从“机器学习”再上一个高度</h2>
+<label class="check"><input class="learn-check" data-key="s1_complete" type="checkbox"/><span><b>阶段 1 掌握：</b>我能解释 X、Y、Sample、Dataset、Parameter、Loss、Gradient、Generalization，并能用政府采购案例说明它们。</span></label></section>
+<section class="section" data-search="" id="deep1"><h2>十、深化理解：从“机器学习”再上一个高度</h2>
 <h3>1. 新手和专家最大的认知区别</h3>
 <div class="grid2"><div class="card"><b>新手</b><p>数据放进去 → GPU 计算 → 模型“学会”。</p></div><div class="card mental"><b>专家</b><p>任务定义 → 数据分布 → 模型假设 → 优化目标 → 泛化。模型只是这个系统的一部分。</p></div></div>
 <h3>2. Hypothesis Space 与 Inductive Bias</h3>
@@ -127,7 +128,7 @@ Loss：预测 Token 分布与真实 Token 的差异</div>
 <ol><li>什么是 X？</li><li>什么是 Y？</li><li>什么是模型 fθ？</li><li>为什么需要 Loss？</li><li>训练到底改变了什么？</li><li>为什么训练集表现很好不等于模型真的好？</li></ol>
 <div class="quote">如果你能不看笔记，用政府采购案例解释这六问，就已经建立了机器学习第一层“专家操作系统”。</div>
 </section>
-<div class="pager"><span></span><a href="stage02.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 完整教材版。页面为独立 HTML，可直接离线打开；进度勾选保存在浏览器本地。</div></main></div><script>
+<div class="pager"><span></span><a href="stage02.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
 const root=document.documentElement;
 const keyTheme='proc_ml_theme';
 const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);

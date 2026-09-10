@@ -1,11 +1,12 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 6 阶段：数据分布、采样与“数据即模型” · 政府采购模型训练课</title><style>
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 6 阶段：数据分布、采样与“数据即模型” · 政府采购模型训练课</title><style>
 :root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
 [data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
 @media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
 @media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课六阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html" >阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html" >阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html" >阶段 03 · 如何正确评价一个模型</a><a href="stage04.html" >阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html" >阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html" class="active">阶段 06 · 数据分布、采样与“数据即模型”</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#dist">Data Distribution</a><a href="#shift">Distribution Shift</a><a href="#imbalance">Class Imbalance</a><a href="#hard">Hard Examples</a><a href="#mining">Mining / Error Bank</a><a href="#dup">去重与长尾</a><a href="#curriculum">Curriculum / Contrastive</a><a href="#active">Active Learning</a><a href="#quality">Data Quality / Temporal</a><a href="#pyramid">数据金字塔</a><a href="#mental">专家心智模型</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 06</div><h1>第一课 · 第 6 阶段：数据分布、采样与“数据即模型”</h1><p>Distribution、Imbalance、Hard Examples、Curriculum、Active Learning</p><div class="chips"><span class="chip">Distribution</span><span class="chip">Imbalance</span><span class="chip">Hard Examples</span><span class="chip">Curriculum</span><span class="chip">Active Learning</span></div></section><section class="section" id="dist" data-search><h2>一、Data Distribution：模型不是在学“整个政府采购”，而是在学你给它看的那部分世界</h2>
+</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a class="active" href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#dist">Data Distribution</a><a href="#shift">Distribution Shift</a><a href="#imbalance">Class Imbalance</a><a href="#hard">Hard Examples</a><a href="#mining">Mining / Error Bank</a><a href="#dup">去重与长尾</a><a href="#curriculum">Curriculum / Contrastive</a><a href="#active">Active Learning</a><a href="#quality">Data Quality / Temporal</a><a href="#pyramid">数据金字塔</a><a href="#mental">专家心智模型</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 06</div><h1>第一课 · 第 6 阶段：数据分布、采样与“数据即模型”</h1><p>Distribution、Imbalance、Hard Examples、Curriculum、Active Learning</p><div class="chips"><span class="chip">Distribution</span><span class="chip">Imbalance</span><span class="chip">Hard Examples</span><span class="chip">Curriculum</span><span class="chip">Active Learning</span></div></section><section class="section" data-search="" id="dist"><h2>一、Data Distribution：模型不是在学“整个政府采购”，而是在学你给它看的那部分世界</h2>
 <p>假设训练数据中风险类型分布：</p><pre>资格条件 40%
 技术参数 25%
 评分标准 15%
@@ -16,19 +17,19 @@
 <div class="formula">理想：P_train(X,Y) ≈ P_real(X,Y)</div>
 <div class="quote">Training Distribution 定义了模型经验边界。</div>
 <p>因此建设数据集时，要按采购对象、行业、采购方式、地区、风险类型、风险等级、难度等维度做 Data Slicing。</p>
-</section><section class="section" id="shift" data-search><h2>二、Distribution Shift：模型没有一定“坏掉”，可能只是进入了陌生世界</h2>
+</section><section class="section" data-search="" id="shift"><h2>二、Distribution Shift：模型没有一定“坏掉”，可能只是进入了陌生世界</h2>
 <p>例如：</p><pre>训练：IT 项目占 80%
 部署：医疗设备占 60%</pre>
 <p>这就是 Train / Deploy 分布不一致。即使总体测试不错，也可能在医疗场景明显掉点。</p>
 <div class="tablewrap"><table class="tbl"><thead><tr><th>维度</th><th>政府采购示例</th></tr></thead><tbody><tr><td>采购对象</td><td>货物 / 服务 / 工程</td></tr><tr><td>行业</td><td>IT / 医疗 / 教育 / 物业 / 工程 / 咨询</td></tr><tr><td>采购方式</td><td>公开招标 / 磋商 / 谈判 / 询价 / 单一来源</td></tr><tr><td>地区</td><td>中央 / 省 / 市 / 县 / 不同省份</td></tr><tr><td>风险类型</td><td>资格 / 参数 / 评分 / 商务 / 合同 / 程序</td></tr><tr><td>难度</td><td>明显 / 普通 / 边界 / 争议</td></tr></tbody></table></div>
-</section><section class="section" id="imbalance" data-search><h2>三、Class Imbalance：样本频率本身就是一种“隐形奖励函数”</h2>
+</section><section class="section" data-search="" id="imbalance"><h2>三、Class Imbalance：样本频率本身就是一种“隐形奖励函数”</h2>
 <p>假设：</p><pre>无风险：95,000
 有风险：5,000</pre>
 <p>模型很容易学会大多数时候预测“无风险”。训练策略可以包括：</p>
 <ul><li><b>Oversampling：</b>提高少数类出现频率。</li><li><b>Undersampling：</b>减少多数类样本。</li><li><b>Class Weight：</b>不改变数量，但提高少数类错误在 Loss 中的权重。</li><li><b>Cost-sensitive Learning：</b>按业务代价让某类错误更贵。</li></ul>
 <div class="formula">Loss = w₁·L(risk) + w₀·L(normal)</div>
 <div class="card mental"><b>样本频率 = Implicit Weight。</b><p>一个模式出现 100 万次，另一个只出现 1000 次，即使 Loss 形式相同，前者对参数的累计影响也会更强。</p></div>
-</section><section class="section" id="hard" data-search><h2>四、Hard Positive / Hard Negative：真正推动能力边界的是“模型最容易错的样本”</h2>
+</section><section class="section" data-search="" id="hard"><h2>四、Hard Positive / Hard Negative：真正推动能力边界的是“模型最容易错的样本”</h2>
 <h3>Hard Negative：看起来像风险，其实不一定是</h3>
 <pre>项目需要在本市提供 2 小时应急服务，
 但不要求供应商提前设立本地机构，
@@ -38,7 +39,7 @@
 <pre>“为确保服务质量，供应商须具有连续十年以上同类项目经验。”</pre>
 <p>措辞有合理化包装，但仍要判断 10 年要求是否必要、与履约能力是否合理相关、是否不当限制竞争。</p>
 <div class="quote">简单样本教模型“表面规则”；困难样本决定它能不能画准真正的决策边界。</div>
-</section><section class="section" id="mining" data-search><h2>五、Hard Example Mining 与 Error Bank：让模型自己告诉我们“下一批最该标什么”</h2>
+</section><section class="section" data-search="" id="mining"><h2>五、Hard Example Mining 与 Error Bank：让模型自己告诉我们“下一批最该标什么”</h2>
 <h3>Hard Negative Mining</h3>
 <pre>当前模型扫描大量数据
 → 找出高置信度判“风险”的案例
@@ -59,14 +60,14 @@ time
 evidence
 whether_retrained</pre></div>
 <div class="formula">Model → Error → Expert Correction → New Data → Better Model → 再发现新错误</div>
-</section><section class="section" id="dup" data-search><h2>六、Duplicate 与 Long Tail：10 万条不一定有 10 万条有效信息</h2>
+</section><section class="section" data-search="" id="dup"><h2>六、Duplicate 与 Long Tail：10 万条不一定有 10 万条有效信息</h2>
 <h3>重复数据</h3>
 <p>如果“注册资本不得低于 X 万元”换数字、项目名重复 2 万次，它会在训练中被赋予过强影响。</p>
 <div class="formula">Raw Count ≠ Effective Information</div>
 <p>去重可分：</p><ul><li>Exact Dedup：完全相同</li><li>Near Dedup：文字高度近似</li><li>Semantic Dedup：语义高度重复</li></ul>
 <h3>Long Tail：低频不等于不重要</h3>
 <p>资格条件可能 30,000 条，特殊政策问题只有 100 条。模型会自然偏向高频类别，而低频案例往往更复杂。可以通过专项采集、Oversampling、Class Weight、RAG、Rules 或专项模型处理。</p>
-</section><section class="section" id="curriculum" data-search><h2>七、Curriculum Learning 与 Contrastive Pair：Dataset 是课程，不是仓库</h2>
+</section><section class="section" data-search="" id="curriculum"><h2>七、Curriculum Learning 与 Contrastive Pair：Dataset 是课程，不是仓库</h2>
 <h3>课程学习</h3>
 <pre>Level 1：明显案例
 → Level 2：普通上下文案例
@@ -77,11 +78,11 @@ whether_retrained</pre></div>
 <h3>Contrastive Pair</h3>
 <div class="grid2"><div class="card danger"><b>A</b><p>供应商必须在本市设立分公司。</p><p>标签：高风险。</p></div><div class="card good"><b>B</b><p>中标供应商应在合同履行期提供本地化现场服务，但不限制注册地或机构设立方式。</p><p>标签：结合项目需要判断，未必构成限制。</p></div></div>
 <p>把 A/B 放在一起，比把 A 重复 100 次更能迫使模型学习“真正差异”。</p>
-</section><section class="section" id="active" data-search><h2>八、Active Learning：专家时间有限，下一条最值得标什么？</h2>
+</section><section class="section" data-search="" id="active"><h2>八、Active Learning：专家时间有限，下一条最值得标什么？</h2>
 <p>假设有 100 万条未标注采购案例，但专家只能标 1 万条。随机抽不一定最优，可以让当前模型先跑，优先挑：</p>
 <ul><li>模型最犹豫：p≈0.5</li><li>多个模型意见分歧</li><li>模型与规则引擎冲突</li><li>高置信度但人工抽检发现错误</li><li>稀缺/长尾业务类别</li></ul>
 <div class="quote">真正昂贵的往往不是 GPU，而是高质量专家时间。目标应是：每 1 小时专家标注，产生最大的模型能力提升。</div>
-</section><section class="section" id="quality" data-search><h2>九、Data Quality、Temporal Metadata 与 Leakage：专业领域数据必须带“时间和适用范围”</h2>
+</section><section class="section" data-search="" id="quality"><h2>九、Data Quality、Temporal Metadata 与 Leakage：专业领域数据必须带“时间和适用范围”</h2>
 <p>一条高质量政府采购训练数据至少要检查：</p>
 <ol><li>输入是否完整，有没有缺上下文？</li><li>标签是否正确、专家标准是否一致？</li><li>法规依据是否真实、有效、适用？</li><li>地区、时间、项目类型是否记录？</li><li>是否重复？</li><li>难度是否标注？</li><li>是否存在答案/未来信息泄漏？</li></ol>
 <h3>Temporal Metadata</h3>
@@ -96,7 +97,7 @@ whether_retrained</pre></div>
 <p>政府采购规则会变化。如果把不同时期相互冲突的规则混在一起而没有时间信息，模型可能把失效规则当成当前规则。</p>
 <h3>Label / Future Leakage</h3>
 <p>任务是审原始采购文件，却把“财政部门认定该条款构成不合理限制”放进输入；或要预测是否投诉，却给了后续投诉处理决定——都会让模型“作弊”。</p>
-</section><section class="section" id="pyramid" data-search><h2>十、ProcurementLM 数据质量金字塔：真正的护城河在哪里？</h2>
+</section><section class="section" data-search="" id="pyramid"><h2>十、ProcurementLM 数据质量金字塔：真正的护城河在哪里？</h2>
 <div class="tablewrap"><table class="tbl"><thead><tr><th>层级</th><th>内容</th><th>单位价值</th></tr></thead><tbody>
 <tr><td>L1 原始数据</td><td>法规、公告、采购文件、案例</td><td>基础</td></tr>
 <tr><td>L2 清洗数据</td><td>去乱码、解析、去重</td><td>↑</td></tr>
@@ -106,11 +107,11 @@ whether_retrained</pre></div>
 <tr><td>L6 错误闭环</td><td>模型真实犯错 + 专家纠正</td><td>最高之一</td></tr>
 </tbody></table></div>
 <p>公开原始数据别人也能抓，真正难复制的是 <b>L4 + L5 + L6</b>：专家标注、困难案例和真实错误反馈。</p>
-</section><section class="section" id="mental" data-search><h2>十一、本阶段 5 个专家核心心智模型</h2>
+</section><section class="section" data-search="" id="mental"><h2>十一、本阶段 5 个专家核心心智模型</h2>
 <ol class="stage-list"><li><b>训练数据就是模型看到的世界：</b>Train Distribution 定义经验边界。</li><li><b>样本频率就是隐形权重：</b>高频数据对参数影响更大。</li><li><b>困难样本决定能力边界：</b>模型最容易错的地方最有训练价值。</li><li><b>高置信度错误是宝藏：</b>它暴露最深的错误规律。</li><li><b>Dataset 是课程，不是仓库：</b>要主动设计顺序、对比、反例与边界样本。</li></ol>
 <div class="quote">不要只问“我有多少数据”，要问“这些数据正在把模型训练成什么样的人”。</div>
-<label class="check"><input type="checkbox" class="learn-check" data-key="s6_complete"><span><b>阶段 6 掌握：</b>我能从 Distribution、Imbalance、Hard Examples、Long Tail、Curriculum、Active Learning、Temporal Metadata 和 Leakage 的角度审视政府采购训练数据。</span></label></section>
-<section class="section" id="deep6" data-search><h2>十二、深化理解：如何判断“下一条数据值不值得标”</h2>
+<label class="check"><input class="learn-check" data-key="s6_complete" type="checkbox"/><span><b>阶段 6 掌握：</b>我能从 Distribution、Imbalance、Hard Examples、Long Tail、Curriculum、Active Learning、Temporal Metadata 和 Leakage 的角度审视政府采购训练数据。</span></label></section>
+<section class="section" data-search="" id="deep6"><h2>十二、深化理解：如何判断“下一条数据值不值得标”</h2>
 <h3>1. Dataset A 与 Dataset B：数量不是唯一答案</h3>
 <div class="tablewrap"><table class="tbl"><thead><tr><th></th><th>Dataset A</th><th>Dataset B</th></tr></thead><tbody><tr><td>总量</td><td>100,000</td><td>30,000</td></tr><tr><td>普通正常</td><td>90%</td><td>30%</td></tr><tr><td>明显风险</td><td>8%</td><td>25%</td></tr><tr><td>Hard Negative</td><td>很少</td><td>20%</td></tr><tr><td>Hard Positive</td><td>很少</td><td>15%</td></tr><tr><td>边界案例</td><td>2%</td><td>10%</td></tr></tbody></table></div>
 <p>专家不会因为 100,000 &gt; 30,000 就自动选 A，而会比较：</p>
@@ -133,7 +134,7 @@ whether_retrained</pre></div>
 <p>基础样本帮助模型学基本模式；Hard/Contrastive 样本修正决策边界；长尾样本扩展覆盖；错误案例修复真实盲区；时间与地区元数据让知识有适用边界。</p>
 <div class="quote">你不是在维护一个数据仓库，而是在持续设计 ProcurementLM 的“教育体系”。</div>
 </section>
-<div class="pager"><a href="stage05.html">← 上一阶段</a><a href="index.html">回课程首页 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 完整教材版。页面为独立 HTML，可直接离线打开；进度勾选保存在浏览器本地。</div></main></div><script>
+<div class="pager"><a href="stage05.html">← 上一阶段</a><a href="stage07.html">下一阶段：模型诊断 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
 const root=document.documentElement;
 const keyTheme='proc_ml_theme';
 const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);

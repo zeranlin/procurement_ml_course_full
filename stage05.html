@@ -1,15 +1,16 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>第一课 · 第 5 阶段：真正的训练过程怎么运转 · 政府采购模型训练课</title><style>
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>第一课 · 第 5 阶段：真正的训练过程怎么运转 · 政府采购模型训练课</title><style>
 :root{--bg:#f4f7fb;--panel:#fff;--panel2:#f8fafc;--text:#172033;--muted:#667085;--border:#e3e8ef;--accent:#285fd4;--accent2:#6d8cff;--good:#16794f;--warn:#9a6700;--danger:#b42318;--code:#0f172a;--codeText:#e5efff;--shadow:0 12px 36px rgba(30,50,90,.08);--sidebar:310px}
 [data-theme="dark"]{--bg:#0d131c;--panel:#141c28;--panel2:#192332;--text:#edf3ff;--muted:#a7b1c2;--border:#2a3648;--accent:#78a6ff;--accent2:#a7bfff;--good:#65d49a;--warn:#efc66d;--danger:#ff8c83;--code:#080d14;--codeText:#eef5ff;--shadow:0 12px 36px rgba(0,0,0,.30)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Arial,sans-serif;line-height:1.78}.layout{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--panel);border-right:1px solid var(--border);padding:22px 18px}.brand{font-size:19px;font-weight:850;line-height:1.35}.brand small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:5px}.tools{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.btn{appearance:none;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}.btn:hover{border-color:var(--accent)}.search{width:100%;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:10px;padding:10px 11px;outline:none}.search:focus{border-color:var(--accent)}.navtitle{font-size:11px;font-weight:850;letter-spacing:.08em;color:var(--muted);margin:18px 8px 7px}.nav a{display:block;color:var(--text);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:13.5px;margin:2px 0}.nav a:hover,.nav a.active{background:rgba(40,95,212,.10);color:var(--accent)}.main{width:100%;max-width:1280px;padding:38px clamp(22px,4vw,68px) 90px}.hero{border:1px solid var(--border);background:linear-gradient(135deg,rgba(40,95,212,.13),rgba(109,140,255,.04)),var(--panel);border-radius:24px;padding:34px;box-shadow:var(--shadow)}.eyebrow{font-size:12px;font-weight:850;color:var(--accent);letter-spacing:.08em}.hero h1{font-size:clamp(31px,4.5vw,52px);line-height:1.13;margin:10px 0 14px}.hero p{font-size:17px;color:var(--muted);max-width:930px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.chip{font-size:12px;font-weight:750;background:rgba(40,95,212,.09);color:var(--accent);padding:5px 9px;border-radius:999px}.section{margin-top:40px;scroll-margin-top:24px}.section h2{font-size:29px;line-height:1.25;margin:0 0 9px}.section h3{font-size:21px;line-height:1.35;margin:25px 0 8px}.section h4{font-size:16px;margin:18px 0 6px}.lead{color:var(--muted);font-size:16px;margin-top:4px}.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:19px;margin:14px 0;box-shadow:0 5px 20px rgba(20,35,70,.04)}.mental{border-left:4px solid var(--accent)}.good{border-left:4px solid var(--good)}.warn{border-left:4px solid var(--warn)}.danger{border-left:4px solid var(--danger)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formula,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--code);color:var(--codeText);padding:15px 17px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.65}.formula{margin:13px 0}.quote{font-size:18px;font-weight:750;border-left:4px solid var(--accent);padding:12px 16px;margin:18px 0;background:rgba(40,95,212,.06);border-radius:0 12px 12px 0}.tablewrap{overflow:auto;border:1px solid var(--border);border-radius:12px}.tbl{width:100%;border-collapse:collapse;min-width:620px;background:var(--panel)}.tbl th,.tbl td{border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.tbl th{font-size:12px;color:var(--muted);background:var(--panel2)}.tbl tr:last-child td{border-bottom:0}.tocbox{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbox a{text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--border);padding:10px 12px;border-radius:10px}.tocbox a:hover{color:var(--accent);border-color:var(--accent)}.check{display:flex;align-items:flex-start;gap:9px;padding:12px 13px;background:var(--panel2);border:1px dashed var(--border);border-radius:11px;margin:12px 0}.check input{margin-top:6px;transform:scale(1.15)}details{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin:9px 0}summary{cursor:pointer;font-weight:760}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:46px}.pager a{flex:1;border:1px solid var(--border);background:var(--panel);padding:14px 16px;border-radius:13px;text-decoration:none;color:var(--text)}.pager a:last-child{text-align:right}.pager a:hover{border-color:var(--accent);color:var(--accent)}.roadmap{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.road{position:relative;background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:17px 17px 17px 58px}.roadno{position:absolute;left:14px;top:15px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:rgba(40,95,212,.10);color:var(--accent);font-weight:850}.road h3{font-size:17px;margin:0 0 5px}.road p{color:var(--muted);font-size:13px;margin:0}.road ul{color:var(--muted);font-size:13px;margin:8px 0 0;padding-left:18px}.footer{margin-top:48px;border-top:1px solid var(--border);padding-top:18px;color:var(--muted);font-size:12px}.hide{display:none!important}.small{font-size:13px;color:var(--muted)}.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:20px}.kpi div{border:1px solid var(--border);background:var(--panel);padding:13px;border-radius:12px}.kpi b{font-size:20px;display:block}.kpi span{font-size:11px;color:var(--muted)}.note{padding:14px 16px;border-radius:12px;background:rgba(22,121,79,.07);border:1px solid rgba(22,121,79,.18)}.stage-list{counter-reset:item;padding-left:0}.stage-list li{list-style:none;counter-increment:item;padding:9px 10px 9px 40px;position:relative;border-bottom:1px solid var(--border)}.stage-list li:before{content:counter(item);position:absolute;left:7px;top:9px;width:24px;height:24px;display:grid;place-items:center;background:rgba(40,95,212,.09);color:var(--accent);border-radius:7px;font-size:12px;font-weight:850}.pill{display:inline-block;border:1px solid var(--border);padding:2px 7px;border-radius:999px;font-size:11px;color:var(--muted);margin:2px 3px}.progress{margin-top:14px}.bar{height:8px;background:var(--border);border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}.progtext{font-size:11px;color:var(--muted);margin-top:6px}
 @media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--border)}.main{padding-top:24px}.grid2,.roadmap,.tocbox{grid-template-columns:1fr}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.kpi{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.hero{padding:24px}.nav{grid-template-columns:1fr}.section h2{font-size:24px}.main{padding-left:16px;padding-right:16px}.kpi{grid-template-columns:1fr 1fr}}
 @media print{.side,.tools,.pager,.search{display:none!important}.layout{display:block}.main{max-width:none;padding:0}.hero,.card{box-shadow:none}.section{break-inside:avoid}.hero{border:0;padding:0 0 15px}}
-</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input id="search" class="search" placeholder="搜索本页知识…"><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课六阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html" >阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html" >阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html" >阶段 03 · 如何正确评价一个模型</a><a href="stage04.html" >阶段 04 · 概率、Loss 与 Gradient</a><a href="stage05.html" class="active">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html" >阶段 06 · 数据分布、采样与“数据即模型”</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#dataset">10万条数据如何进GPU</a><a href="#batch">Batch / Mini-batch</a><a href="#step">Step / Epoch</a><a href="#lr">Learning Rate</a><a href="#opt">SGD / Adam / AdamW</a><a href="#ga">Gradient Accumulation</a><a href="#shuffle">Shuffle / Split</a><a href="#curve">Training Curve</a><a href="#tokens">Token Batch / GPU</a><a href="#mental">专家心智模型</a><a href="#example">完整训练流水线</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 05</div><h1>第一课 · 第 5 阶段：真正的训练过程怎么运转</h1><p>Batch、Step、Epoch、Learning Rate、AdamW、Gradient Accumulation</p><div class="chips"><span class="chip">Batch</span><span class="chip">Step</span><span class="chip">Epoch</span><span class="chip">Learning Rate</span><span class="chip">AdamW</span><span class="chip">Gradient Accumulation</span></div></section><section class="section" id="dataset" data-search><h2>一、从 10 万条政府采购数据开始：GPU 并不是一次把全部数据吞进去</h2>
+</style></head><body><div class="layout"><aside class="side"><div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">政府采购模型训练课</a><small>第一课 · 机器学习基础 · 十二阶段完整教材版</small></div><div class="tools"><button class="btn" id="themeBtn">☾ 主题</button><button class="btn" id="fontBtn">Aa 字号</button><button class="btn" id="printBtn">打印</button></div><input class="search" id="search" placeholder="搜索本页知识…"/><div class="progress"><div class="bar"><span id="progressBar"></span></div><div class="progtext" id="progressText">本页进度</div></div><div class="navtitle">第一课十二阶段</div><nav class="nav"><a href="index.html">课程首页 / 路线图</a><a href="stage01.html">阶段 01 · 模型到底在“学习”什么？</a><a href="stage02.html">阶段 02 · 欠拟合、过拟合与泛化诊断</a><a href="stage03.html">阶段 03 · 如何正确评价一个模型</a><a href="stage04.html">阶段 04 · 概率、Loss 与 Gradient</a><a class="active" href="stage05.html">阶段 05 · 真正的训练过程怎么运转</a><a href="stage06.html">阶段 06 · 数据分布、采样与“数据即模型”</a><a href="stage07.html">阶段 07 · 模型诊断：Bias / Drift / OOD</a><a href="stage08.html">阶段 08 · 完整机器学习实验：Experiment 001</a><a href="stage09.html">阶段 09 · 工程化与可复现性</a><a href="stage10.html">阶段 10 · Production ML：监控、反馈与持续学习</a><a href="stage11.html">阶段 11 · 不确定性、校准与风险控制</a><a href="stage12.html">阶段 12 · 因果、反事实与稳定泛化</a></nav><div class="navtitle">本页目录</div><nav class="nav"><a href="#dataset">10万条数据如何进GPU</a><a href="#batch">Batch / Mini-batch</a><a href="#step">Step / Epoch</a><a href="#lr">Learning Rate</a><a href="#opt">SGD / Adam / AdamW</a><a href="#ga">Gradient Accumulation</a><a href="#shuffle">Shuffle / Split</a><a href="#curve">Training Curve</a><a href="#tokens">Token Batch / GPU</a><a href="#mental">专家心智模型</a><a href="#example">完整训练流水线</a></nav></aside><main class="main"><section class="hero"><div class="eyebrow">COURSE 01 · STAGE 05</div><h1>第一课 · 第 5 阶段：真正的训练过程怎么运转</h1><p>Batch、Step、Epoch、Learning Rate、AdamW、Gradient Accumulation</p><div class="chips"><span class="chip">Batch</span><span class="chip">Step</span><span class="chip">Epoch</span><span class="chip">Learning Rate</span><span class="chip">AdamW</span><span class="chip">Gradient Accumulation</span></div></section><section class="section" data-search="" id="dataset"><h2>一、从 10 万条政府采购数据开始：GPU 并不是一次把全部数据吞进去</h2>
 <p>假设训练集：</p><div class="formula">D = {(x₁,y₁), …, (x₁₀₀₀₀₀,y₁₀₀₀₀)}</div>
 <p>显存有限，所以训练通常不会一次把 10 万条样本全部送入 GPU。真实主线：</p>
 <div class="formula">Dataset → Mini-batch → Forward → Loss → Backward → Gradient → Optimizer Step → 下一批 → Epoch</div>
-</section><section class="section" id="batch" data-search><h2>二、Batch / Mini-batch：一次给模型多少样本？</h2>
+</section><section class="section" data-search="" id="batch"><h2>二、Batch / Mini-batch：一次给模型多少样本？</h2>
 <p>假设 Batch Size=32：每次 GPU 同时处理 32 条政府采购样本。</p>
 <h3>两个极端</h3>
 <div class="grid2"><div class="card"><b>Batch Size=1</b><p>每看一个样本更新一次，梯度噪声很大，更新很频繁。</p></div><div class="card"><b>Full Batch</b><p>一次用全部 10 万样本算梯度，稳定但显存和计算代价巨大。</p></div></div>
@@ -20,13 +21,13 @@
 → 每个样本 Loss
 → 取 Batch 平均 Loss
 → Backward 计算所有可训练参数的 Gradient</pre>
-</section><section class="section" id="step" data-search><h2>三、Step 与 Epoch：参数真正更新了多少次？</h2>
+</section><section class="section" data-search="" id="step"><h2>三、Step 与 Epoch：参数真正更新了多少次？</h2>
 <p><b>Optimizer Step</b>：完成一次参数更新。<b>Epoch</b>：模型完整看完一次训练集。</p>
 <div class="formula">Steps per Epoch ≈ N / Effective Batch Size</div>
 <p>例如 100,000 样本，Batch=100：</p><div class="formula">100000 / 100 = 1000 steps per epoch</div>
 <p>训练 5 Epoch，大约 5000 次更新。</p>
 <div class="card warn"><b>Epoch 不是能力分数。</b><p>多看几遍数据可能强化规律，也可能从“学习”走向“记忆”。最终仍要看 Validation。</p></div>
-</section><section class="section" id="lr" data-search><h2>四、Learning Rate：每一步到底走多远？</h2>
+</section><section class="section" data-search="" id="lr"><h2>四、Learning Rate：每一步到底走多远？</h2>
 <div class="formula">θ(new) = θ(old) - η · ∇θL</div>
 <ul><li><b>LR 太大：</b>在最优点两侧来回跳，Loss 震荡甚至发散。</li><li><b>LR 太小：</b>Loss 缓慢下降，训练结束时还没有学充分。</li><li><b>LR 合适：</b>长期稳定下降并逐渐收敛。</li></ul>
 <h3>Learning Rate Schedule / Warmup</h3>
@@ -35,13 +36,13 @@
 中期：较有效率地学习大方向
 后期：减小步长，精细调整</pre>
 <p>Parameter 是模型训练出来的权重；Learning Rate、Batch Size、Epoch、Weight Decay、LoRA Rank 等属于 <b>Hyperparameter</b>，由训练者设置。</p>
-</section><section class="section" id="opt" data-search><h2>五、SGD、Momentum、Adam、AdamW：Gradient 只是方向，Optimizer 才是“怎么走”</h2>
+</section><section class="section" data-search="" id="opt"><h2>五、SGD、Momentum、Adam、AdamW：Gradient 只是方向，Optimizer 才是“怎么走”</h2>
 <h3>SGD</h3><div class="formula">θ(t+1)=θ(t)-η·g(t)</div><p>当前 mini-batch 梯度指哪里，就往反方向更新。</p>
 <h3>Momentum</h3><p>保留历史运动趋势，不因为单个 Batch 的偶然噪声就彻底改变方向。</p>
 <h3>Adam</h3><p>综合梯度历史与自适应步长，让不同参数可以有不同“学习速度”。</p>
 <h3>AdamW</h3><p>在 Transformer / LLM 训练中非常常见，可以直觉理解成 Adam + 更合理的 Weight Decay 处理。</p>
 <div class="quote">Gradient = 坡度；Optimizer = 下山策略；Learning Rate = 步长；Batch = 用多少样本估计坡度。</div>
-</section><section class="section" id="ga" data-search><h2>六、Gradient Accumulation：显存只能放 2 个样本，怎样得到更大的 Effective Batch？</h2>
+</section><section class="section" data-search="" id="ga"><h2>六、Gradient Accumulation：显存只能放 2 个样本，怎样得到更大的 Effective Batch？</h2>
 <p>假设单卡一次只能放 4 个样本，但希望 Effective Batch=32：</p>
 <pre>Micro-batch 1：4个 → 计算梯度，不更新
 Micro-batch 2：4个 → 累积
@@ -51,12 +52,12 @@ Micro-batch 8：4个 → 累积完成
 <div class="formula">Effective Batch = Per-device Batch × GPU 数量 × Gradient Accumulation</div>
 <p>例如 4 张 GPU × 每卡 2 × 累积 8：</p><div class="formula">Effective Batch = 2 × 4 × 8 = 64</div>
 <p>所以读训练配置时不能只看 <code>per_device_train_batch_size</code>，要看 Effective Batch。</p>
-</section><section class="section" id="shuffle" data-search><h2>七、Shuffle 与 Split 是两件事</h2>
+</section><section class="section" data-search="" id="shuffle"><h2>七、Shuffle 与 Split 是两件事</h2>
 <p>训练集内部通常会 Shuffle，避免数据顺序造成连续偏置。例如原始数据若按“资格 → 技术 → 评分”成块排列，不打乱时模型会在一段时间里被单一任务连续推动。</p>
 <p>但：</p>
 <div class="formula">先正确做 Project/Time Split → 再在 Train 内部 Shuffle</div>
 <div class="card danger"><b>不要为了 Shuffle 破坏隔离。</b><p>Train / Validation / Test 的项目、时间、关联案例隔离优先级高于随机性。</p></div>
-</section><section class="section" id="curve" data-search><h2>八、Training Curve：训练不是“脚本跑完”，而是持续观察动态系统</h2>
+</section><section class="section" data-search="" id="curve"><h2>八、Training Curve：训练不是“脚本跑完”，而是持续观察动态系统</h2>
 <p>常见监控至少包括：</p>
 <pre>Train Loss
 Validation Loss
@@ -67,7 +68,7 @@ GPU 利用率 / 显存
 Tokens/sec / Samples/sec</pre>
 <div class="tablewrap"><table class="tbl"><thead><tr><th>曲线现象</th><th>可能原因</th></tr></thead><tbody><tr><td>Loss 稳定下降</td><td>正常学习</td></tr><tr><td>Loss 剧烈震荡</td><td>LR 过大、Batch 太小、数据/数值问题</td></tr><tr><td>Loss 几乎不动</td><td>LR 太小、参数没训练、数据/任务有问题</td></tr><tr><td>Loss 突然爆炸</td><td>Gradient Explosion 或数值不稳定</td></tr><tr><td>Train 降、Val 升</td><td>过拟合</td></tr></tbody></table></div>
 <div class="quote">Monitoring 本身就是模型训练的一部分。Checkpoint 生成了 ≠ 训练成功。</div>
-</section><section class="section" id="tokens" data-search><h2>九、文本模型还要看 Tokens per Batch，而不只是 Samples per Batch</h2>
+</section><section class="section" data-search="" id="tokens"><h2>九、文本模型还要看 Tokens per Batch，而不只是 Samples per Batch</h2>
 <p>政府采购文档长度差异巨大：</p>
 <pre>采购公告：短
 采购需求：中等
@@ -76,9 +77,9 @@ Tokens/sec / Samples/sec</pre>
 <p>32 个短问答和 2 份长招标文件的显存/算力需求可能完全不同。Transformer 的计算成本与 Sequence Length 高度相关，因此大模型训练还要关心：</p>
 <div class="formula">Context Length / Tokens per Batch / Packing / Chunking</div>
 <p>GPU 的主要任务不是“存知识”，而是高吞吐地执行海量矩阵乘法。知识最终体现为训练后的参数值。</p>
-</section><section class="section" id="mental" data-search><h2>十、本阶段 5 个专家核心心智模型</h2>
+</section><section class="section" data-search="" id="mental"><h2>十、本阶段 5 个专家核心心智模型</h2>
 <ol class="stage-list"><li><b>Batch 是数据分布的局部估计：</b>每批梯度只是总体规律的带噪声估计。</li><li><b>Epoch 是训练深度，不是能力分数：</b>越多可能越过拟合。</li><li><b>Gradient ≠ Optimizer：</b>方向、策略、步长必须分开理解。</li><li><b>Training 是随机优化过程：</b>有波动正常，看长期趋势与 Validation。</li><li><b>Training 必须被监控：</b>Loss、Val、Gradient、LR、吞吐都要看。</li></ol>
-</section><section class="section" id="example" data-search><h2>十一、把一次真实训练流水线完整跑在脑子里</h2>
+</section><section class="section" data-search="" id="example"><h2>十一、把一次真实训练流水线完整跑在脑子里</h2>
 <p>假设：</p><pre>训练样本：100,000
 GPU：4 张
 Per-device batch：2
@@ -98,8 +99,8 @@ Steps/Epoch ≈ 100000/64 ≈ 1563
 → Shuffle Train
 → Epoch 2 / 3
 → 最终 Test</pre>
-<label class="check"><input type="checkbox" class="learn-check" data-key="s5_complete"><span><b>阶段 5 掌握：</b>我能读懂 Batch、Micro-batch、Effective Batch、Step、Epoch、LR、AdamW、Gradient Accumulation，并能从训练曲线初步诊断异常。</span></label></section>
-<section class="section" id="deep5" data-search><h2>十二、深化理解：训练工程里几个最容易混淆的细节</h2>
+<label class="check"><input class="learn-check" data-key="s5_complete" type="checkbox"/><span><b>阶段 5 掌握：</b>我能读懂 Batch、Micro-batch、Effective Batch、Step、Epoch、LR、AdamW、Gradient Accumulation，并能从训练曲线初步诊断异常。</span></label></section>
+<section class="section" data-search="" id="deep5"><h2>十二、深化理解：训练工程里几个最容易混淆的细节</h2>
 <h3>1. 小 Batch 和大 Batch 都有代价</h3>
 <div class="grid2"><div class="card"><b>小 Batch</b><ul><li>显存低</li><li>更新频繁</li><li>梯度噪声更大</li><li>有时泛化较好</li><li>GPU 利用率可能不足</li></ul></div><div class="card"><b>大 Batch</b><ul><li>梯度更稳定</li><li>GPU 并行效率好</li><li>显存需求高</li><li>每 Epoch 更新次数更少</li><li>超大 Batch 往往需要配套调整 LR</li></ul></div></div>
 <h3>2. Optimizer Step ≠ Micro-batch 数量</h3>
@@ -123,7 +124,7 @@ Total Optimizer Steps ≈ 1563×3 ≈ 4689</div>
 <h3>6. Training Dashboard 的专家阅读顺序</h3>
 <ol><li>Train Loss 是否长期下降？</li><li>Validation Loss 是否同向改善，何时开始分叉？</li><li>Learning Rate 当前处于 Warmup、峰值还是衰减？</li><li>Gradient Norm 是否异常？</li><li>吞吐率是否突然下降？</li><li>GPU 显存/利用率是否合理？</li></ol>
 </section>
-<div class="pager"><a href="stage04.html">← 上一阶段</a><a href="stage06.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 完整教材版。页面为独立 HTML，可直接离线打开；进度勾选保存在浏览器本地。</div></main></div><script>
+<div class="pager"><a href="stage04.html">← 上一阶段</a><a href="stage06.html">下一阶段 →</a></div><div class="footer">《政府采购领域模型训练学习课程》第一课 · 十二阶段完整教材版。页面为独立 HTML，可直接离线打开；学习进度保存在浏览器本地。</div></main></div><script>
 const root=document.documentElement;
 const keyTheme='proc_ml_theme';
 const savedTheme=localStorage.getItem(keyTheme); if(savedTheme) root.setAttribute('data-theme',savedTheme);
